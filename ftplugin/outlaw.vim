@@ -52,29 +52,14 @@ fun! s:outlaw_pn(linenr, dir)
 endf
 
 fun! s:outlaw_up(linenr, dir)
-  if !OutlawIsTopic(a:linenr)
-    let l:l = s:outlaw_prev(a:linenr)
-  else
-    let l:l = a:linenr
-  endif
-  let l:ind = foldlevel(l:l) - 2
-  if l:ind < 0
-    return
-  endif
-  let l:tab = &l:expandtab ? repeat(' ', &l:shiftwidth) : '\t'
-  return search('^\(' . l:tab . '\)\{,' . l:ind . '}' . b:outlaw_header_mark, a:dir.'sW')
+  let [l:indent,l:mark] = (OutlawIsTopic(a:linenr) ? [foldlevel(a:linenr)-2,'s'] : [foldlevel(s:outlaw_pn(a:linenr,'b'))-2,''])
+  if l:indent < 0 | return 0 | endif
+  return search('^\('.s:tab().'\)\{,'.l:indent.'}'.b:outlaw_header_mark, a:dir.l:mark.'W')
 endf
 
-fun! s:outlaw_brother(linenr, dir)
-  if !OutlawIsTopic(a:linenr)
-    let l:l = s:outlaw_prev(a:linenr)
-  else
-    let l:l = a:linenr
-  endif
-  let l:ind = foldlevel(l:l) - 1
-  let l:tab = &l:expandtab ? repeat(' ', &l:shiftwidth) : '\t'
-  let l:lim = search('^' . repeat(l:tab, l:ind-1) . b:outlaw_header_mark, a:dir.'nW')
-  call search('^' . repeat(l:tab, l:ind) . b:outlaw_header_mark, a:dir.'sW', l:lim)
+fun! s:outlaw_br(linenr, dir)
+  let [l:indent,l:mark] = (OutlawIsTopic(a:linenr) ? [foldlevel(a:linenr)-1,'s'] : [foldlevel(s:outlaw_pn(a:linenr,'b'))-1,''])
+  return search('^'.repeat(s:tab(),l:indent).b:outlaw_header_mark, a:dir.l:mark.'Wz', search('^'.repeat(s:tab(),l:indent-1).b:outlaw_header_mark, a:dir.'nWz'))
 endf
 
 nnoremap <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>outlaw_pn('.', 'b')<cr>^zv
