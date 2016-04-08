@@ -83,8 +83,8 @@ fun! s:outlaw_brother(linenr, dir)
   call search('^' . repeat(l:tab, l:ind) . b:outlaw_header_mark, a:dir.'sW', l:lim)
 endf
 
-nnoremap <silent> <plug>OutlawPrev :<c-u>call <sid>outlaw_prev('.')<cr>
-nnoremap <silent> <plug>OutlawNext :<c-u>call <sid>outlaw_next('.')<cr>
+nnoremap <silent> <plug>OutlawPrevTopic :<c-u>call <sid>outlaw_prev('.')<cr>
+nnoremap <silent> <plug>OutlawNextTopic :<c-u>call <sid>outlaw_next('.')<cr>
 nnoremap <silent> <plug>OutlawParent :<c-u>call <sid>outlaw_up('.', 'b')<cr>
 nnoremap <silent> <plug>OutlawUncle :<c-u>call <sid>outlaw_up('.', '')<cr>
 nnoremap <silent> <plug>OutlawPrevBrother :<c-u> call <sid>outlaw_brother('.', 'b')<cr>
