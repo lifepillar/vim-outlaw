@@ -83,10 +83,10 @@ fun! s:outlaw_brother(linenr, dir)
   call search('^' . repeat(l:tab, l:ind) . b:outlaw_header_mark, a:dir.'sW', l:lim)
 endf
 
-nnoremap <silent> <plug>OutlawPrevTopic :<c-u>call <sid>outlaw_prev('.')<cr>zv
-nnoremap <silent> <plug>OutlawNextTopic :<c-u>call <sid>outlaw_next('.')<cr>zv
-nnoremap <silent> <plug>OutlawParent :<c-u>call <sid>outlaw_up('.', 'b')<cr>zv
-nnoremap <silent> <plug>OutlawUncle :<c-u>call <sid>outlaw_up('.', '')<cr>zv
-nnoremap <silent> <plug>OutlawPrevBrother :<c-u> call <sid>outlaw_brother('.', 'b')<cr>zv
-nnoremap <silent> <plug>OutlawNextBrother :<c-u> call <sid>outlaw_brother('.', '')<cr>zv
+nnoremap <silent> <plug>OutlawPrevTopic :<c-u>call <sid>outlaw_prev('.')<cr>^zv
+nnoremap <silent> <plug>OutlawNextTopic :<c-u>call <sid>outlaw_next('.')<cr>^zv
+nnoremap <silent> <plug>OutlawParent :<c-u>call <sid>outlaw_up('.', 'b')<cr>^zv
+nnoremap <silent> <plug>OutlawUncle :<c-u>call <sid>outlaw_up('.', '')<cr>^zv
+nnoremap <silent> <plug>OutlawPrevBrother :<c-u> call <sid>outlaw_brother('.', 'b')<cr>^zv
+nnoremap <silent> <plug>OutlawNextBrother :<c-u> call <sid>outlaw_brother('.', '')<cr>^zv
 
