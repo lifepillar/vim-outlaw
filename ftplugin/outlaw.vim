@@ -47,7 +47,6 @@ setlocal foldexpr=OutlawFold()
 " Full display with collapsed notes by default:
 setlocal foldlevel=19
 setlocal foldtext=OutlawIsTopic(v:foldstart)?substitute(getline(v:foldstart),'\\t',repeat('\ ',&l:shiftwidth),'g'):b:outlaw_folded_text
-nnoremap <buffer> <silent> <leader>n :set foldlevel=19<cr>
 
 fun! s:outlaw_prev(linenr)
   return search('^\s*'.b:outlaw_header_mark, 'bsWz')
