@@ -43,12 +43,12 @@ setlocal foldexpr=OutlawFold()
 setlocal foldtext=OutlawIsTopic(v:foldstart)?substitute(getline(v:foldstart),'\\t',repeat('\ ',&l:shiftwidth),'g'):b:outlaw_folded_text
 setlocal foldlevel=19 " Full display with collapsed notes by default
 
-fun! s:outlaw_prev(linenr)
-  return search('^\s*'.b:outlaw_header_mark, 'bsWz')
+fun! s:tab()
+  return &l:expandtab ? repeat(' ', &l:shiftwidth) : '\t'
 endf
 
-fun! s:outlaw_next(linenr)
-  return search('^\s*'.b:outlaw_header_mark, 'sW')
+fun! s:outlaw_pn(linenr, dir)
+  return search('^\s*'.b:outlaw_header_mark, a:dir.'sWz')
 endf
 
 fun! s:outlaw_up(linenr, dir)
@@ -77,10 +77,10 @@ fun! s:outlaw_brother(linenr, dir)
   call search('^' . repeat(l:tab, l:ind) . b:outlaw_header_mark, a:dir.'sW', l:lim)
 endf
 
-nnoremap <silent> <plug>OutlawPrevTopic :<c-u>call <sid>outlaw_prev('.')<cr>^zv
-nnoremap <silent> <plug>OutlawNextTopic :<c-u>call <sid>outlaw_next('.')<cr>^zv
 nnoremap <silent> <plug>OutlawParent :<c-u>call <sid>outlaw_up('.', 'b')<cr>^zv
 nnoremap <silent> <plug>OutlawUncle :<c-u>call <sid>outlaw_up('.', '')<cr>^zv
 nnoremap <silent> <plug>OutlawPrevBrother :<c-u> call <sid>outlaw_brother('.', 'b')<cr>^zv
 nnoremap <silent> <plug>OutlawNextBrother :<c-u> call <sid>outlaw_brother('.', '')<cr>^zv
+nnoremap <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>outlaw_pn('.', 'b')<cr>^zv
+nnoremap <silent> <plug>OutlawNextTopic   :<c-u>call <sid>outlaw_pn('.',  '')<cr>^zv
 
