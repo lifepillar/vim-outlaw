@@ -50,7 +50,7 @@ setlocal foldtext=OutlawIsTopic(v:foldstart)?substitute(getline(v:foldstart),'\\
 nnoremap <buffer> <silent> <leader>n :set foldlevel=19<cr>
 
 fun! s:outlaw_prev(linenr)
-  return search('^\s*'.b:outlaw_header_mark, 'bsW')
+  return search('^\s*'.b:outlaw_header_mark, 'bsWz')
 endf
 
 fun! s:outlaw_next(linenr)
