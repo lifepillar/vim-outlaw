@@ -35,11 +35,7 @@ fun! OutlawFold()
           \ ? indent(v:lnum) / &l:shiftwidth
           \ : '>' . (1 + indent(v:lnum) / &l:shiftwidth)
         \ )
-        \ : (
-          \ getline(v:lnum) =~# '\v^\s*$'
-          \ ? '='
-          \ : 20
-          \ )
+        \ : (getline(v:lnum) =~# '\v^\s*$' ? '=' : 20)
 endf
 
 setlocal foldmethod=expr
