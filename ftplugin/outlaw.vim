@@ -69,4 +69,27 @@ nnoremap <silent> <plug>OutlawPrevSibling :<c-u>call <sid>outlaw_br('b')<cr>^zv
 nnoremap <silent> <plug>OutlawNextSibling :<c-u>call <sid>outlaw_br('')<cr>^zv
 nnoremap <silent> <plug>OutlawParent      :<c-u>call <sid>outlaw_up('b')<cr>^zv
 nnoremap <silent> <plug>OutlawUncle       :<c-u>call <sid>outlaw_up('')<cr>^zv
+nnoremap <silent> <plug>OutlawAddSibling  :<c-u>call <sid>outlaw_add_sibling()<cr>
+
+if !hasmapto('<plug>OutlawPrevTopic', 'n')
+  nmap <buffer> <up> <plug>OutlawPrevTopic
+endif
+if !hasmapto('<plug>OutlawNextTopic', 'n')
+  nmap <buffer> <down> <plug>OutlawNextTopic
+endif
+if !hasmapto('<plug>OutlawPrevSibling', 'n')
+  nmap <buffer> <c-k> <plug>OutlawPrevSibling
+endif
+if !hasmapto('<plug>OutlawNextSibling', 'n')
+  nmap <buffer> <c-j> <plug>OutlawNextSibling
+endif
+if !hasmapto('<plug>OutlawParent', 'n')
+  nmap <buffer> - <plug>OutlawParent
+endif
+if !hasmapto('<plug>OutlawUncle', 'n')
+  nmap <buffer> + <plug>OutlawUncle
+endif
+if !hasmapto('<plug>OutlawAddSibling', 'n')
+  nmap <buffer> <cr> <plug>OutlawAddSibling
+endif
 
