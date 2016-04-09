@@ -8,7 +8,7 @@ endif
 let b:did_ftplugin = 1
 
 let s:undo_ftplugin = "setlocal foldexpr< foldlevel< foldmethod< foldtext<"
-      \ . "| unlet b:outlaw_folded_text b:outlaw_header_mark"
+                  \ . "| unlet b:outlaw_folded_text b:outlaw_header_mark"
 
 if exists('b:undo_ftplugin')
   let b:undo_ftplugin .= "|" . s:undo_ftplugin
@@ -24,18 +24,20 @@ if !exists('b:outlaw_folded_text')
   let b:outlaw_folded_text = get(g:, 'outlaw_folded_text', '[…]')
 endif
 
-fun! OutlawIsTopic(linenr) " True if linenr is a topic line, false if it is body text
-  return getline(a:linenr) =~# '\m^\s*' . b:outlaw_header_mark
-endf
-
 fun! OutlawFold()
-  return OutlawIsTopic(v:lnum) ? '>' . (1 + indent(v:lnum) / &l:shiftwidth) : (getline(v:lnum) =~# '\v^\s*$' ? '=' : 20)
+  return getline(v:lnum) =~# '\m^\s*' . b:outlaw_header_mark
+        \ ? '>' . (1 + indent(v:lnum) / &l:shiftwidth)
+        \ : (getline(v:lnum) =~# '\v^\s*$' ? '=' : 20)
 endf
 
 setlocal foldmethod=expr
 setlocal foldexpr=OutlawFold()
-setlocal foldtext=OutlawIsTopic(v:foldstart)?substitute(getline(v:foldstart),'\\t',repeat('\ ',&l:shiftwidth),'g'):b:outlaw_folded_text
+setlocal foldtext=foldlevel(v:foldstart)<20?substitute(getline(v:foldstart),'\\t',repeat('\ ',&l:shiftwidth),'g'):b:outlaw_folded_text
 setlocal foldlevel=19 " Full display with collapsed notes by default
+
+fun! s:tab()
+  return &l:expandtab ? repeat(' ', &l:shiftwidth) : '\t'
+endf
 
 fun! s:topic_search(flags) " Search for a topic line from the cursor's position
   return search('^\s*'.b:outlaw_header_mark, a:flags)
@@ -49,24 +51,16 @@ fun! OutlawLevel() " Return the level of the current topic (top level is level 0
   return foldlevel(OutlawTopicLine()) - 1
 endf
 
-fun! OutlawTopicPrefix() " Return the prefix text of the current topic.
-  return matchstr(getline(OutlawTopicLine()), '^\s*'.b:outlaw_header_mark.'\s*')
-endf
-
-fun! s:tab()
-  return &l:expandtab ? repeat(' ', &l:shiftwidth) : '\t'
-endf
-
-fun! s:outlaw_up(dir)
+fun! s:outlaw_up(dir) " Search for a topic at least one level up, in the given direction
   return search('^\('.s:tab().'\)\{,'.max([0,OutlawLevel()-1]).'}'.b:outlaw_header_mark, a:dir.'sWz')
 endf
 
-fun! s:outlaw_br(dir)
+fun! s:outlaw_br(dir) " Search for a topic at the same level, in the given direction
   return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_header_mark, a:dir.'sWz')
 endf
 
 fun! s:outlaw_add_brother(linenr)
-  call feedkeys("zco\<c-o>d0".OutlawTopicPrefix(a:linenr))
+  call feedkeys("zco\<c-o>d0".matchstr(getline(OutlawTopicLine()), '^\s*'.b:outlaw_header_mark.'\s*'))
 endf
 
 nnoremap <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>topic_search('bsWz')<cr>^zv
