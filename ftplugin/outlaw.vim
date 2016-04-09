@@ -61,8 +61,8 @@ fun! s:outlaw_up(dir)
   return search('^\('.s:tab().'\)\{,'.max([0,OutlawLevel()-1]).'}'.b:outlaw_header_mark, a:dir.'sWz')
 endf
 
-fun! s:outlaw_br(linenr, dir)
-  return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_header_mark, a:dir.'Wz')
+fun! s:outlaw_br(dir)
+  return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_header_mark, a:dir.'sWz')
 endf
 
 fun! s:outlaw_add_brother(linenr)
@@ -73,8 +73,8 @@ nnoremap <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>topic_search('bsWz')<c
 nnoremap <silent> <plug>OutlawNextTopic   :<c-u>call <sid>topic_search('sWz')<cr>^zv
 nnoremap <silent> <plug>OutlawParent      :<c-u>call <sid>outlaw_up('b')<cr>^zv
 nnoremap <silent> <plug>OutlawUncle       :<c-u>call <sid>outlaw_up('')<cr>^zv
-nnoremap <silent> <plug>OutlawPrevBrother :<c-u>call <sid>outlaw_br('.', 'b')<cr>^zv
-nnoremap <silent> <plug>OutlawNextBrother :<c-u>call <sid>outlaw_br('.',  '')<cr>^zv
+nnoremap <silent> <plug>OutlawPrevBrother :<c-u>call <sid>outlaw_br('b')<cr>^zv
+nnoremap <silent> <plug>OutlawNextBrother :<c-u>call <sid>outlaw_br('')<cr>^zv
 nnoremap <silent> <plug>OutlawAddBrother  :<c-u>call <sid>outlaw_add_brother('.')<cr>
 
 " if !hasmapto('<plug>OutlawNext')
