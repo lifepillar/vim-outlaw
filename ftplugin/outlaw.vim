@@ -24,14 +24,14 @@ if !exists('b:outlaw_folded_text')
   let b:outlaw_folded_text = get(g:, 'outlaw_folded_text', '[…]')
 endif
 
-fun! OutlawFold()
-  return getline(v:lnum) =~# '\m^\s*' . b:outlaw_topic_mark
-        \ ? '>' . (1 + indent(v:lnum) / &l:shiftwidth)
-        \ : (getline(v:lnum) =~# '\v^\s*$' ? '=' : 20)
+fun! OutlawFold(lnum)
+  return getline(a:lnum) =~# '\m^\s*' . b:outlaw_topic_mark
+        \ ? '>' . (1 + indent(a:lnum) / &l:shiftwidth)
+        \ : (getline(a:lnum) =~# '\v^\s*$' ? '=' : 20)
 endf
 
 setlocal foldmethod=expr
-setlocal foldexpr=OutlawFold()
+setlocal foldexpr=OutlawFold(v:lnum)
 setlocal foldtext=foldlevel(v:foldstart)<20?substitute(getline(v:foldstart),'\\t',repeat('\ ',&l:shiftwidth),'g'):b:outlaw_folded_text
 setlocal foldlevel=19 " Full display with collapsed notes by default
 
