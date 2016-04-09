@@ -65,10 +65,10 @@ endf
 
 nnoremap <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>topic_search('bsWz')<cr>^zv
 nnoremap <silent> <plug>OutlawNextTopic   :<c-u>call <sid>topic_search('sWz')<cr>^zv
-nnoremap <silent> <plug>OutlawParent      :<c-u>call <sid>outlaw_up('b')<cr>^zv
-nnoremap <silent> <plug>OutlawUncle       :<c-u>call <sid>outlaw_up('')<cr>^zv
 nnoremap <silent> <plug>OutlawPrevBrother :<c-u>call <sid>outlaw_br('b')<cr>^zv
 nnoremap <silent> <plug>OutlawNextBrother :<c-u>call <sid>outlaw_br('')<cr>^zv
+nnoremap <silent> <plug>OutlawParent      :<c-u>call <sid>outlaw_up('b')<cr>^zv
+nnoremap <silent> <plug>OutlawUncle       :<c-u>call <sid>outlaw_up('')<cr>^zv
 nnoremap <silent> <plug>OutlawAddBrother  :<c-u>call <sid>outlaw_add_brother()<cr>
 
 " if !hasmapto('<plug>OutlawNext')
