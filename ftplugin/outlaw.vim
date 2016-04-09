@@ -8,7 +8,7 @@ endif
 let b:did_ftplugin = 1
 
 let s:undo_ftplugin = "setlocal foldexpr< foldlevel< foldmethod< foldtext<"
-                  \ . "| unlet b:outlaw_folded_text b:outlaw_header_mark"
+                  \ . "| unlet b:outlaw_folded_text b:outlaw_topic_mark"
 
 if exists('b:undo_ftplugin')
   let b:undo_ftplugin .= "|" . s:undo_ftplugin
@@ -16,8 +16,8 @@ else
   let b:undo_ftplugin = s:undo_ftplugin
 endif
 
-if !exists('b:outlaw_header_mark')
-  let b:outlaw_header_mark = get(g:, 'outlaw_header_mark', '\(===\|\[x\]\|\[ \]\|\[-\]\)')
+if !exists('b:outlaw_topic_mark')
+  let b:outlaw_topic_mark = get(g:, 'outlaw_topic_mark', '\(===\|\[x\]\|\[ \]\|\[-\]\)')
 endif
 
 if !exists('b:outlaw_folded_text')
@@ -25,7 +25,7 @@ if !exists('b:outlaw_folded_text')
 endif
 
 fun! OutlawFold()
-  return getline(v:lnum) =~# '\m^\s*' . b:outlaw_header_mark
+  return getline(v:lnum) =~# '\m^\s*' . b:outlaw_topic_mark
         \ ? '>' . (1 + indent(v:lnum) / &l:shiftwidth)
         \ : (getline(v:lnum) =~# '\v^\s*$' ? '=' : 20)
 endf
@@ -40,7 +40,7 @@ fun! s:tab()
 endf
 
 fun! s:topic_search(flags) " Search for a topic line from the cursor's position
-  return search('^\s*'.b:outlaw_header_mark, a:flags)
+  return search('^\s*'.b:outlaw_topic_mark, a:flags)
 endf
 
 fun! OutlawTopicLine() " Return the line number where the current topic starts
@@ -52,15 +52,15 @@ fun! OutlawLevel() " Return the level of the current topic (top level is level 0
 endf
 
 fun! s:outlaw_up(dir) " Search for a topic at least one level up, in the given direction
-  return search('^\('.s:tab().'\)\{,'.max([0,OutlawLevel()-1]).'}'.b:outlaw_header_mark, a:dir.'sWz')
+  return search('^\('.s:tab().'\)\{,'.max([0,OutlawLevel()-1]).'}'.b:outlaw_topic_mark, a:dir.'sWz')
 endf
 
 fun! s:outlaw_br(dir) " Search for a topic at the same level, in the given direction
-  return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_header_mark, a:dir.'sWz')
+  return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_topic_mark, a:dir.'sWz')
 endf
 
 fun! s:outlaw_add_brother()
-  call feedkeys("zco\<c-o>d0".matchstr(getline(OutlawTopicLine()), '^\s*'.b:outlaw_header_mark.'\s*'))
+  call feedkeys("zco\<c-o>d0".matchstr(getline(OutlawTopicLine()), '^\s*'.b:outlaw_topic_mark.'\s*'))
 endf
 
 nnoremap <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>topic_search('bsWz')<cr>^zv

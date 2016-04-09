@@ -12,7 +12,7 @@ syntax sync minlines=10 maxlines=100
 let s:tab = &l:expandtab ? repeat(' ', &l:shiftwidth) : '\t'
 let s:num = get(b:, 'outlaw_levels', get(g:, 'outlaw_levels',
       \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']))
-let s:mark = get(b:, 'outlaw_header_mark', get(g:, 'outlaw_header_mark', '\(===\|\[x\]\|\[ \]\|\[-\]\)'))
+let s:mark = get(b:, 'outlaw_topic_mark', get(g:, 'outlaw_topic_mark', '\(===\|\[x\]\|\[ \]\|\[-\]\)'))
 let s:hg = get(b:, 'outlaw_highlight_groups', get(g:, 'outlaw_highlight_groups',
       \ ['Statement', 'Identifier', 'Constant', 'PreProc']))
 
