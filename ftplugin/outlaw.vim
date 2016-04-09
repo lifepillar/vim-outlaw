@@ -59,25 +59,14 @@ fun! s:outlaw_br(dir) " Search for a topic at the same level, in the given direc
   return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_topic_mark, a:dir.'sWz')
 endf
 
-fun! s:outlaw_add_brother()
+fun! s:outlaw_add_sibling()
   call feedkeys("zco\<c-o>d0".matchstr(getline(OutlawTopicLine()), '^\s*'.b:outlaw_topic_mark.'\s*'))
 endf
 
 nnoremap <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>topic_search('bsWz')<cr>^zv
 nnoremap <silent> <plug>OutlawNextTopic   :<c-u>call <sid>topic_search('sWz')<cr>^zv
-nnoremap <silent> <plug>OutlawPrevBrother :<c-u>call <sid>outlaw_br('b')<cr>^zv
-nnoremap <silent> <plug>OutlawNextBrother :<c-u>call <sid>outlaw_br('')<cr>^zv
+nnoremap <silent> <plug>OutlawPrevSibling :<c-u>call <sid>outlaw_br('b')<cr>^zv
+nnoremap <silent> <plug>OutlawNextSibling :<c-u>call <sid>outlaw_br('')<cr>^zv
 nnoremap <silent> <plug>OutlawParent      :<c-u>call <sid>outlaw_up('b')<cr>^zv
 nnoremap <silent> <plug>OutlawUncle       :<c-u>call <sid>outlaw_up('')<cr>^zv
-nnoremap <silent> <plug>OutlawAddBrother  :<c-u>call <sid>outlaw_add_brother()<cr>
-
-" if !hasmapto('<plug>OutlawNext')
-  nmap <buffer> <up>       <plug>OutlawPrevTopic
-  nmap <buffer> <down>     <plug>OutlawNextTopic
-  nmap <buffer> <leader>p  <plug>OutlawParent
-  nmap <buffer> <leader>n  <plug>OutlawUncle
-  nmap <buffer> <left>     <plug>OutlawPrevBrother
-  nmap <buffer> <right>    <plug>OutlawNextBrother
-  nmap <buffer> <c-a>      <plug>OutlawAddBrother
-" endif
 
