@@ -59,7 +59,7 @@ fun! s:outlaw_br(dir) " Search for a topic at the same level, in the given direc
   return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_header_mark, a:dir.'sWz')
 endf
 
-fun! s:outlaw_add_brother(linenr)
+fun! s:outlaw_add_brother()
   call feedkeys("zco\<c-o>d0".matchstr(getline(OutlawTopicLine()), '^\s*'.b:outlaw_header_mark.'\s*'))
 endf
 
@@ -69,7 +69,7 @@ nnoremap <silent> <plug>OutlawParent      :<c-u>call <sid>outlaw_up('b')<cr>^zv
 nnoremap <silent> <plug>OutlawUncle       :<c-u>call <sid>outlaw_up('')<cr>^zv
 nnoremap <silent> <plug>OutlawPrevBrother :<c-u>call <sid>outlaw_br('b')<cr>^zv
 nnoremap <silent> <plug>OutlawNextBrother :<c-u>call <sid>outlaw_br('')<cr>^zv
-nnoremap <silent> <plug>OutlawAddBrother  :<c-u>call <sid>outlaw_add_brother('.')<cr>
+nnoremap <silent> <plug>OutlawAddBrother  :<c-u>call <sid>outlaw_add_brother()<cr>
 
 " if !hasmapto('<plug>OutlawNext')
   nmap <buffer> <up>       <plug>OutlawPrevTopic
