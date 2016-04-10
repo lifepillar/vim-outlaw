@@ -1,0 +1,282 @@
+*outlaw.txt*  The wanted outliner!
+
+Author:  Lifepillar <https://github.com/lifepillar>
+License: Public Domain
+
+           _____         _    _                   ~
+          |  _  |       | |  | |                  ~
+          | | | | _   _ | |_ | |  __ _ __      __ ~
+          | | | || | | || __|| | / _` |\ \ /\ / / ~
+          \ \_/ /| |_| || |_ | || (_| | \ V  V /  ~
+           \___/  \__,_| \__||_| \__,_|  \_/\_/   ~
+                                                  ~
+
+====================================================================
+CONTENTS                                           *outlaw-contents*
+
+    1. Introducing myself ... |outlaw-introduction|
+    2. How to do X? ......... |outlaw-howto|
+    3. Mappings ............. |outlaw-mappings|
+    4. Customization ........ |outlaw-customization|
+    5. Contributing ......... |outlaw-contributing|
+    6. Credits .............. |outlaw-credits|
+
+====================================================================
+Section 1: Introducing myself                  *outlaw-introduction*
+
+Hi, I am Outlaw, and I am wanted.
+
+I am wanted because I am an outliner, and although many outliners
+are already available for Vim, I am different. Striving for the same
+minimalist philosophy followed by plugins like Commentary, Dirvish
+or Sneak, I do not try to reinvent the wheel. The price on my head
+is less than 130 LoC.
+
+Here is a very simple outline which you may start playing with:
+
+vim: set ft=outlaw tw=80 sw=2 ts=2 sts=2 et:
+=== My biography
+    The secret of a long life is trying not to shorten it.
+  === Travel to the East
+    === The telegram
+      === Meeting with Nobody
+      === The bomb
+    === Searching for a brother
+      === The Wild Bunch
+
+=== Todo list
+  [x] Clean boots
+  [ ] Brush the horse
+      You may lead him to the water if you want, but don't expect
+      him to drink.
+  [ ] Wear the sheriff's badge
+
+I interpret lines starting with `===`, `[x]`, `[-]` or `[<spc>]`
+(`<spc>` is a whitespace) as topics. Each topic must be on a single
+line. The pattern defining a topic may be fully customized by
+setting |g:outlaw_topic_mark|, shouldn't you like my admittedly
+biased choice.
+
+Topics may be indented to form a hierarchy or outline. I support up
+to nineteen levels (ten are highlighted by default, see
+|g:outlaw_levels|). I work with spaces or tabs, you choose (but do
+not use both to indent different topics inside the same document!).
+
+For me, everything that does not look like a topic (including blank
+lines) is body text (notes). I couldn't care less about the format
+or indentation of the body text: each block of body text always
+belongs to the topic immediately before it. But don't call it a son
+of a topic: you'd better think of body text as being at the same
+level as the topic it belongs to (although its fold level is
+different).
+
+The body text is plain text, but you may put some text between `~~~`
+tags to embed any configured filetype (see |g:outlaw_nested_ft|). If
+you don't like `~~~`, the tag may be changed, too (see
+|g:outlaw_ft_tag|).
+
+I let you jump through topics quickly: to the next or previous topic
+(`<down>` and `<up>`), brother or cousin (`<c-j>` and `<c-k>`),
+father or uncle (`-` or `+`). Press `<enter>` in Normal mode to
+quickly add a new brother.
+
+There's not much else you need to know about me. But read on if you
+want to ask me questions.
+
+====================================================================
+Section 2: How to do X?                              *outlaw-howto*
+
+Q: Ok Outlaw, how much do you need?
+A: Just Vim compiled with |+folding|.
+
+Q: How do I open files as Outlaw buffers?
+A: Just set `ft=outlaw` in the document's modeline, or map the
+   suffix you want yourself. I do not define any filetype mapping,
+   because there is no conventional suffix or format for text
+   outlines.
+
+Q: How do I copy/move/delete topics?
+A: Fold them (|zc| or |za|), then yank/paste/delete as usual.
+
+Q: How do I jump to the previous/next topic header?
+A: Use the up and down arrows in Normal mode. If you don't like
+   such mappings, you may define your own (see |outlaw-mappings|).
+
+Q: How do I jump to the parent of the current topic?
+A: Type `-` in Normal mode (even when you are inside the body text),
+   or define your own mapping. Pressing `-` when the cursor is in a
+   top-level topic will cause a jump to the previous top-level
+   topic, so you may continue pressing `-` till you reach the
+   beginning of the document.
+
+Q: May I jump to the (next) uncle of the current topic?
+A: Sure, type `+` in Normal mode (even from inside the body text),
+   or define your own mapping. Actually, `+` will jump to the next
+   great-uncle if the current topic has no next uncle, or to
+   great-great-uncle if it has no great-uncle, and so on. Pressing
+   `+` when the cursor is in a top-level topic will cause a jump to
+   the next top-level topic, so you may continue pressing `+` till
+   you reach the last top-level topic of the document.
+
+Q: How about moving to previous/next brother or cousin (i.e.,
+   between topics at the same level)?
+A: Use `<c-k>` and `<c-j>`, respectively, in Normal mode. Or define
+   your own mappings.
+
+Q: Are all those jumps remembered in the jump list?
+A: You bet they do.
+
+Q: How do I display my outline in its full glory?
+A: Use |zR| or set |foldlevel| to 20.
+
+Q: How do I collapse the outline?
+A: Use |zM| or set |foldlevel| to 0.
+
+Q: How do I fully expand the outline, but with collapsed body text?
+A: Set |fdl|=19.
+
+Q: How do I zoom to the desired level?
+A: Set |fdl|=`n`, where `n` is a number between 0 and 20.
+
+Q: How do I collapse/expand a topic?
+A: Use |za|, |zc|, |zo|.
+
+Q: How do I collapse/expand the body text of a topic?
+A: To expand, use |zA| (|za| and |zo| may also work, but not
+   always), to collapse use |za| or |zc|. The reason why I don't
+   recommend using |za| for expanding a body text is that the fold
+   level of body text is always set to 20, so, in general, you need
+   recursive unfolding.
+
+Q: How do I shift a topic left or right?
+A: Fold it, then use |<<| or |>>|.
+
+Q: How do I quickly create a brother/son/uncle of the current topic?
+A: Press `<cr>` in Normal mode to add a brother of the current topic
+   (it works even if you are inside the body text of the topic). You
+   may then indent or outdent as you see fit with |i_CTRL-T| and
+   |i_CTRL-D|, respectively. The command also automatically copies
+   the topic's prefix from the current topic, so you don't have to
+   type it yourself (type |i_CTRL-U| if you want to change it).
+
+Q: How do I "zoom into a topic" (get a focused view on a topic)?
+A: Install the NrrRgn plugin. You may also like Limelight.
+
+Q: How do I sort topics?
+A: Use a plugin like AdvancedSorters or vissort. That's not the type
+   of job I get hired for.
+
+Q: How do I create a checkbox?
+A: Do I really have to tell you? Type `i[x]`, `i[-]` or `i[<spc>]`.
+
+Q: Isn't there a quicker way?
+A: Sure, define a mapping.
+
+Q: Ok, how do I toggle a checkbox's status?
+A: Position the cursor inside the checkbox, then type `rx`, `r-` or
+   `r<spc>` as required.
+
+Q: The checkbox is too far!
+A: If you are inside the body text, `<up>l` will put you right inside
+   the checkbox.
+
+Q: Hey, that's too much typing!
+A: Define your own mappings. Btw, that's not a question.
+
+Q: Other outliners have better horses and shine like the door of
+   a whorehouse.
+A: I'm not the kind who needs an audience so I can show off. Btw,
+   that's not a question either.
+
+====================================================================
+Section 3: Mappings                                *outlaw-mappings*
+
+These are the default mappings I provide:
+
+  nmap <buffer> <up>    <plug>OutlawPrevTopic
+  nmap <buffer> <down>  <plug>OutlawNextTopic
+  nmap <buffer> <c-k>   <plug>OutlawPrevSibling
+  nmap <buffer> <c-j>   <plug>OutlawNextSibling
+  nmap <buffer> -       <plug>OutlawParent
+  nmap <buffer> +       <plug>OutlawUncle
+  nmap <buffer> <cr>    <plug>OutlawAddSibling
+
+There's no way these mappings are good for everyone. Feel free to
+override them in your `.vimrc`.
+
+====================================================================
+Section 4: Customization                      *outlaw-customization*
+
+                                              *g:outlaw_folded_text*
+The text that is displayed for folded body text.
+
+  let g:outlaw_folded_text = '[…]'
+
+                                                   *g:outlaw_ft_tag*
+The tag to be used for nested filetypes. This is a regular
+expression.
+
+  let g:outlaw_ft_tag = '\~\~\~'
+
+                                                *g:outlaw_nested_ft*
+A List of syntax filetypes that can be nested into an outline.
+
+  let g:outlaw_nested_ft = []
+
+For example, if you put this in your `.vimrc`:
+
+  let g:outlaw_nested_ft = ['sql']
+
+then when you write something like:
+
+  === My plan
+    Here it is:
+    `~~~sql`
+    select money from bank where sheriff is null;
+    `~~~`
+
+the part between the `~~~` tags will be highlighted as SQL.
+
+                                               *g:outlaw_topic_mark*
+A regular expression that defines a topic's prefix.
+
+  let g:outlaw_topic_mark = '\(===\|\[x\]\|\[ \]\|\[-\]\)'
+
+                                         *g:outlaw_highlight_groups*
+A List of highlight groups for the different indentation levels.
+The elements of the list are reused cyclically, so you may define
+less elements than the number of levels. If you don't want any
+highlighting, set this variable to `['Normal']`.
+
+  let g:outlaw_highlight_groups =
+    \ ['Statement', 'Identifier', 'Constant', 'PreProc']
+
+                                                   *g:outlaw_levels*
+A List of Strings used to define the highlight groups for the
+different indentation levels. By default, ten levels are
+highlighted.
+
+  let g:outlaw_levels =
+    \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+
+For each of the above variables, a corresponding buffer-local
+version with the same name can be defined, whose value takes
+precedence over the global variable.
+
+====================================================================
+Section 5: Contributing                        *outlaw-contributing*
+
+For bug reports and feature requests please use:
+
+    https://github.com/lifepillar/vim-outlaw/issues
+
+Pull requests are welcome, too!
+
+====================================================================
+Section 6: Credits                                  *outlaw-credits*
+
+A man who is a man needs something to believe in. My main source of
+inspiration has been the epic TimeOut Outliner for AppleWorks (yes,
+I am talking Apple II!). Simple, yet so effective. And no, I am not
+nearly as good as TimeOut!
+
