@@ -1,0 +1,14 @@
+g:outlaw_folded_text	outlaw.txt	/*g:outlaw_folded_text*
+g:outlaw_ft_tag	outlaw.txt	/*g:outlaw_ft_tag*
+g:outlaw_highlight_groups	outlaw.txt	/*g:outlaw_highlight_groups*
+g:outlaw_levels	outlaw.txt	/*g:outlaw_levels*
+g:outlaw_nested_ft	outlaw.txt	/*g:outlaw_nested_ft*
+g:outlaw_topic_mark	outlaw.txt	/*g:outlaw_topic_mark*
+outlaw-contents	outlaw.txt	/*outlaw-contents*
+outlaw-contributing	outlaw.txt	/*outlaw-contributing*
+outlaw-credits	outlaw.txt	/*outlaw-credits*
+outlaw-customization	outlaw.txt	/*outlaw-customization*
+outlaw-howto	outlaw.txt	/*outlaw-howto*
+outlaw-introduction	outlaw.txt	/*outlaw-introduction*
+outlaw-mappings	outlaw.txt	/*outlaw-mappings*
+outlaw.txt	outlaw.txt	/*outlaw.txt*
