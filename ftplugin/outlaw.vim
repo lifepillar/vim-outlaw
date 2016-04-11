@@ -24,8 +24,12 @@ if !exists('b:outlaw_folded_text')
   let b:outlaw_folded_text = get(g:, 'outlaw_folded_text', '[…]')
 endif
 
+if !exists("b:outlaw_body_text_level")
+  let b:outlaw_body_text_level = get(g:, 'outlaw_body_text_level', '=')
+endif
+
 fun! OutlawFold(lnum)
-  return getline(a:lnum) =~# '\m^\s*'.b:outlaw_topic_mark ? '>'.(1+indent(a:lnum)/&l:shiftwidth) : 20
+  return getline(a:lnum) =~# '\m^\s*'.b:outlaw_topic_mark ? '>'.(1+indent(a:lnum)/&l:shiftwidth) : b:outlaw_body_text_level
 endf
 
 setlocal foldmethod=expr
