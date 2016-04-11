@@ -15,7 +15,7 @@ reinvent the wheel. The price on my head is less than 130 LoC.
 Here is a very simple outline which you may start playing with:
 
 ```
-vim: set ft=outlaw tw=80 sw=2 ts=2 sts=2 et:
+vim: set tw=80 sw=2 ts=2 sts=2 et ft=outlaw:
 === My biography
     The secret of a long life is trying not to shorten it.
   === Travel to the East
