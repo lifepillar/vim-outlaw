@@ -6,9 +6,11 @@ Hi, I am Outlaw, and I am wanted.
 
 I am wanted because I am an outliner, and although many outliners
 are already available for Vim, I am different. Striving for the same
-minimalist philosophy followed by plugins like Commentary, Dirvish
-or Sneak, I do not try to reinvent the wheel. The price on my head
-is less than 130 LoC.
+minimalist philosophy followed by plugins like
+[Commentary](https://github.com/tpope/vim-commentary),
+[Dirvish](https://github.com/justinmk/vim-dirvish) or
+[Sneak](https://github.com/justinmk/vim-sneak), I do not try to
+reinvent the wheel. The price on my head is less than 130 LoC.
 
 Here is a very simple outline which you may start playing with:
 
