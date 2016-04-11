@@ -52,10 +52,10 @@ vim: set ft=outlaw tw=80 sw=2 ts=2 sts=2 et:
   [ ] Wear the sheriff's badge
 
 I interpret lines starting with `===`, `[x]`, `[-]` or `[<spc>]`
-(`<spc>` is a whitespace) as topics. Each topic must be on a single
-line. The pattern defining a topic may be fully customized by
-setting |g:outlaw_topic_mark|, shouldn't you like my admittedly
-biased choice.
+(`<spc>` is a whitespace), followed by a space, as topics. Each
+topic must be on a single line. The pattern defining a topic may be
+fully customized by setting |g:outlaw_topic_mark|, shouldn't you
+like my admittedly biased choice.
 
 Topics may be indented to form a hierarchy or outline. I support up
 to nineteen levels (ten are highlighted by default, see
@@ -68,7 +68,7 @@ or indentation of the body text: each block of body text always
 belongs to the topic immediately before it. But don't call it a son
 of a topic: you'd better think of body text as being at the same
 level as the topic it belongs to (although its fold level is
-different).
+different so that it may be folded independently).
 
 The body text is plain text, but you may put some text between `~~~`
 tags to embed any configured filetype (see |g:outlaw_nested_ft|). If
@@ -144,7 +144,7 @@ A: Use |za|, |zc|, |zo|.
 Q: How do I collapse/expand the body text of a topic?
 A: To expand, use |zA| (|za| and |zo| may also work, but not
    always), to collapse use |za| or |zc|. The reason why I don't
-   recommend using |za| for expanding a body text is that the fold
+   recommend using |za| for expanding body text is that the fold
    level of body text is always set to 20, so, in general, you need
    recursive unfolding.
 
@@ -159,6 +159,12 @@ A: Press `<cr>` in Normal mode to add a brother of the current topic
    the topic's prefix from the current topic, so you don't have to
    type it yourself (type |i_CTRL-U| if you want to change it).
 
+Q: How do I get an agenda view (e.g., a list of the TODO items in my
+   outline)?
+A: A simple way is to use the quickfix list. For instance:
+
+   :vimgrep /^\s*<c-r>=b:outlaw_topic_mark<cr>\s*TODO/ %
+
 Q: How do I "zoom into a topic" (get a focused view on a topic)?
 A: Install the NrrRgn plugin. You may also like Limelight.
 
@@ -167,7 +173,8 @@ A: Use a plugin like AdvancedSorters or vissort. That's not the type
    of job I get hired for.
 
 Q: How do I create a checkbox?
-A: Do I really have to tell you? Type `i[x]`, `i[-]` or `i[<spc>]`.
+A: Do I really have to tell you? Type `[x]`, `[-]` or `[<spc>]` in
+   Insert mode.
 
 Q: Isn't there a quicker way?
 A: Sure, define a mapping.
@@ -176,9 +183,9 @@ Q: Ok, how do I toggle a checkbox's status?
 A: Position the cursor inside the checkbox, then type `rx`, `r-` or
    `r<spc>` as required.
 
-Q: The checkbox is too far!
-A: If you are inside the body text, `<up>l` will put you right inside
-   the checkbox.
+Q: The checkbox is too far! How do I jump there?
+A: Pressing `<up>` from any point in the topic line or its body text
+   will put you right inside the checkbox of the current topic.
 
 Q: Hey, that's too much typing!
 A: Define your own mappings. Btw, that's not a question.
@@ -240,13 +247,19 @@ the part between the `~~~` tags will be highlighted as SQL.
                                                *g:outlaw_topic_mark*
 A regular expression that defines a topic's prefix.
 
-  let g:outlaw_topic_mark = '\(===\|\[x\]\|\[ \]\|\[-\]\)'
+  let g:outlaw_topic_mark =
+    \  '\(=== \|\[x\ze\] \|\[ \ze\] \|\[-\ze\] \)'
+
+In this regular expression you may use |\ze| to denote the place
+where the cursor should be put when jumping to a topic line. The
+cursor is placed at the end of the match by default.
 
                                          *g:outlaw_highlight_groups*
 A List of highlight groups for the different indentation levels.
 The elements of the list are reused cyclically, so you may define
 less elements than the number of levels. If you don't want any
-highlighting, set this variable to `['Normal']`.
+highlighting, set this variable to `['Normal']` (or even better, set
+|g:outlaw_levels| to the empty list).
 
   let g:outlaw_highlight_groups =
     \ ['Statement', 'Identifier', 'Constant', 'PreProc']

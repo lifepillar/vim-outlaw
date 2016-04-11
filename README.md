@@ -34,10 +34,11 @@ which looks like this:
 
 ![Sample outline](images/example.png)
 
-I interpret lines starting with `===`, `[x]`, `[-]` or `[ ]` as
-topics. Each topic must be on a single line. The pattern defining
-a topic may be fully customized by setting `g:outlaw_topic_mark`,
-shouldn't you like my admittedly biased choice.
+I interpret lines starting with `===`, `[x]`, `[-]` or `[ ]`,
+followed by a space, as topics. Each topic must be on a single line.
+The pattern defining a topic may be fully customized by setting
+`g:outlaw_topic_mark`, shouldn't you like my admittedly biased
+choice.
 
 Topics may be indented to form a hierarchy or outline. I support up
 to nineteen levels (ten are highlighted by default, see
@@ -50,7 +51,7 @@ or indentation of the body text: each block of body text always
 belongs to the topic immediately before it. But don't call it a son
 of a topic: you'd better think of body text as being at the same
 level as the topic it belongs to (although its fold level is
-different).
+different so that it may be folded independently).
 
 The body text is plain text, but you may put some text between `~~~`
 tags to embed any configured filetype (see `g:outlaw_nested_ft`). If
