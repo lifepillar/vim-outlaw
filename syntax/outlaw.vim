@@ -6,7 +6,7 @@ if exists("b:current_syntax")
   finish
 endif
 
-syntax case match
+syntax case ignore
 syntax sync minlines=10 maxlines=100
 
 let s:tab = &l:expandtab ? repeat(' ', &l:shiftwidth) : '\t'
