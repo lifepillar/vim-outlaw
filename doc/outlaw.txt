@@ -138,15 +138,15 @@ A: Set |fdl|=19.
 Q: How do I zoom to the desired level?
 A: Set |fdl|=`n`, where `n` is a number between 0 and 20.
 
-Q: How do I collapse/expand a topic?
-A: Use |za|, |zc|, |zo|.
+Q: How do I collapse a topic or the body text of a topic?
+A: I recommend using |zc| (close). Alternatively, use |za|.
 
-Q: How do I collapse/expand the body text of a topic?
-A: To expand, use |zA| (|za| and |zo| may also work, but not
-   always), to collapse use |za| or |zc|. The reason why I don't
-   recommend using |za| for expanding body text is that the fold
-   level of body text is always set to 20, so, in general, you need
-   recursive unfolding.
+Q: How do I expand a topic or the body text of a topic?
+A: I recommend using |zv| (view), which works in all cases.
+   All Vim's folding commands work as usual, but you have to keep in
+   mind that body text's fold level is always set to 20. Commands
+   like |zo| or |za| may not open folded body text: in general, you
+   need to unfold recursively with |zv| or |zA|.
 
 Q: How do I shift a topic left or right?
 A: Fold it, then use |<<| or |>>|.
