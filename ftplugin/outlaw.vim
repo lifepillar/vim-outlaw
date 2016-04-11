@@ -63,13 +63,13 @@ fun! s:outlaw_add_sibling()
   call feedkeys("zco\<c-o>d0".matchstr(getline(OutlawTopicLine()), '^\s*'.substitute(b:outlaw_topic_mark,'\\ze','','g').'\s*'))
 endf
 
-nnoremap <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>topic_search('besW')<cr>zv
-nnoremap <silent> <plug>OutlawNextTopic   :<c-u>call <sid>topic_search('esW')<cr>zv
-nnoremap <silent> <plug>OutlawPrevSibling :<c-u>call <sid>outlaw_br('b')<cr>zv
-nnoremap <silent> <plug>OutlawNextSibling :<c-u>call <sid>outlaw_br('')<cr>zv
-nnoremap <silent> <plug>OutlawParent      :<c-u>call <sid>outlaw_up('b')<cr>zv
-nnoremap <silent> <plug>OutlawUncle       :<c-u>call <sid>outlaw_up('')<cr>zv
-nnoremap <silent> <plug>OutlawAddSibling  :<c-u>call <sid>outlaw_add_sibling()<cr>
+nnoremap <script> <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>topic_search('besW')<cr>zv
+nnoremap <script> <silent> <plug>OutlawNextTopic   :<c-u>call <sid>topic_search('esW')<cr>zv
+nnoremap <script> <silent> <plug>OutlawPrevSibling :<c-u>call <sid>outlaw_br('b')<cr>zv
+nnoremap <script> <silent> <plug>OutlawNextSibling :<c-u>call <sid>outlaw_br('')<cr>zv
+nnoremap <script> <silent> <plug>OutlawParent      :<c-u>call <sid>outlaw_up('b')<cr>zv
+nnoremap <script> <silent> <plug>OutlawUncle       :<c-u>call <sid>outlaw_up('')<cr>zv
+nnoremap <script> <silent> <plug>OutlawAddSibling  :<c-u>call <sid>outlaw_add_sibling()<cr>
 
 if !hasmapto('<plug>OutlawPrevTopic', 'n')
   nmap <buffer> <up> <plug>OutlawPrevTopic
