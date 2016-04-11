@@ -25,9 +25,7 @@ if !exists('b:outlaw_folded_text')
 endif
 
 fun! OutlawFold(lnum)
-  return getline(a:lnum) =~# '\m^\s*' . b:outlaw_topic_mark
-        \ ? '>' . (1 + indent(a:lnum) / &l:shiftwidth)
-        \ : (getline(a:lnum) =~# '\v^\s*$' ? '=' : 20)
+  return getline(a:lnum) =~# '\m^\s*'.b:outlaw_topic_mark ? '>'.(1+indent(a:lnum)/&l:shiftwidth) : 20
 endf
 
 setlocal foldmethod=expr
