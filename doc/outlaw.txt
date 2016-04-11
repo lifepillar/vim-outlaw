@@ -151,6 +151,28 @@ A: I recommend using |zv| (view), which works in all cases.
 Q: How do I shift a topic left or right?
 A: Fold it, then use |<<| or |>>|.
 
+Q: But |<<| does not do what I want, because the brothers of the
+   topic I am moving become its children. How do I promote a topic
+   to uncle?
+A: Use something like `dd+P<<`. Say you have this outline:
+
+    === H1
+      === H1.1
+      === H1.2
+      === H1.3
+    === H2
+
+   and the cursor is on H1.1. Then `dd` will delete the line (or the
+   whole fold if the topic is folded), `+` will jump to H2, `P` will
+   paste the deleted topic above H2 and `<<` will move the topic
+   one-level up. So, the topic will be promoted as you desire:
+
+    === H1
+      === H1.2
+      === H1.3
+    === H1.1
+    === H2
+
 Q: How do I quickly create a brother/son/uncle of the current topic?
 A: Press `<cr>` in Normal mode to add a brother of the current topic
    (it works even if you are inside the body text of the topic). You
@@ -187,7 +209,7 @@ Q: The checkbox is too far! How do I jump there?
 A: Pressing `<up>` from any point in the topic line or its body text
    will put you right inside the checkbox of the current topic.
 
-Q: Hey, that's too much typing!
+Q: Hey, you showed me everything, but that's too much typing!
 A: Define your own mappings. Btw, that's not a question.
 
 Q: Other outliners have better horses and shine like the door of
