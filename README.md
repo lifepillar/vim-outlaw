@@ -52,8 +52,9 @@ lines) is body text (notes). I couldn't care less about the format
 or indentation of the body text: each block of body text always
 belongs to the topic immediately before it. But don't call it a son
 of a topic: you'd better think of body text as being at the same
-level as the topic it belongs to (although its fold level is
-different so that it may be folded independently).
+level as the topic it belongs to (although its fold level may be set
+to a different value so that it may be folded independently: see
+|g:outlaw_body_text_level|).
 
 The body text is plain text, but you may put some text between `~~~`
 tags to embed any configured filetype (see `g:outlaw_nested_ft`). If

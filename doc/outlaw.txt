@@ -67,8 +67,9 @@ lines) is body text (notes). I couldn't care less about the format
 or indentation of the body text: each block of body text always
 belongs to the topic immediately before it. But don't call it a son
 of a topic: you'd better think of body text as being at the same
-level as the topic it belongs to (although its fold level is
-different so that it may be folded independently).
+level as the topic it belongs to (although its fold level may be set
+to a different value so that it may be folded independently: see
+|g:outlaw_body_text_level|).
 
 The body text is plain text, but you may put some text between `~~~`
 tags to embed any configured filetype (see |g:outlaw_nested_ft|). If
@@ -133,7 +134,9 @@ Q: How do I collapse the outline?
 A: Use |zM| or set |foldlevel| to 0.
 
 Q: How do I fully expand the outline, but with collapsed body text?
-A: Set |fdl|=19.
+A: Set |fdl|=|g:outlaw_body_text_level|-1. This only works if
+   |g:outlaw_body_text_level| is set to a number (typically, 20)
+   higher than the number of nested topics.
 
 Q: How do I zoom to the desired level?
 A: Set |fdl|=`n`, where `n` is a number between 0 and 20.
@@ -142,12 +145,11 @@ Q: How do I collapse a topic or the body text of a topic?
 A: I recommend using |zc| (close). Alternatively, use |za|.
 
 Q: How do I expand a topic or the body text of a topic?
-A: I recommend using |zv| (view), which works in all cases.
-   All Vim's folding commands work as usual, but you have to keep in
-   mind that body text's fold level is always set to 20, while the
-   fold level of topic lines depends on their indentation. Hence,
-   commands like |zo| or |za| may not open folded body text: in
-   general, you need to unfold recursively with |zv| or |zA|.
+A: I recommend using |zv| (view), which works in all cases. All other
+   Vim's folding commands work as usual, of course. But keep in mind
+   that, if |g:outlaw_body_text_level| is set to `20`, in general
+   you will need to unfold recursively (|zA| or |zv|) for the body
+   text to be expanded.
 
 Q: How do I shift a topic left or right?
 A: Fold it, then use |<<| or |>>|.
@@ -237,8 +239,17 @@ override them in your `.vimrc`.
 ====================================================================
 Section 4: Customization                      *outlaw-customization*
 
+                                          *g:outlaw_body_text_level*
+The foldlevel of the body text. The value of this variable should be
+either `'='` (same foldlevel as the topic header) or `20` (or
+another high numeric value). If you use `20`, you may fully expand
+the outline while keeping the body text folded.
+
+  let g:outlaw_body_text_level = '='
+
                                               *g:outlaw_folded_text*
-The text that is displayed for folded body text.
+The text that is displayed for folded body text. This value is
+relevant only if |g:outlaw_body_text_level| is not set to `'='`.
 
   let g:outlaw_folded_text = '[…]'
 
@@ -247,6 +258,24 @@ The tag to be used for nested filetypes. This is a regular
 expression.
 
   let g:outlaw_ft_tag = '\~\~\~'
+
+                                         *g:outlaw_highlight_groups*
+A List of highlight groups for the different indentation levels.
+The elements of the list are reused cyclically, so you may define
+less elements than the number of levels. If you don't want any
+highlighting, set this variable to `['Normal']` (or even better, set
+|g:outlaw_levels| to the empty list).
+
+  let g:outlaw_highlight_groups =
+    \ ['Statement', 'Identifier', 'Constant', 'PreProc']
+
+                                                   *g:outlaw_levels*
+A List of Strings used to define the highlight groups for the
+different indentation levels. By default, ten levels are
+highlighted.
+
+  let g:outlaw_levels =
+    \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
 
                                                 *g:outlaw_nested_ft*
 A List of syntax filetypes that can be nested into an outline.
@@ -276,24 +305,6 @@ A regular expression that defines a topic's prefix.
 In this regular expression you may use |\ze| to denote the place
 where the cursor should be put when jumping to a topic line. The
 cursor is placed at the end of the match by default.
-
-                                         *g:outlaw_highlight_groups*
-A List of highlight groups for the different indentation levels.
-The elements of the list are reused cyclically, so you may define
-less elements than the number of levels. If you don't want any
-highlighting, set this variable to `['Normal']` (or even better, set
-|g:outlaw_levels| to the empty list).
-
-  let g:outlaw_highlight_groups =
-    \ ['Statement', 'Identifier', 'Constant', 'PreProc']
-
-                                                   *g:outlaw_levels*
-A List of Strings used to define the highlight groups for the
-different indentation levels. By default, ten levels are
-highlighted.
-
-  let g:outlaw_levels =
-    \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
 
 For each of the above variables, a corresponding buffer-local
 version with the same name can be defined, whose value takes
