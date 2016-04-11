@@ -17,7 +17,7 @@ else
 endif
 
 if !exists('b:outlaw_topic_mark')
-  let b:outlaw_topic_mark = get(g:, 'outlaw_topic_mark', '\(=== \zs\S\|\[\zsx\] \|\[\zs \] \|\[\zs-\] \)')
+  let b:outlaw_topic_mark = get(g:, 'outlaw_topic_mark', '\(=== \|\[x\ze\] \|\[ \ze\] \|\[-\ze\] \)')
 endif
 
 if !exists('b:outlaw_folded_text')
@@ -44,8 +44,7 @@ fun! s:topic_search(flags) " Search for a topic line from the cursor's position
 endf
 
 fun! OutlawTopicLine() " Return the line number where the current topic starts
-  " return s:topic_search('bcnW')
-  return search('^\s*'.substitute(b:outlaw_topic_mark, '\\zs', '', 'g'), 'bcnW')
+  return s:topic_search('bcnW')
 endf
 
 fun! OutlawLevel() " Return the level of the current topic (top level is level 0)
@@ -53,19 +52,19 @@ fun! OutlawLevel() " Return the level of the current topic (top level is level 0
 endf
 
 fun! s:outlaw_up(dir) " Search for a topic at least one level up, in the given direction
-  return search('^\('.s:tab().'\)\{,'.max([0,OutlawLevel()-1]).'}'.b:outlaw_topic_mark, a:dir.'sW')
+  return search('^\('.s:tab().'\)\{,'.max([0,OutlawLevel()-1]).'}'.b:outlaw_topic_mark, a:dir.'esW')
 endf
 
 fun! s:outlaw_br(dir) " Search for a topic at the same level, in the given direction
-  return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_topic_mark, a:dir.'sW')
+  return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_topic_mark, a:dir.'esW')
 endf
 
 fun! s:outlaw_add_sibling()
-  call feedkeys("zco\<c-o>d0".matchstr(getline(OutlawTopicLine()), '^\s*'.b:outlaw_topic_mark.'\s*'))
+  call feedkeys("zco\<c-o>d0".matchstr(getline(OutlawTopicLine()), '^\s*'.substitute(b:outlaw_topic_mark,'\\ze','','g').'\s*'))
 endf
 
-nnoremap <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>topic_search('bsW')<cr>zv
-nnoremap <silent> <plug>OutlawNextTopic   :<c-u>call <sid>topic_search('sW')<cr>zv
+nnoremap <silent> <plug>OutlawPrevTopic   :<c-u>call <sid>topic_search('besW')<cr>zv
+nnoremap <silent> <plug>OutlawNextTopic   :<c-u>call <sid>topic_search('esW')<cr>zv
 nnoremap <silent> <plug>OutlawPrevSibling :<c-u>call <sid>outlaw_br('b')<cr>zv
 nnoremap <silent> <plug>OutlawNextSibling :<c-u>call <sid>outlaw_br('')<cr>zv
 nnoremap <silent> <plug>OutlawParent      :<c-u>call <sid>outlaw_up('b')<cr>zv
