@@ -8,6 +8,8 @@ endif
 
 syntax case ignore
 syntax sync minlines=10 maxlines=100
+syn keyword outlawKeyword contained TODO FIXME XXX DEBUG NOTE
+hi def link OutlawKeyword Special
 
 let s:tab = &l:expandtab ? repeat(' ', &l:shiftwidth) : '\t'
 let s:num = get(b:, 'outlaw_levels', get(g:, 'outlaw_levels',
@@ -18,7 +20,7 @@ let s:hg = get(b:, 'outlaw_highlight_groups', get(g:, 'outlaw_highlight_groups',
 let s:tag = get(b:, 'outlaw_ft_tag', get(g:, 'outlaw_ft_tag', '\~\~\~'))
 
 for i in range(0, len(s:num) - 1)
-  execute 'syn match OutlawHead'.s:num[i] '/\m^'.repeat(s:tab,i).s:mark.'.*$/'
+  execute 'syn match OutlawHead'.s:num[i] '/\m^'.repeat(s:tab,i).s:mark.'.*$/ contains=outlawKeyword'
   execute 'hi def link OutlawHead'.s:num[i] s:hg[i % len(s:hg)]
 endfor
 
