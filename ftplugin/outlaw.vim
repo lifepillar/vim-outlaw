@@ -7,7 +7,7 @@ if exists("b:did_ftplugin")
 endif
 let b:did_ftplugin = 1
 
-let s:undo_ftplugin = "setlocal autoindent< comments< foldexpr< foldmethod< foldtext< shiftround<"
+let s:undo_ftplugin = "setlocal autoindent< comments< foldexpr< foldmethod< foldtext< formatoptions< shiftround<"
                   \ . "| unlet b:outlaw_folded_text b:outlaw_topic_mark"
 
 if exists('b:undo_ftplugin')
@@ -37,6 +37,7 @@ setlocal foldexpr=OutlawFold(v:lnum)
 setlocal foldtext=foldlevel(v:foldstart)<20?substitute(getline(v:foldstart),'\\t',repeat('\ ',&l:shiftwidth),'g'):b:outlaw_folded_text
 setlocal autoindent
 setlocal comments+=fb:*,fb:- " Lists
+setlocal formatoptions=tcroqnlj1
 setlocal shiftround
 
 fun! s:tab()
