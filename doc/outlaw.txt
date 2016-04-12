@@ -143,7 +143,6 @@ A: Set |fdl|=|g:outlaw_body_text_level|-1. This only works if
    learn how to toggle this setting.
 
 Q: How do I zoom to the desired level?
-
 A: Set |fdl|=`n`, where `n` is a number between 0 and 20. You may
    also use `gl` to set the fold level according to the level of the
    current line.
