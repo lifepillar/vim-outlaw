@@ -30,7 +30,7 @@ I am wanted because I am an outliner, and although many outliners
 are already available for Vim, I am different. Striving for the same
 minimalist philosophy followed by plugins like Commentary, Dirvish
 or Sneak, I do not try to reinvent the wheel. The price on my head
-is about 130 LoC.
+is about 140 LoC.
 
 Here is a very simple outline which you may start playing with:
 
@@ -79,6 +79,10 @@ I let you jump through topics quickly: to the next or previous topic
 (`<down>` and `<up>`), brother or cousin (`<c-j>` and `<c-k>`),
 father or uncle (`-` or `+`). Press `<enter>` in Normal mode to
 quickly add a new brother.
+
+Folding and unfolding are performed using Vim's default mappings.
+In addition, I provide `gl` to set the fold level according to the
+level of the current line.
 
 There's not much else you need to know about me. But read on if you
 want to ask me questions.
@@ -139,7 +143,10 @@ A: Set |fdl|=|g:outlaw_body_text_level|-1. This only works if
    learn how to toggle this setting.
 
 Q: How do I zoom to the desired level?
-A: Set |fdl|=`n`, where `n` is a number between 0 and 20.
+
+A: Set |fdl|=`n`, where `n` is a number between 0 and 20. You may
+   also use `gl` to set the fold level according to the level of the
+   current line.
 
 Q: How do I collapse a topic or the body text of a topic?
 A: I recommend using |zc| (close). Alternatively, use |za|.
@@ -232,6 +239,7 @@ Section 3: Mappings                                *outlaw-mappings*
 
 These are the default mappings I provide:
 
+  nmap <buffer> gl      <plug>OutlawThisFoldLevel
   nmap <buffer> gy      <plug>OutlawBodyTextMode
   nmap <buffer> <up>    <plug>OutlawPrevTopic
   nmap <buffer> <down>  <plug>OutlawNextTopic

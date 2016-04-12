@@ -68,15 +68,19 @@ fun! s:outlaw_add_sibling()
   call feedkeys("zco\<c-o>d0".matchstr(getline(OutlawTopicLine()), '^\s*'.substitute(b:outlaw_topic_mark,'\\ze','','g').'\s*'))
 endf
 
-nnoremap <script> <silent> <plug>OutlawBodyTextMode :<c-u>let b:outlaw_body_text_level=b:outlaw_body_text_level==20?'=':20<cr>zx
-nnoremap <script> <silent> <plug>OutlawPrevTopic    :<c-u>call <sid>topic_search('besW')<cr>zv
-nnoremap <script> <silent> <plug>OutlawNextTopic    :<c-u>call <sid>topic_search('esW')<cr>zv
-nnoremap <script> <silent> <plug>OutlawPrevSibling  :<c-u>call <sid>outlaw_br('b')<cr>zv
-nnoremap <script> <silent> <plug>OutlawNextSibling  :<c-u>call <sid>outlaw_br('')<cr>zv
-nnoremap <script> <silent> <plug>OutlawParent       :<c-u>call <sid>outlaw_up('b')<cr>zv
-nnoremap <script> <silent> <plug>OutlawUncle        :<c-u>call <sid>outlaw_up('')<cr>zv
-nnoremap <script> <silent> <plug>OutlawAddSibling   :<c-u>call <sid>outlaw_add_sibling()<cr>
+nnoremap <script> <silent> <plug>OutlawThisFoldLevel :<c-u>let &l:fdl=OutlawLevel()<cr>
+nnoremap <script> <silent> <plug>OutlawBodyTextMode  :<c-u>let b:outlaw_body_text_level=b:outlaw_body_text_level==20?'=':20<cr>zx
+nnoremap <script> <silent> <plug>OutlawPrevTopic     :<c-u>call <sid>topic_search('besW')<cr>zv
+nnoremap <script> <silent> <plug>OutlawNextTopic     :<c-u>call <sid>topic_search('esW')<cr>zv
+nnoremap <script> <silent> <plug>OutlawPrevSibling   :<c-u>call <sid>outlaw_br('b')<cr>zv
+nnoremap <script> <silent> <plug>OutlawNextSibling   :<c-u>call <sid>outlaw_br('')<cr>zv
+nnoremap <script> <silent> <plug>OutlawParent        :<c-u>call <sid>outlaw_up('b')<cr>zv
+nnoremap <script> <silent> <plug>OutlawUncle         :<c-u>call <sid>outlaw_up('')<cr>zv
+nnoremap <script> <silent> <plug>OutlawAddSibling    :<c-u>call <sid>outlaw_add_sibling()<cr>
 
+if !hasmapto('<plug>OutlawThisFoldLevel', 'n')
+  nmap <buffer> gl <plug>OutlawThisFoldLevel
+endif
 if !hasmapto('<plug>OutlawBodyTextMode', 'n')
   nmap <buffer> gy <plug>OutlawBodyTextMode
 endif
