@@ -73,6 +73,10 @@ nnoremap <script> <silent> <plug>OutlawParent      :<c-u>call <sid>outlaw_up('b'
 nnoremap <script> <silent> <plug>OutlawUncle       :<c-u>call <sid>outlaw_up('')<cr>zv
 nnoremap <script> <silent> <plug>OutlawAddSibling  :<c-u>call <sid>outlaw_add_sibling()<cr>
 
+nnoremap <script> <silent> <plug>OutlawBodyTextMode :<c-u>let b:outlaw_body_text_level=b:outlaw_body_text_level==20?'=':20<cr>zx
+if !hasmapto('<plug>OutlawBodyTextMode', 'n')
+  nmap <buffer> gy <plug>OutlawBodyTextMode
+endif
 if !hasmapto('<plug>OutlawPrevTopic', 'n')
   nmap <buffer> <up> <plug>OutlawPrevTopic
 endif
