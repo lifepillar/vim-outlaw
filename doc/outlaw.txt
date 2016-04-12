@@ -194,6 +194,9 @@ A: A simple way is to use the quickfix list. For instance:
 
    :vimgrep /TODO/ % | copen
 
+   You may get creative from there, but be aware that an outliner
+   and a task manager are two different beasts.
+
 Q: How do I "zoom into a topic" (get a focused view on a topic)?
 A: Install the NrrRgn plugin. You may also like Limelight.
 
