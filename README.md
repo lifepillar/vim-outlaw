@@ -10,7 +10,7 @@ minimalist philosophy followed by plugins like
 [Commentary](https://github.com/tpope/vim-commentary),
 [Dirvish](https://github.com/justinmk/vim-dirvish) or
 [Sneak](https://github.com/justinmk/vim-sneak), I do not try to
-reinvent the wheel. The price on my head is less than 130 LoC.
+reinvent the wheel. The price on my head is about 130 LoC.
 
 Here is a very simple outline which you may start playing with:
 
@@ -25,7 +25,7 @@ vim: set tw=80 sw=2 ts=2 sts=2 et ft=outlaw:
     === Searching for a brother
       === The Wild Bunch
 
-=== Todo list
+=== Things to do
   [x] Clean boots
   [ ] Brush the horse
       You may lead him to the water if you want, but don't expect
@@ -49,17 +49,16 @@ not use both to indent different topics inside the same document!).
 
 For me, everything that does not look like a topic (including blank
 lines) is body text (notes). I couldn't care less about the format
-or indentation of the body text: each block of body text always
+or indentation of your notes: each block of body text always
 belongs to the topic immediately before it. But don't call it a son
 of a topic: you'd better think of body text as being at the same
 level as the topic it belongs to (although its fold level may be set
-to a different value so that it may be folded independently: see
-`g:outlaw_body_text_level`).
+to a different value using `gy`, so that it may be folded
+independently: see also `g:outlaw_body_text_level`).
 
-The body text is plain text, but you may put some text between `~~~`
-tags to embed any configured filetype (see `g:outlaw_nested_ft`). If
-you don't like `~~~`, the tag may be changed, too (see
-`g:outlaw_ft_tag`).
+Notes are just plain text, but you may use `~~~` tags to embed any
+configured filetype (see `g:outlaw_nested_ft`). If you don't like
+`~~~`, the tag may be changed, too (see `g:outlaw_ft_tag`).
 
 I let you jump through topics quickly: to the next or previous topic
 (`<down>` and `<up>`), brother or cousin (`<c-j>` and `<c-k>`),
