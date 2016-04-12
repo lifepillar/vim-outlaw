@@ -68,7 +68,7 @@ or indentation of your notes: each block of body text always
 belongs to the topic immediately before it. But don't call it a son
 of a topic: you'd better think of body text as being at the same
 level as the topic it belongs to (although its fold level may be set
-to a different value using |gy|, so that it may be folded
+to a different value using `gy`, so that it may be folded
 independently: see also |g:outlaw_body_text_level|).
 
 Notes are just plain text, but you may use `~~~` tags to embed any
