@@ -188,7 +188,11 @@ Q: How do I get an agenda view (e.g., a list of the TODO items in my
    outline)?
 A: A simple way is to use the quickfix list. For instance:
 
-   :vimgrep /^\s*<c-r>=b:outlaw_topic_mark<cr>\s*TODO/ %
+   :vimgrep /^\s*<c-r>=b:outlaw_topic_mark<cr>\s*TODO/ % | copen
+
+   or even just:
+
+   :vimgrep /TODO/ % | copen
 
 Q: How do I "zoom into a topic" (get a focused view on a topic)?
 A: Install the NrrRgn plugin. You may also like Limelight.
