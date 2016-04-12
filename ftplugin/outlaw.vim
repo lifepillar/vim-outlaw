@@ -36,7 +36,7 @@ setlocal foldmethod=expr
 setlocal foldexpr=OutlawFold(v:lnum)
 setlocal foldtext=foldlevel(v:foldstart)<20?substitute(getline(v:foldstart),'\\t',repeat('\ ',&l:shiftwidth),'g'):b:outlaw_folded_text
 setlocal autoindent
-setlocal comments=fb:*,fb:- " Lists
+setlocal comments+=fb:*,fb:- " Lists
 setlocal shiftround
 
 fun! s:tab()
