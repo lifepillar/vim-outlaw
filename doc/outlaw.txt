@@ -90,80 +90,76 @@ want to ask me questions.
 ====================================================================
 Section 2: How to do X?                              *outlaw-howto*
 
-Q: Ok Outlaw, how much do you need?
-A: Just Vim compiled with |+comments| and |+folding|.
+Ok Outlaw, how much do you need? ~
+Just Vim compiled with |+comments| and |+folding|.
 
-Q: How do I open files as Outlaw buffers?
-A: Just set `ft=outlaw` in the document's modeline, or map the
-   suffix you want yourself. I do not define any filetype mapping,
-   because there is no conventional suffix or format for text
-   outlines.
+How do I open files as Outlaw buffers? ~
+Just set `ft=outlaw` in the document's modeline, or map the suffix
+you want yourself. I do not define any filetype mapping, because
+there is no conventional suffix or format for text outlines.
 
-Q: How do I copy/move/delete topics?
-A: Fold them (|zc| or |za|), then yank/paste/delete as usual.
+How do I copy/move/delete topics? ~
+Fold them (|zc| or |za|), then yank/paste/delete as usual.
 
-Q: How do I jump to the previous/next topic header?
-A: Use the up and down arrows in Normal mode. If you don't like
-   such mappings, you may define your own (see |outlaw-mappings|).
+How do I jump to the previous/next topic header? ~
+Use the up and down arrows in Normal mode. If you don't like such
+mappings, you may define your own (see |outlaw-mappings|).
 
-Q: How do I jump to the parent of the current topic?
-A: Type `-` in Normal mode (even when you are inside the body text),
-   or define your own mapping. Pressing `-` when the cursor is in a
-   top-level topic will cause a jump to the previous top-level
-   topic, so you may continue pressing `-` till you reach the
-   beginning of the document.
+How do I jump to the parent of the current topic? ~
+Type `-` in Normal mode (even when you are inside the body text), or
+define your own mapping. Pressing `-` when the cursor is in
+a top-level topic will cause a jump to the previous top-level topic,
+so you may continue pressing `-` till you reach the beginning of the
+document.
 
-Q: May I jump to the (next) uncle of the current topic?
-A: Sure, type `+` in Normal mode (even from inside the body text),
-   or define your own mapping. Actually, `+` will jump to the next
-   great-uncle if the current topic has no next uncle, or to
-   great-great-uncle if it has no great-uncle, and so on. Pressing
-   `+` when the cursor is in a top-level topic will cause a jump to
-   the next top-level topic, so you may continue pressing `+` till
-   you reach the last top-level topic of the document.
+May I jump to the (next) uncle of the current topic? ~
+Sure, type `+` in Normal mode (even from inside the body text), or
+define your own mapping. Actually, `+` will jump to the next
+great-uncle if the current topic has no next uncle, or to
+great-great-uncle if it has no great-uncle, and so on. Pressing `+`
+when the cursor is in a top-level topic will cause a jump to the
+next top-level topic, so you may continue pressing `+` till you
+reach the last top-level topic of the document.
 
-Q: How about moving to previous/next brother or cousin (i.e.,
-   between topics at the same level)?
-A: Use `<c-k>` and `<c-j>`, respectively, in Normal mode. Or define
-   your own mappings.
+How about moving to previous/next brother or cousin (i.e., ~
+between topics at the same level)? ~
+Use `<c-k>` and `<c-j>`, respectively, in Normal mode. Or define
+your own mappings.
 
-Q: Are all those jumps remembered in the jump list?
-A: You bet they do.
+Are all those jumps remembered in the jump list? ~
+You bet they do.
 
-Q: How do I display my outline in its full glory?
-A: Use |zR| or set |foldlevel| to 20.
+How do I display my outline in its full glory? ~
+Use |zR| or set |foldlevel| to 20.
 
-Q: How do I collapse the outline?
-A: Use |zM| or set |foldlevel| to 0.
+How do I collapse the outline? ~
+Use |zM| or set |foldlevel| to 0.
 
-Q: How do I fully expand the outline, but with collapsed body text?
-A: Set |fdl|=|g:outlaw_body_text_level|-1. This only works if
-   |g:outlaw_body_text_level| is set to a number (typically, 20)
-   higher than the number of nested topics. See |outlaw-mappings| to
-   learn how to toggle this setting.
+How do I fully expand the outline, but with collapsed body text? ~
+Set |fdl|=19. This only works if |g:outlaw_body_text_level| is set
+to 20. See |outlaw-mappings| to learn how to toggle that setting.
 
-Q: How do I zoom to the desired level?
-A: Set |fdl|=`n`, where `n` is a number between 0 and 20. You may
-   also use `gl` to set the fold level according to the level of the
-   current line.
+How do I zoom to the desired level? ~
+Set |fdl|=`n`, where `n` is a number between 0 and 20. You may also
+use `gl` to set the fold level according to the level of the current
+line.
 
-Q: How do I collapse a topic or the body text of a topic?
-A: I recommend using |zc| (close). Alternatively, use |za|.
+How do I collapse a topic or the body text of a topic? ~
+I recommend using |zc| (close). Alternatively, use |za|.
 
-Q: How do I expand a topic or the body text of a topic?
-A: I recommend using |zv| (view), which works in all cases. All other
-   Vim's folding commands work as usual, of course. But keep in mind
-   that, if |g:outlaw_body_text_level| is set to `20`, in general
-   you will need to unfold recursively (|zA| or |zv|) for the body
-   text to be expanded.
+How do I expand a topic or the body text of a topic? ~
+I recommend using |zv| (view), which works in all cases. All other
+Vim's folding commands work as usual, of course. But keep in mind
+that, if |g:outlaw_body_text_level| is set to `20`, in general you
+will need to unfold recursively (|zA| or |zv|) for the body text to
+be expanded.
 
-Q: How do I shift a topic left or right?
-A: Fold it, then use |<<| or |>>|.
+How do I shift a topic left or right? ~
+Fold it, then use |<<| or |>>|.
 
-Q: But |<<| does not do what I want, because the brothers of the
-   topic I am moving become its children. How do I promote a topic
-   to uncle?
-A: Use something like `dd+P<<`. Say you have this outline:
+But << does not do what I want, because the brothers of the topic ~
+I am moving become its children. How do I promote a topic to uncle? ~
+Use something like `dd+P<<`. Say you have this outline:
 
     === H1
       === H1.1
@@ -171,10 +167,10 @@ A: Use something like `dd+P<<`. Say you have this outline:
       === H1.3
     === H2
 
-   and the cursor is on H1.1. Then `dd` will delete the line (or the
-   whole fold if the topic is folded), `+` will jump to H2, `P` will
-   paste the deleted topic above H2 and `<<` will move the topic
-   one-level up. So, the topic will be promoted as you desire:
+and the cursor is on H1.1. Then `dd` will delete the line (or the
+whole fold if the topic is folded), `+` will jump to H2, `P` will
+paste the deleted topic above H2 and `<<` will move the topic
+one-level up. So, the topic will be promoted as you desire:
 
     === H1
       === H1.2
@@ -182,17 +178,17 @@ A: Use something like `dd+P<<`. Say you have this outline:
     === H1.1
     === H2
 
-Q: How do I quickly create a brother/son/uncle of the current topic?
-A: Press `<cr>` in Normal mode to add a brother of the current topic
-   (it works even if you are inside the body text of the topic). You
-   may then indent or outdent as you see fit with |i_CTRL-T| and
-   |i_CTRL-D|, respectively. The command also automatically copies
-   the topic's prefix from the current topic, so you don't have to
-   type it yourself (type |i_CTRL-U| if you want to change it).
+How do I quickly create a brother/son/uncle of the current topic? ~
+Press `<cr>` in Normal mode to add a brother of the current topic
+(it works even if you are inside the body text of the topic). You
+may then indent or outdent as you see fit with |i_CTRL-T| and
+|i_CTRL-D|, respectively. The command also automatically copies the
+topic's prefix from the current topic, so you don't have to type it
+yourself (type |i_CTRL-U| if you want to change it).
 
-Q: How do I get an agenda view (e.g., a list of the TODO items in my
-   outline)?
-A: A simple way is to use the quickfix list. For instance:
+How do I get an agenda view (e.g., a list of the TODO items in my ~
+outline)? ~
+A simple way is to use the quickfix list. For instance:
 
    :vimgrep /^\s*<c-r>=b:outlaw_topic_mark<cr>\s*TODO/ % | copen
 
@@ -200,38 +196,35 @@ A: A simple way is to use the quickfix list. For instance:
 
    :vimgrep /TODO/ % | copen
 
-   You may get creative from there, but be aware that an outliner
-   and a task manager are two different beasts.
+You may get creative from there, but be aware that an outliner and
+a task manager are two different beasts.
 
-Q: How do I "zoom into a topic" (get a focused view on a topic)?
-A: Install the NrrRgn plugin. You may also like Limelight.
+How do I "zoom into a topic" (get a focused view on a topic)? ~
+Install the NrrRgn plugin. You may also like Limelight.
 
-Q: How do I sort topics?
-A: Use a plugin like AdvancedSorters or vissort. That's not the type
-   of job I get hired for.
+How do I sort topics? ~
+Use a plugin like AdvancedSorters or vissort. That's not the type
+of job I get hired for.
 
-Q: How do I create a checkbox?
-A: Do I really have to tell you? Type `[x]`, `[-]` or `[<spc>]` in
-   Insert mode.
+How do I create a checkbox? ~
+Do I really have to tell you? Type `[x]`, `[-]` or `[<spc>]` in
+Insert mode.
 
-Q: Isn't there a quicker way?
-A: Sure, define a mapping.
+Isn't there a quicker way? ~
+Sure, define a mapping.
 
-Q: Ok, how do I toggle a checkbox's status?
-A: Position the cursor inside the checkbox, then type `rx`, `r-` or
-   `r<spc>` as required.
+Ok, how do I toggle a checkbox's status? ~
+Position the cursor inside the checkbox, then type `rx`, `r-` or
+`r<spc>` as required.
 
-Q: The checkbox is too far! How do I jump there?
-A: Pressing `<up>` from any point in the topic line or its body text
-   will put you right inside the checkbox of the current topic.
+The checkbox is too far! How do I jump there? ~
+Pressing `<up>` from any point in the topic line or its body text
+will put you right inside the checkbox of the current topic.
 
-Q: Hey, you showed me everything, but that's too much typing!
-A: Define your own mappings. Btw, that's not a question.
-
-Q: Other outliners have better horses and shine like the door of
-   a whorehouse.
-A: I'm not the kind who needs an audience so I can show off. Btw,
-   that's not a question either.
+Other outliners have better horses and shine like the door of ~
+a whorehouse. ~
+I'm not the kind who needs an audience so I can show off. Btw,
+that's not a question.
 
 ====================================================================
 Section 3: Mappings                                *outlaw-mappings*
