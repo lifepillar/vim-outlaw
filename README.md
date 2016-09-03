@@ -34,7 +34,7 @@ vim: set tw=80 sw=2 ts=2 sts=2 et ft=outlaw:
 ```
 which looks like this:
 
-![Sample outline](https://raw.github.com/lifepillar/Resources/master/example.png)
+![Sample outline](https://raw.github.com/lifepillar/Resources/master/outlaw/example.png)
 
 I interpret lines starting with `===`, `[x]`, `[-]` or `[ ]`,
 followed by a space, as topics. Each topic must be on a single line.
