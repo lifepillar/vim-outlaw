@@ -1,4 +1,4 @@
-![Nobody](images/nobody.jpg)
+![Nobody](https://raw.github.com/lifepillar/Resources/master/outlaw/nobody.jpg)
 
 # Vim Outlaw: The Wanted Outliner!
 
@@ -34,7 +34,7 @@ vim: set tw=80 sw=2 ts=2 sts=2 et ft=outlaw:
 ```
 which looks like this:
 
-![Sample outline](images/example.png)
+![Sample outline](https://raw.github.com/lifepillar/Resources/master/example.png)
 
 I interpret lines starting with `===`, `[x]`, `[-]` or `[ ]`,
 followed by a space, as topics. Each topic must be on a single line.
