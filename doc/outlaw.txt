@@ -322,7 +322,8 @@ then when you write something like:
     select money from bank where sheriff is null;
     ~~~
 <
-the part between `~~~` will be highlighted as SQL.
+the part between `~~~` will be highlighted as SQL. The delimiters
+may be hidden by setting |conceallevel|.
 
                                                *g:outlaw_topic_mark*
 A regular expression that defines a topic's prefix.
