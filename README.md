@@ -10,7 +10,7 @@ minimalist philosophy followed by plugins like
 [Commentary](https://github.com/tpope/vim-commentary),
 [Dirvish](https://github.com/justinmk/vim-dirvish) or
 [Sneak](https://github.com/justinmk/vim-sneak), I do not try to
-reinvent the wheel. The price on my head is about 140 LoC.
+reinvent the wheel. The price on my head is about 150 LoC.
 
 Here is a very simple outline which you may start playing with:
 
@@ -65,9 +65,11 @@ I let you jump through topics quickly: to the next or previous topic
 father or uncle (`-` or `+`). Press `<enter>` in Normal mode to
 quickly add a new brother.
 
-Folding and unfolding are performed using Vim's default mappings.
-In addition, I provide `gl` to set the fold level according to the
-level of the current line.
+Folding and unfolding are performed using Vim's default mappings and
+controlled using Vim's options (see `:h fold-options`). In addition,
+I provide `gl` to set the fold level according to the level of the
+current line, and `g:outlaw_auto_close` as a better suited
+alternative to setting `foldclose`.
 
 There's not much else you need to know about me. But if you want to
 know all the details, see **:h outlaw.txt**.
