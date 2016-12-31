@@ -81,7 +81,7 @@ I let you jump through topics quickly: to the next or previous topic
 (<down> and <up>), to the previous or next sibling/cousin (<left>
 and <right>), to parent or to uncle (- and +). Press <enter> in
 Normal mode to quickly add a new sibling below the current topic, or
-<c-j> to add a new sibling above the current topic.
+<c-k> to add a new sibling above the current topic.
 
 Folding and unfolding are performed using Vim's default mappings and
 controlled using Vim's options (see |fold-options|). In addition,
@@ -191,13 +191,15 @@ one-level up. So, the topic will be promoted as you desire:
   === H1.1
   === H2
 <
-How do I quickly create a sibling/son/uncle of the current topic? ~
+How do I quickly create a sibling/child/uncle of the current topic? ~
 Press <enter> in Normal mode to add a sibling of the current topic
 (it works even if you are inside the body text of the topic). You
 may then indent or outdent as you see fit with |i_CTRL-T| and
 |i_CTRL-D|, respectively. The command also automatically copies the
 topic's prefix from the current topic, so you don't have to type it
 yourself (type |i_CTRL-U| if you want to change it).
+
+To quickly add a new child to the current topic, use <c-j>.
 
 How do I get an agenda view (e.g., a list of the TODO items in my ~
 outline)? ~
@@ -254,7 +256,8 @@ These are the default mappings I provide:
   nmap <buffer> -       <plug>OutlawParent
   nmap <buffer> +       <plug>OutlawUncle
   nmap <buffer> <cr>    <plug>OutlawAddSiblingBelow
-  nmap <buffer> <c-j>   <plug>OutlawAddSiblingAbove
+  nmap <buffer> <c-k>   <plug>OutlawAddSiblingAbove
+  nmap <buffer> <c-j>   <plug>OutlawAddChild
 
 There's no way these mappings are good for everyone. Feel free to
 override them in your |.vimrc|.

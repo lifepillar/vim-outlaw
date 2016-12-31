@@ -101,6 +101,7 @@ nnoremap <script> <silent> <plug>OutlawParent        :<c-u>call <sid>close_fold(
 nnoremap <script> <silent> <plug>OutlawUncle         :<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('')<cr>zv
 nnoremap <script> <silent> <plug>OutlawAddSiblingBelow    :<c-u>call <sid>outlaw_add_sibling(1)<cr>
 nnoremap <script> <silent> <plug>OutlawAddSiblingAbove    :<c-u>call <sid>outlaw_add_sibling(0)<cr>
+nnoremap <script> <silent> <plug>OutlawAddChild           :<c-u>call <sid>outlaw_add_sibling(1)<cr><c-t><c-o>zv
 nnoremap <script> <silent> <plug>OutlawToggleAutoClose    :<c-u>call <sid>outlaw_toggle_auto_close()<cr>
 
 if !hasmapto('<plug>OutlawToggleAutoClose', 'n')
@@ -134,5 +135,8 @@ if !hasmapto('<plug>OutlawAddSiblingBelow', 'n')
   nmap <buffer> <cr> <plug>OutlawAddSiblingBelow
 endif
 if !hasmapto('<plug>OutlawAddSiblingAbove', 'n')
-  nmap <buffer> <c-j> <plug>OutlawAddSiblingAbove
+  nmap <buffer> <c-k> <plug>OutlawAddSiblingAbove
+endif
+if !hasmapto('<plug>OutlawAddChild', 'n')
+  nmap <buffer> <c-j> <plug>OutlawAddChild
 endif
