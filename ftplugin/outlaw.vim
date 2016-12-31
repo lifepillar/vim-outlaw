@@ -81,7 +81,7 @@ fun! s:outlaw_add_sibling(dir)
 endf
 
 fun! s:close_fold()
-  if get(b:, 'outlaw_auto_close', get(g:, 'outlaw_auto_close', 1))
+  if get(b:, 'outlaw_auto_close', get(g:, 'outlaw_auto_close', 1)) && foldclosed('.') == -1
     foldclose
   endif
 endf
