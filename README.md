@@ -62,7 +62,7 @@ configured filetype (see `g:outlaw_nested_ft`). If you don't like
 
 I let you jump through topics quickly: to the next or previous topic
 (`<down>` and `<up>`), brother or cousin (`<c-j>` and `<c-k>`),
-father or uncle (`-` or `+`). Press `<enter>` in Normal mode to
+father or uncle (`-` and `+`). Press `<enter>` in Normal mode to
 quickly add a new brother.
 
 Folding and unfolding are performed using Vim's default mappings and
