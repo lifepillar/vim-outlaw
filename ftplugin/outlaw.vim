@@ -111,4 +111,3 @@ endif
 if !hasmapto('<plug>OutlawAddSibling', 'n')
   nmap <buffer> <cr> <plug>OutlawAddSibling
 endif
-

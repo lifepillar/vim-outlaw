@@ -32,4 +32,3 @@ for ft in get(b:, 'outlaw_nested_ft', get(g:, 'outlaw_nested_ft', []))
 endfor
 
 let b:current_syntax = "outlaw"
-
