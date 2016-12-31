@@ -82,8 +82,13 @@ endf
 
 fun! s:close_fold()
   if get(b:, 'outlaw_auto_close', get(g:, 'outlaw_auto_close', 1))
-    normal zc
+    foldclose
   endif
+endf
+
+fun! s:outlaw_toggle_auto_close()
+  let b:outlaw_auto_close = 1 - get(b:, 'outlaw_auto_close', get(g:, 'outlaw_auto_close', 1))
+  echomsg '[Outlaw] Auto close' (b:outlaw_auto_close ? 'on' : 'off')
 endf
 
 nnoremap <script> <silent> <plug>OutlawThisFoldLevel :<c-u>let &l:fdl=OutlawLevel()<cr>
@@ -96,7 +101,11 @@ nnoremap <script> <silent> <plug>OutlawParent        :<c-u>call <sid>close_fold(
 nnoremap <script> <silent> <plug>OutlawUncle         :<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('')<cr>zv
 nnoremap <script> <silent> <plug>OutlawAddSiblingBelow    :<c-u>call <sid>outlaw_add_sibling(1)<cr>
 nnoremap <script> <silent> <plug>OutlawAddSiblingAbove    :<c-u>call <sid>outlaw_add_sibling(0)<cr>
+nnoremap <script> <silent> <plug>OutlawToggleAutoClose    :<c-u>call <sid>outlaw_toggle_auto_close()<cr>
 
+if !hasmapto('<plug>OutlawToggleAutoClose', 'n')
+  nmap <buffer> gA <plug>OutlawToggleAutoClose
+endif
 if !hasmapto('<plug>OutlawThisFoldLevel', 'n')
   nmap <buffer> gl <plug>OutlawThisFoldLevel
 endif

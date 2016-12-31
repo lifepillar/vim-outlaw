@@ -244,6 +244,7 @@ Section 3: Mappings                                *outlaw-mappings*
 
 These are the default mappings I provide:
 
+  nmap <buffer> gA      <plug>OutlawToggleAutoClose
   nmap <buffer> gl      <plug>OutlawThisFoldLevel
   nmap <buffer> gy      <plug>OutlawBodyTextMode
   nmap <buffer> <up>    <plug>OutlawPrevTopic
