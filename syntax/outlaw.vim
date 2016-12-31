@@ -31,4 +31,6 @@ for ft in get(b:, 'outlaw_nested_ft', get(g:, 'outlaw_nested_ft', []))
   execute 'syn region Outlaw'.ft 'matchgroup=Conceal start="'.s:tag.ft.'" end="'.s:tag.'" concealends keepend contains=@Outlaw'.ft
 endfor
 
+syn match Conceal '^vim: .*' conceal
+
 let b:current_syntax = "outlaw"
