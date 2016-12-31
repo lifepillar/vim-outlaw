@@ -30,7 +30,7 @@ I am wanted because I am an outliner, and although many outliners
 are already available for Vim, I am different. Striving for the same
 minimalist philosophy followed by plugins like Commentary, Dirvish
 or Sneak, I do not try to reinvent the wheel. The price on my head
-is about 150 LoC.
+is about 200 LoC.
 
 Here is a very simple outline which you may start playing with:
 >
@@ -51,6 +51,8 @@ Here is a very simple outline which you may start playing with:
         him to drink.
     [ ] Wear the sheriff's badge
 <
+(The modeline is hidden if you set |conceallevel|.)
+
 I interpret lines starting with `===`, `[x]`, `[-]` or `[ ]`,
 followed by a space, as topics. Each topic must be on a single line.
 The pattern defining a topic may be fully customized by setting
@@ -76,9 +78,10 @@ any configured filetype (see |g:outlaw_nested_ft|). If you don't
 like `~~~`, the tag may be changed, too (see |g:outlaw_ft_tag|).
 
 I let you jump through topics quickly: to the next or previous topic
-(<down> and <up>), brother or cousin (<c-j> and <c-k>),
-father or uncle (- and +). Press <enter> in Normal mode to
-quickly add a new brother.
+(<down> and <up>), to the previous or next sibling/cousin (<left>
+and <right>), to parent or to uncle (- and +). Press <enter> in
+Normal mode to quickly add a new sibling below the current topic, or
+<c-j> to add a new sibling above the current topic.
 
 Folding and unfolding are performed using Vim's default mappings and
 controlled using Vim's options (see |fold-options|). In addition,
@@ -123,10 +126,10 @@ when the cursor is in a top-level topic will cause a jump to the
 next top-level topic, so you may continue pressing + until you
 reach the last top-level topic of the document.
 
-How about moving to previous/next brother or cousin (i.e., ~
+How about moving to previous/next sibling or cousin (i.e., ~
 between topics at the same level)? ~
-Use <c-k> and <c-j>, respectively, in Normal mode. Or define
-your own mappings.
+Use <left> and <right>, respectively, in Normal mode. Or define your
+own mappings.
 
 Are all those jumps remembered in the jump list? ~
 You bet they do.
@@ -151,7 +154,7 @@ With
   setl fdl=n
 <
 where `n` is a number between 0 and 20. You may also use |gl| to set
-the fold level according to the level of the current line.
+the fold level to the fold level of the current line.
 
 How do I collapse a topic or the body text of a topic? ~
 I recommend using |zc| (close). Alternatively, use |za|.
@@ -166,8 +169,9 @@ be expanded.
 How do I shift a topic left or right? ~
 Fold it, then use << or >>.
 
-But << does not do what I want, because the brothers of the topic ~
-I am moving become its children. How do I promote a topic to uncle? ~
+But << does not do what I want, because some siblings of the topic ~
+I am moving may become its children. How do I promote a topic to ~
+uncle? ~
 Use something like |dd+P<<|. Say you have this outline:
 >
   === H1
@@ -187,8 +191,8 @@ one-level up. So, the topic will be promoted as you desire:
   === H1.1
   === H2
 <
-How do I quickly create a brother/son/uncle of the current topic? ~
-Press <enter> in Normal mode to add a brother of the current topic
+How do I quickly create a sibling/son/uncle of the current topic? ~
+Press <enter> in Normal mode to add a sibling of the current topic
 (it works even if you are inside the body text of the topic). You
 may then indent or outdent as you see fit with |i_CTRL-T| and
 |i_CTRL-D|, respectively. The command also automatically copies the
@@ -206,7 +210,7 @@ A simple way is to use the quickfix list. For instance:
  :vimgrep /TODO/ % | copen
 <
 You may get creative from there, but be aware that an outliner and
-a task manager are two different beasts.
+a task manager are like Jack Beauregard and The Wild Bunch.
 
 How do I "zoom into a topic" (get a focused view on a topic)? ~
 Install the NrrRgn plugin. You may also like Limelight.
@@ -244,11 +248,12 @@ These are the default mappings I provide:
   nmap <buffer> gy      <plug>OutlawBodyTextMode
   nmap <buffer> <up>    <plug>OutlawPrevTopic
   nmap <buffer> <down>  <plug>OutlawNextTopic
-  nmap <buffer> <c-k>   <plug>OutlawPrevSibling
-  nmap <buffer> <c-j>   <plug>OutlawNextSibling
+  nmap <buffer> <left>  <plug>OutlawPrevSibling
+  nmap <buffer> <right> <plug>OutlawNextSibling
   nmap <buffer> -       <plug>OutlawParent
   nmap <buffer> +       <plug>OutlawUncle
-  nmap <buffer> <cr>    <plug>OutlawAddSibling
+  nmap <buffer> <cr>    <plug>OutlawAddSiblingBelow
+  nmap <buffer> <c-j>   <plug>OutlawAddSiblingAbove
 
 There's no way these mappings are good for everyone. Feel free to
 override them in your |.vimrc|.

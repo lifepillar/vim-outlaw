@@ -48,12 +48,17 @@ fun! s:topic_search(flags) " Search for a topic line from the cursor's position
   return search('^\s*'.b:outlaw_topic_mark, a:flags)
 endf
 
-fun! OutlawTopicLine() " Return the line number where the current topic starts
+fun! OutlawTopicStart() " Return the line number where the current topic starts
   return s:topic_search('bcnW')
 endf
 
 fun! OutlawLevel() " Return the level of the current topic (top level is level 0)
-  return foldlevel(OutlawTopicLine()) - 1
+  return foldlevel(OutlawTopicStart()) - 1
+endf
+
+fun! OutlawTopicEnd() " Return the line number of the last line of the current topic
+  let l:line = search('^\('.s:tab().'\)\{,'.max([0,OutlawLevel()]).'}'.b:outlaw_topic_mark, 'nW') - 1
+  return l:line < 0 ? line('$') : l:line
 endf
 
 fun! s:outlaw_up(dir) " Search for a topic at least one level up, in the given direction
@@ -64,8 +69,15 @@ fun! s:outlaw_br(dir) " Search for a topic at the same level, in the given direc
   return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_topic_mark, a:dir.'esW')
 endf
 
-fun! s:outlaw_add_sibling()
-  call feedkeys("zco\<c-o>d0".matchstr(getline(OutlawTopicLine()), '^\s*'.substitute(b:outlaw_topic_mark,'\\ze','','g').'\s*'))
+fun! s:outlaw_add_sibling(dir)
+  call s:close_fold()
+  if foldclosed('.') > -1
+    call cursor(foldclosed('.'), 1)
+  endif
+  let l:line = a:dir ? OutlawTopicEnd() : max([OutlawTopicStart() - 1, 0])
+  call append(l:line, matchstr(getline(OutlawTopicStart()), '^\s*'.substitute(b:outlaw_topic_mark,'\\ze','','g').'\s*'))
+  call cursor(l:line + 1, 9999)
+  call feedkeys('a','it')
 endf
 
 fun! s:close_fold()
@@ -82,7 +94,8 @@ nnoremap <script> <silent> <plug>OutlawPrevSibling   :<c-u>call <sid>close_fold(
 nnoremap <script> <silent> <plug>OutlawNextSibling   :<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_br('')<cr>zv
 nnoremap <script> <silent> <plug>OutlawParent        :<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('b')<cr>zv
 nnoremap <script> <silent> <plug>OutlawUncle         :<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('')<cr>zv
-nnoremap <script> <silent> <plug>OutlawAddSibling    :<c-u>call <sid>outlaw_add_sibling()<cr>
+nnoremap <script> <silent> <plug>OutlawAddSiblingBelow    :<c-u>call <sid>outlaw_add_sibling(1)<cr>
+nnoremap <script> <silent> <plug>OutlawAddSiblingAbove    :<c-u>call <sid>outlaw_add_sibling(0)<cr>
 
 if !hasmapto('<plug>OutlawThisFoldLevel', 'n')
   nmap <buffer> gl <plug>OutlawThisFoldLevel
@@ -97,10 +110,10 @@ if !hasmapto('<plug>OutlawNextTopic', 'n')
   nmap <buffer> <down> <plug>OutlawNextTopic
 endif
 if !hasmapto('<plug>OutlawPrevSibling', 'n')
-  nmap <buffer> <c-k> <plug>OutlawPrevSibling
+  nmap <buffer> <left> <plug>OutlawPrevSibling
 endif
 if !hasmapto('<plug>OutlawNextSibling', 'n')
-  nmap <buffer> <c-j> <plug>OutlawNextSibling
+  nmap <buffer> <right> <plug>OutlawNextSibling
 endif
 if !hasmapto('<plug>OutlawParent', 'n')
   nmap <buffer> - <plug>OutlawParent
@@ -108,6 +121,9 @@ endif
 if !hasmapto('<plug>OutlawUncle', 'n')
   nmap <buffer> + <plug>OutlawUncle
 endif
-if !hasmapto('<plug>OutlawAddSibling', 'n')
-  nmap <buffer> <cr> <plug>OutlawAddSibling
+if !hasmapto('<plug>OutlawAddSiblingBelow', 'n')
+  nmap <buffer> <cr> <plug>OutlawAddSiblingBelow
+endif
+if !hasmapto('<plug>OutlawAddSiblingAbove', 'n')
+  nmap <buffer> <c-j> <plug>OutlawAddSiblingAbove
 endif
