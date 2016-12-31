@@ -1,3 +1,4 @@
+g:outlaw_auto_close	outlaw.txt	/*g:outlaw_auto_close*
 g:outlaw_body_text_level	outlaw.txt	/*g:outlaw_body_text_level*
 g:outlaw_folded_text	outlaw.txt	/*g:outlaw_folded_text*
 g:outlaw_ft_tag	outlaw.txt	/*g:outlaw_ft_tag*

@@ -247,6 +247,16 @@ override them in your `.vimrc`.
 ====================================================================
 Section 4: Customization                      *outlaw-customization*
 
+                                               *g:outlaw_auto_close*
+When set to 1, close the current fold (i.e., the fold at the cursor
+line) before using an Outlaw jump command. This is a less aggressive
+form of fold closing compared to setting |'foldclose'| to "all",
+because it allows you to have more than one open fold at a time.
+Set to 0 if you do not want folds to be closed, or if you prefer to
+set |'foldclose'|.
+>
+  let g:outlaw_auto_close = 1
+<
                                           *g:outlaw_body_text_level*
 The foldlevel of the body text. The value of this variable should be
 either `'='` (same foldlevel as the topic header) or `20`. If you
