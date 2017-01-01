@@ -76,8 +76,8 @@ fun! s:outlaw_add_sibling(dir)
   endif
   let l:line = a:dir ? OutlawTopicEnd() : max([OutlawTopicStart() - 1, 0])
   call append(l:line, matchstr(getline(OutlawTopicStart()), '^\s*'.substitute(b:outlaw_topic_mark,'\\ze','','g').'\s*'))
-  call cursor(l:line + 1, 9999)
-  call feedkeys('a','it')
+  call cursor(l:line + 1, 1)
+  call feedkeys('A', 'it')
 endf
 
 fun! s:close_fold()
