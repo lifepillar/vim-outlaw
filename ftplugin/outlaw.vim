@@ -91,52 +91,25 @@ fun! s:outlaw_toggle_auto_close()
   echomsg '[Outlaw] Auto close' (b:outlaw_auto_close ? 'on' : 'off')
 endf
 
-nnoremap <script> <silent> <plug>OutlawThisFoldLevel :<c-u>let &l:fdl=OutlawLevel()<cr>
-nnoremap <script> <silent> <plug>OutlawBodyTextMode  :<c-u>let b:outlaw_body_text_level=b:outlaw_body_text_level==20?'=':20<cr>zx
-nnoremap <script> <silent> <plug>OutlawPrevTopic     :<c-u>call <sid>close_fold()<cr>:call <sid>topic_search('besW')<cr>zv
-nnoremap <script> <silent> <plug>OutlawNextTopic     :<c-u>call <sid>close_fold()<cr>:call <sid>topic_search('esW')<cr>zv
-nnoremap <script> <silent> <plug>OutlawPrevSibling   :<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_br('b')<cr>zv
-nnoremap <script> <silent> <plug>OutlawNextSibling   :<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_br('')<cr>zv
-nnoremap <script> <silent> <plug>OutlawParent        :<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('b')<cr>zv
-nnoremap <script> <silent> <plug>OutlawUncle         :<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('')<cr>zv
-nnoremap <script> <silent> <plug>OutlawAddSiblingBelow    :<c-u>call <sid>outlaw_add_sibling(1)<cr>
-nnoremap <script> <silent> <plug>OutlawAddSiblingAbove    :<c-u>call <sid>outlaw_add_sibling(0)<cr>
-nnoremap <script> <silent> <plug>OutlawAddChild           :<c-u>call <sid>outlaw_add_sibling(1)<cr><c-t><c-o>zv
-nnoremap <script> <silent> <plug>OutlawToggleAutoClose    :<c-u>call <sid>outlaw_toggle_auto_close()<cr>
+if !get(g:, 'outlaw_no_mappings', 0)
+  fun! s:map(mode, name, lhs, rhs)
+    exe a:mode.'noremap <sid>('.a:name.')' a:rhs
+    exe a:mode.'noremap <script> <plug>(Outlaw'.a:name.') <sid>('.a:name.')'
+    if !hasmapto('<plug>(Outlaw'.a:name.')', a:mode)
+      exe a:mode.'map' a:lhs '<plug>(Outlaw'.a:name.')'
+    endif
+  endf
 
-if !hasmapto('<plug>OutlawToggleAutoClose', 'n')
-  nmap <buffer> gA <plug>OutlawToggleAutoClose
-endif
-if !hasmapto('<plug>OutlawThisFoldLevel', 'n')
-  nmap <buffer> gl <plug>OutlawThisFoldLevel
-endif
-if !hasmapto('<plug>OutlawBodyTextMode', 'n')
-  nmap <buffer> gy <plug>OutlawBodyTextMode
-endif
-if !hasmapto('<plug>OutlawPrevTopic', 'n')
-  nmap <buffer> <up> <plug>OutlawPrevTopic
-endif
-if !hasmapto('<plug>OutlawNextTopic', 'n')
-  nmap <buffer> <down> <plug>OutlawNextTopic
-endif
-if !hasmapto('<plug>OutlawPrevSibling', 'n')
-  nmap <buffer> <left> <plug>OutlawPrevSibling
-endif
-if !hasmapto('<plug>OutlawNextSibling', 'n')
-  nmap <buffer> <right> <plug>OutlawNextSibling
-endif
-if !hasmapto('<plug>OutlawParent', 'n')
-  nmap <buffer> - <plug>OutlawParent
-endif
-if !hasmapto('<plug>OutlawUncle', 'n')
-  nmap <buffer> + <plug>OutlawUncle
-endif
-if !hasmapto('<plug>OutlawAddSiblingBelow', 'n')
-  nmap <buffer> <cr> <plug>OutlawAddSiblingBelow
-endif
-if !hasmapto('<plug>OutlawAddSiblingAbove', 'n')
-  nmap <buffer> <c-k> <plug>OutlawAddSiblingAbove
-endif
-if !hasmapto('<plug>OutlawAddChild', 'n')
-  nmap <buffer> <c-j> <plug>OutlawAddChild
+  call s:map('n', 'ThisFoldLevel',   'gl',      ":<c-u>let &l:fdl=OutlawLevel()<cr>")
+  call s:map('n', 'BodyTextMode',    'gy',      ":<c-u>let b:outlaw_body_text_level=b:outlaw_body_text_level==20?'=':20<cr>zx")
+  call s:map('n', 'PrevTopic',       '<up>',    ":<c-u>call <sid>close_fold()<cr>:call <sid>topic_search('besW')<cr>zv")
+  call s:map('n', 'NextTopic',       '<down>',  ":<c-u>call <sid>close_fold()<cr>:call <sid>topic_search('esW')<cr>zv")
+  call s:map('n', 'PrevSibling',     '<left>',  ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_br('b')<cr>zv")
+  call s:map('n', 'NextSibling',     '<right>', ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_br('')<cr>zv")
+  call s:map('n', 'Parent',          '-',       ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('b')<cr>zv")
+  call s:map('n', 'Uncle',           '+',       ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('')<cr>zv")
+  call s:map('n', 'AddSiblingBelow', '<cr>',    ":<c-u>call <sid>outlaw_add_sibling(1)<cr>")
+  call s:map('n', 'AddSibglingAbove','<c-k>',   ":<c-u>call <sid>outlaw_add_sibling(0)<cr>")
+  call s:map('n', 'AddChild',        '<c-j>',   ":<c-u>call <sid>outlaw_add_sibling(1)<cr><c-t><c-o>zv")
+  call s:map('n', 'ToggleAutoClose', 'gA',      ":<c-u>call <sid>outlaw_toggle_auto_close()<cr>")
 endif
