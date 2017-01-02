@@ -31,7 +31,6 @@ fun! OutlawIndent()
       let l:prev = max([1, search('^\s*'.b:outlaw_topic_mark, 'bWz')])
     endwhile
     return foldlevel(l:prev) < foldlevel(v:lnum) ? indent(l:prev) + shiftwidth() : 0
-    endif
   endif
   return -1
 endf
