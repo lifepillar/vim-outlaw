@@ -96,6 +96,27 @@ fun! s:outlaw_toggle_auto_close()
   echomsg '[Outlaw] Auto close' (b:outlaw_auto_close ? 'on' : 'off')
 endf
 
+fun! s:align_note() " Align the note at the cursor's position
+  let l:start = OutlawTopicStart() + 1
+  if indent(l:start) == 0 | return | endif " Do not touch flush-left notes
+  let l:end = OutlawNextTopic() - 1
+  if l:end < l:start | return | endif
+  let l:shift = (indent(l:start - 1) + shiftwidth() - indent(l:start)) / shiftwidth()
+  if l:shift == 0 | return | endif
+  exe l:start.','.l:end.repeat(l:shift > 0 ? '>' : '<', abs(l:shift))
+endf
+
+fun! s:align_all_notes()
+  let l:view = winsaveview()
+  call cursor(1,1)
+  while s:topic_search('W') " Advance to next topic
+    call s:align_note()
+  endwhile
+  call winrestview(l:view)
+endf
+
+command! -bar -nargs=0 OutlawAlignNotes :call <sid>align_all_notes()
+
 if !get(g:, 'outlaw_no_mappings', 0)
   fun! s:map(mode, name, lhs, rhs)
     exe a:mode.'noremap <sid>('.a:name.')' a:rhs
