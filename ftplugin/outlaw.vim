@@ -56,7 +56,7 @@ fun! OutlawLevel() " Return the level of the current topic (top level is level 0
   return foldlevel(OutlawTopicStart()) - 1
 endf
 
-fun! OutlawTopicEnd() " Return the line number of the last line of the current topic
+fun! OutlawTopicTreeEnd() " Return the line number of the last line of the current subtree
   let l:line = search('^\('.s:tab().'\)\{,'.max([0,OutlawLevel()]).'}'.b:outlaw_topic_mark, 'nW') - 1
   return l:line < 0 ? line('$') : l:line
 endf
@@ -74,7 +74,7 @@ fun! s:outlaw_add_sibling(dir)
   if foldclosed('.') > -1
     call cursor(foldclosed('.'), 1)
   endif
-  let l:line = a:dir ? OutlawTopicEnd() : max([OutlawTopicStart() - 1, 0])
+  let l:line = a:dir ? OutlawTopicTreeEnd() : max([OutlawTopicStart() - 1, 0])
   call append(l:line, matchstr(getline(OutlawTopicStart()), '^\s*'.substitute(b:outlaw_topic_mark,'\\ze','','g').'\s*'))
   call cursor(l:line + 1, 1)
   call feedkeys('A', 'it')
