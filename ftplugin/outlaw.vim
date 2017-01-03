@@ -53,6 +53,10 @@ fun! OutlawTopicStart() " Return the line number where the current topic starts
   return s:topic_search('bcnW')
 endf
 
+fun! OutlawNextTopic() " Return the line number where the next (sub)topic starts
+  return s:topic_search('nW')
+endf
+
 fun! OutlawLevel() " Return the level of the current topic (top level is level 0)
   return foldlevel(OutlawTopicStart()) - 1
 endf
