@@ -29,19 +29,19 @@ if !exists("b:outlaw_body_text_level")
 endif
 
 fun! OutlawFold(lnum)
-  return getline(a:lnum) =~# '\m^\s*'.b:outlaw_topic_mark ? '>'.(1+indent(a:lnum)/&l:shiftwidth) : b:outlaw_body_text_level
+  return getline(a:lnum) =~# '\m^\s*'.b:outlaw_topic_mark ? '>'.(1+indent(a:lnum)/shiftwidth()) : b:outlaw_body_text_level
 endf
 
 setlocal foldmethod=expr
 setlocal foldexpr=OutlawFold(v:lnum)
-setlocal foldtext=foldlevel(v:foldstart)<20?substitute(getline(v:foldstart),'\\t',repeat('\ ',&l:shiftwidth),'g'):b:outlaw_folded_text
+setlocal foldtext=foldlevel(v:foldstart)<20?substitute(getline(v:foldstart),'\\t',repeat('\ ',shiftwidth()),'g'):b:outlaw_folded_text
 setlocal autoindent
 setlocal comments=fb:*,fb:- " Lists
 setlocal formatoptions=tcroqnlj1
 setlocal shiftround
 
 fun! s:tab()
-  return &l:expandtab ? repeat(' ', &l:shiftwidth) : '\t'
+  return &l:expandtab ? repeat(' ', shiftwidth()) : '\t'
 endf
 
 fun! s:topic_search(flags) " Search for a topic line from the cursor's position

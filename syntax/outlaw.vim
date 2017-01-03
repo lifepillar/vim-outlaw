@@ -11,7 +11,7 @@ syntax sync minlines=10 maxlines=100
 syn keyword outlawKeyword contained TODO FIXME XXX DEBUG NOTE
 hi def link OutlawKeyword Special
 
-let s:tab = &l:expandtab ? repeat(' ', &l:shiftwidth) : '\t'
+let s:tab = &l:expandtab ? repeat(' ', shiftwidth()) : '\t'
 let s:num = get(b:, 'outlaw_levels', get(g:, 'outlaw_levels',
       \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']))
 let s:mark = substitute(get(b:, 'outlaw_topic_mark', get(g:, 'outlaw_topic_mark', '\(=== \|\[x\] \|\[ \] \|\[-\] \)')), '\\ze', '', 'g')
