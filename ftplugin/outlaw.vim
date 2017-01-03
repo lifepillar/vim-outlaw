@@ -96,6 +96,18 @@ fun! s:outlaw_toggle_auto_close()
   echomsg '[Outlaw] Auto close' (b:outlaw_auto_close ? 'on' : 'off')
 endf
 
+fun! s:outlaw_move_down() range
+  call cursor(line("'>") + 1, 1)
+  let l:target = OutlawNextTopic() - 1
+  execute a:firstline.','.a:lastline.'move' (l:target > 0 ? l:target : line('$')).'<cr>'
+endf
+
+fun! s:outlaw_move_up() range
+  call cursor(line("'<") - 1, 1)
+  let l:target = OutlawTopicStart() - 1
+  execute a:firstline.','.a:lastline.'move' (l:target < 0 ? 0 : l:target).'<cr>'
+endf
+
 fun! s:align_note() " Align the note at the cursor's position
   let l:start = OutlawTopicStart() + 1
   if indent(l:start) == 0 | return | endif " Do not touch flush-left notes
@@ -132,6 +144,8 @@ if !get(g:, 'outlaw_no_mappings', 0)
   call s:map('n', 'NextTopic',       '<down>',  ":<c-u>call <sid>close_fold()<cr>:call <sid>topic_search('esW')<cr>zv")
   call s:map('n', 'PrevSibling',     '<left>',  ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_br('b')<cr>zv")
   call s:map('n', 'NextSibling',     '<right>', ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_br('')<cr>zv")
+  call s:map('v', 'MoveUp',          '<up>',    ":call <sid>outlaw_move_up()<cr>gv=:call <sid>align_note()<cr>gv")
+  call s:map('v', 'MoveDown',        '<down>',  ":call <sid>outlaw_move_down()<cr>gv")
   call s:map('n', 'Parent',          '-',       ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('b')<cr>zv")
   call s:map('n', 'Uncle',           '+',       ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('')<cr>zv")
   call s:map('n', 'AddSiblingBelow', '<cr>',    ":<c-u>call <sid>outlaw_add_sibling(1)<cr>")
