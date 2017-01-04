@@ -53,10 +53,6 @@ setlocal formatoptions=tcroqnlj1
 setlocal nopreserveindent
 setlocal shiftround
 
-fun! s:tab()
-  return &l:expandtab ? repeat(' ', shiftwidth()) : '\t'
-endf
-
 fun! s:topic_search(flags) " Search for a topic line from the cursor's position
   return search('^\s*'.b:outlaw_topic_mark, a:flags)
 endf
@@ -73,17 +69,21 @@ fun! OutlawLevel() " Return the level of the current topic (top level is level 0
   return foldlevel(OutlawTopicStart()) - 1
 endf
 
+fun! OutlawTopicColumn() " Return the column where the current topic starts
+  return 1 + indent(OutlawTopicStart())
+endf
+
 fun! OutlawTopicTreeEnd() " Return the line number of the last line of the current subtree
-  let l:line = search('^\('.s:tab().'\)\{,'.max([0,OutlawLevel()]).'}'.b:outlaw_topic_mark, 'nW') - 1
+  let l:line = search('\%<'.(OutlawTopicColumn()+1).'v'.b:outlaw_topic_mark, 'nW') - 1
   return l:line < 0 ? line('$') : l:line
 endf
 
 fun! s:outlaw_up(dir) " Search for a topic at least one level up, in the given direction
-  return search('^\('.s:tab().'\)\{,'.max([0,OutlawLevel()-1]).'}'.b:outlaw_topic_mark, a:dir.'esW')
+  return search('\%<'.OutlawTopicColumn().'v'.b:outlaw_topic_mark, a:dir.'esW')
 endf
 
 fun! s:outlaw_br(dir) " Search for a topic at the same level, in the given direction
-  return search('^'.repeat(s:tab(),OutlawLevel()).b:outlaw_topic_mark, a:dir.'esW')
+  return search('\%'.OutlawTopicColumn().'v'.b:outlaw_topic_mark, a:dir.'esW')
 endf
 
 fun! s:outlaw_add_sibling(dir)
