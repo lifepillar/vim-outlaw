@@ -28,6 +28,14 @@ if !exists("b:outlaw_body_text_level")
   let b:outlaw_body_text_level = get(g:, 'outlaw_body_text_level', '=')
 endif
 
+if !&smarttab && &l:softtabstop !=# shiftwidth()
+  if &l:softtabstop > 0
+    echomsg "[Outlaw] You should set 'softtabstop' to 0 or to the value of 'shiftwidth'."
+  elseif &l:softtabstop ==# 0 && &l:tabstop !=# shiftwidth()
+    echomsg "[Outlaw] You should set 'shiftwidth' to 0 or to the value of 'tabstop'."
+  endif
+endif
+
 fun! OutlawFold(lnum)
   return getline(a:lnum) =~# '\m^\s*'.b:outlaw_topic_mark ? '>'.(1+indent(a:lnum)/shiftwidth()) : b:outlaw_body_text_level
 endf
