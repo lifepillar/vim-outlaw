@@ -17,7 +17,7 @@ else
 endif
 
 if !exists('b:outlaw_topic_mark')
-  let b:outlaw_topic_mark = get(g:, 'outlaw_topic_mark', '\(=== \|\[x\ze\] \|\[ \ze\] \|\[-\ze\] \)')
+  let b:outlaw_topic_mark = get(g:, 'outlaw_topic_mark', '\%(=== \|\[x\ze\] \|\[ \ze\] \|\[-\ze\] \)')
 endif
 
 if !exists('b:outlaw_folded_text')
