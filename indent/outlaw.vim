@@ -24,13 +24,15 @@ fun! OutlawIndent()
   " immediately when computing the new indentation, so foldlevel()
   " allows us to infer the original indentation of a previous line.
   if getline(v:lnum) =~# '\m^\s*'.b:outlaw_topic_mark
-    " Search for the first topic with a fold level less than the
+    " Search for the first topic with a fold level no greater than the
     " fold level of the current topic (if any)
-    let l:prev = v:lnum
-    while l:prev > 1 && foldlevel(l:prev) >= foldlevel(v:lnum)
-      let l:prev = max([1, search('^\s*'.b:outlaw_topic_mark, 'bWz')])
+    let l:prev = search('^\s*'.b:outlaw_topic_mark, 'bWz')
+    while l:prev > 1 && foldlevel(l:prev) > foldlevel(v:lnum)
+      let l:prev = search('^\s*'.b:outlaw_topic_mark, 'bWz')
     endwhile
-    return foldlevel(l:prev) < foldlevel(v:lnum) ? indent(l:prev) + shiftwidth() : 0
+    return foldlevel(l:prev) == 0 " e.g., vim modeline
+          \ ? 0
+          \ : foldlevel(l:prev) < foldlevel(v:lnum) ? indent(l:prev) + shiftwidth() : -1
   endif
   return -1
 endf
