@@ -113,7 +113,7 @@ fun! s:align_note() " Align the note at the cursor's position
   if indent(l:start) == 0 | return | endif " Do not touch flush-left notes
   let l:end = OutlawNextTopic() - 1
   if l:end < l:start | return | endif
-  let l:shift = (indent(l:start - 1) + shiftwidth() - indent(l:start)) / shiftwidth()
+  let l:shift = (indent(l:start - 1) + get(b:, 'note_indent', get(g:, 'note_indent', 1)) * shiftwidth() - indent(l:start)) / shiftwidth()
   if l:shift == 0 | return | endif
   exe l:start.','.l:end.repeat(l:shift > 0 ? '>' : '<', abs(l:shift))
 endf
