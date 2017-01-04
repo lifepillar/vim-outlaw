@@ -30,9 +30,9 @@ fun! OutlawIndent()
     while l:prev > 1 && foldlevel(l:prev) > foldlevel(v:lnum)
       let l:prev = search('^\s*'.b:outlaw_topic_mark, 'bWz')
     endwhile
-    return foldlevel(l:prev) == 0 " e.g., vim modeline
+    return foldlevel(l:prev) ==# 0
           \ ? 0
-          \ : foldlevel(l:prev) < foldlevel(v:lnum) ? indent(l:prev) + shiftwidth() : -1
+          \ : (foldlevel(l:prev) < foldlevel(v:lnum) ? indent(l:prev) + shiftwidth() : -1)
   endif
   return -1
 endf
