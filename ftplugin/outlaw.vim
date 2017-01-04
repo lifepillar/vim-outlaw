@@ -46,7 +46,7 @@ endf
 
 setlocal foldmethod=expr
 setlocal foldexpr=OutlawFold(v:lnum)
-setlocal foldtext=foldlevel(v:foldstart)<20?substitute(substitute(getline(v:foldstart),'\\t',repeat('\ ',shiftwidth()),'g'),OutlawTopicPattern(),get(g:,'outlaw_folded_prefix','+\ '),'g'):b:outlaw_folded_text
+setlocal foldtext=foldlevel(v:foldstart)<20?substitute(substitute(getline(v:foldstart),'\\t',repeat('\ ',shiftwidth()),'g'),OutlawTopicPattern(),get(g:,'outlaw_folded_prefix','(+)\ '),'g'):b:outlaw_folded_text
 setlocal autoindent
 setlocal comments=fb:*,fb:- " Lists
 setlocal formatoptions=tcroqnlj1
