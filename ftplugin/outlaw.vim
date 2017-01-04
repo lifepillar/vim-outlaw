@@ -121,7 +121,7 @@ endf
 fun! s:align_all_notes()
   let l:view = winsaveview()
   call cursor(1,1)
-  while s:topic_search('W') " Advance to next topic
+  while s:topic_search('ceWz') " Advance to next topic
     call s:align_note()
   endwhile
   call winrestview(l:view)
