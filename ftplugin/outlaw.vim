@@ -7,8 +7,8 @@ if exists("b:did_ftplugin")
 endif
 let b:did_ftplugin = 1
 
-                  \ . "| unlet b:outlaw_folded_text b:outlaw_topic_mark"
 let s:undo_ftplugin = "setlocal autoindent< comments< foldexpr< foldmethod< foldtext< formatoptions< preserveindent< shiftround<"
+                  \ . "| unlet b:outlaw_folded_text b:outlaw_topic_mark" " FIXME: add missing variables
 
 if exists('b:undo_ftplugin')
   let b:undo_ftplugin .= "|" . s:undo_ftplugin
@@ -32,9 +32,13 @@ fun! OutlawFold(lnum)
   return getline(a:lnum) =~# '\m^\s*'.b:outlaw_topic_mark ? '>'.(1+indent(a:lnum)/shiftwidth()) : b:outlaw_body_text_level
 endf
 
+fun! OutlawTopicPattern() " Same as b:outlaw_topic_mark, but with \zs, \ze stripped away
+  return substitute(b:outlaw_topic_mark, '\\ze\|\\zs', '', 'g')
+endf
+
 setlocal foldmethod=expr
 setlocal foldexpr=OutlawFold(v:lnum)
-setlocal foldtext=foldlevel(v:foldstart)<20?substitute(getline(v:foldstart),'\\t',repeat('\ ',shiftwidth()),'g'):b:outlaw_folded_text
+setlocal foldtext=foldlevel(v:foldstart)<20?substitute(substitute(getline(v:foldstart),'\\t',repeat('\ ',shiftwidth()),'g'),OutlawTopicPattern(),'+\ ','g'):b:outlaw_folded_text
 setlocal autoindent
 setlocal comments=fb:*,fb:- " Lists
 setlocal formatoptions=tcroqnlj1
@@ -80,7 +84,7 @@ fun! s:outlaw_add_sibling(dir)
     call cursor(foldclosed('.'), 1)
   endif
   let l:line = a:dir ? OutlawTopicTreeEnd() : max([OutlawTopicStart() - 1, 0])
-  call append(l:line, matchstr(getline(OutlawTopicStart()), '^\s*'.substitute(b:outlaw_topic_mark,'\\ze','','g').'\s*'))
+  call append(l:line, matchstr(getline(OutlawTopicStart()), '^\s*'.OutlawTopicPattern().'\s*'))
   call cursor(l:line + 1, 1)
   call feedkeys('A', 'it')
 endf
