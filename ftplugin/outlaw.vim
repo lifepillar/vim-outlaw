@@ -79,7 +79,7 @@ fun! s:outlaw_br(dir) " Search for a topic at the same level, in the given direc
 endf
 
 fun! s:outlaw_add_sibling(dir)
-  call s:close_fold()
+  call s:auto_close()
   if foldclosed('.') > -1
     call cursor(foldclosed('.'), 1)
   endif
@@ -89,7 +89,7 @@ fun! s:outlaw_add_sibling(dir)
   call feedkeys('A', 'it')
 endf
 
-fun! s:close_fold()
+fun! s:auto_close()
   if get(b:, 'outlaw_auto_close', get(g:, 'outlaw_auto_close', 1)) && foldclosed('.') == -1
     foldclose
   endif
@@ -148,16 +148,16 @@ if !get(g:, 'outlaw_no_mappings', 0)
 
   call s:map('n', 'ThisFoldLevel',   'gl',      ":<c-u>let &l:fdl=OutlawLevel()<cr>")
   call s:map('n', 'BodyTextMode',    'gy',      ":<c-u>let b:outlaw_body_text_level=b:outlaw_body_text_level==20?'=':20<cr>zx")
-  call s:map('n', 'PrevTopic',       '<up>',    ":<c-u>call <sid>close_fold()<cr>:call <sid>topic_search('besW')<cr>zv")
-  call s:map('n', 'NextTopic',       '<down>',  ":<c-u>call <sid>close_fold()<cr>:call <sid>topic_search('esW')<cr>zv")
-  call s:map('n', 'PrevSibling',     '<left>',  ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_br('b')<cr>zv")
-  call s:map('n', 'NextSibling',     '<right>', ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_br('')<cr>zv")
+  call s:map('n', 'PrevTopic',       '<up>',    ":<c-u>call <sid>auto_close()<cr>:call <sid>topic_search('besW')<cr>zv")
+  call s:map('n', 'NextTopic',       '<down>',  ":<c-u>call <sid>auto_close()<cr>:call <sid>topic_search('esW')<cr>zv")
+  call s:map('n', 'PrevSibling',     '<left>',  ":<c-u>call <sid>auto_close()<cr>:call <sid>outlaw_br('b')<cr>zv")
+  call s:map('n', 'NextSibling',     '<right>', ":<c-u>call <sid>auto_close()<cr>:call <sid>outlaw_br('')<cr>zv")
   call s:map('v', 'MoveUp',          '<up>',    ":call <sid>outlaw_move_up(v:count1)<cr>zvgv=:call <sid>align_note()<cr>gv")
   call s:map('v', 'MoveDown',        '<down>',  ":call <sid>outlaw_move_down(v:count1)<cr>zvgv")
   call s:map('v', 'MoveLeft',        '<left>',  "<zvgv")
   call s:map('v', 'MoveRight',       '<right>', ">zvgv")
-  call s:map('n', 'Parent',          '-',       ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('b')<cr>zv")
-  call s:map('n', 'Uncle',           '+',       ":<c-u>call <sid>close_fold()<cr>:call <sid>outlaw_up('')<cr>zv")
+  call s:map('n', 'Parent',          '-',       ":<c-u>call <sid>auto_close()<cr>:call <sid>outlaw_up('b')<cr>zv")
+  call s:map('n', 'Uncle',           '+',       ":<c-u>call <sid>auto_close()<cr>:call <sid>outlaw_up('')<cr>zv")
   call s:map('n', 'AddSiblingBelow', '<cr>',    ":<c-u>call <sid>outlaw_add_sibling(1)<cr>")
   call s:map('n', 'AddSibglingAbove','<c-k>',   ":<c-u>call <sid>outlaw_add_sibling(0)<cr>")
   call s:map('n', 'AddChild',        '<c-j>',   ":<c-u>call <sid>outlaw_add_sibling(1)<cr><c-t><c-o>zv")
