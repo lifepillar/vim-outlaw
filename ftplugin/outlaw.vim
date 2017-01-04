@@ -127,7 +127,7 @@ fun! s:align_all_notes()
   call winrestview(l:view)
 endf
 
-command! -bar -nargs=0 OutlawAlignNotes :call <sid>align_all_notes()
+command! -bar -nargs=0 OutlawAlignNotes :silent call <sid>align_all_notes()
 
 if !get(g:, 'outlaw_no_mappings', 0)
   fun! s:map(mode, name, lhs, rhs)
