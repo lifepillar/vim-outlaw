@@ -7,7 +7,7 @@ if exists("b:did_ftplugin")
 endif
 let b:did_ftplugin = 1
 
-let s:undo_ftplugin = "setlocal autoindent< comments< foldexpr< foldmethod< foldtext< formatoptions< preserveindent< shiftround< softtabstop<"
+let s:undo_ftplugin = "setlocal autoindent< comments< foldexpr< foldmethod< foldtext< formatoptions< preserveindent< shiftround<"
                   \ . "| unlet b:outlaw_folded_text b:outlaw_topic_mark" " FIXME: add missing variables
 
 if exists('b:undo_ftplugin')
@@ -46,13 +46,12 @@ endf
 
 setlocal foldmethod=expr
 setlocal foldexpr=OutlawFold(v:lnum)
-setlocal foldtext=foldlevel(v:foldstart)<20?substitute(substitute(getline(v:foldstart),'\\t',repeat('\ ',shiftwidth()),'g'),OutlawTopicPattern(),get(g:,'outlaw_folded_prefix','(+)\ '),'g'):b:outlaw_folded_text
+setlocal foldtext=foldlevel(v:foldstart)<20?substitute(substitute(getline(v:foldstart),'\\t',repeat('\ ',shiftwidth()),'g'),OutlawTopicPattern(),get(g:,'outlaw_folded_prefix','+\ '),'g'):b:outlaw_folded_text
 setlocal autoindent
 setlocal comments=fb:*,fb:- " Lists
 setlocal formatoptions=tcroqnlj1
 setlocal nopreserveindent
 setlocal shiftround
-setlocal softtabstop=0
 
 fun! s:tab()
   return &l:expandtab ? repeat(' ', shiftwidth()) : '\t'
