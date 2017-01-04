@@ -8,7 +8,7 @@ endif
 
 syntax case ignore
 syntax sync minlines=10 maxlines=100
-syn keyword outlawKeyword contained TODO FIXME XXX DEBUG NOTE
+syn keyword OutlawKeyword TODO FIXME XXX NOTE
 hi def link OutlawKeyword Special
 
 let s:num = get(b:, 'outlaw_levels', get(g:, 'outlaw_levels',
