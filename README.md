@@ -65,10 +65,10 @@ like `~~~`, the tag may be changed, too (see
 
 I let you jump through topics quickly: to the next or previous topic
 (`<down>` and `<up>`), to the previous or next sibling/cousing
-(`<c-j>` and `<c-k>`), parent or uncle (`-` and `+`). Press
+(`<left>` and `<right>`), parent or uncle (`-` and `+`). Press
 `<enter>` in Normal mode to quickly add a new sibling below the
 current topic, or `<c-k>` to add a new sibling above the current
-topic.
+topic. Use `<c-j>` to make a new child.
 
 Besides, I let you move pieces of your outline using the arrow keys
 in Visual mode (they accept a count, of course). Fix the indentation
