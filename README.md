@@ -44,35 +44,42 @@ choice.
 
 Topics may be indented to form a hierarchy or outline. I support up
 to nineteen levels (ten are highlighted by default, see
-`g:outlaw_levels`). I work with all (sensible) combinations of
+`g:outlaw_levels`). I work with most (sensible) combinations of
 `shiftwidth`, `tabstop`, `softtabstop` and `smarttab` (I'll tell you
 if I don't like your settings).
 
 For me, everything that does not look like a topic (including blank
 lines) is body text (notes). I couldn't care less about the format
-or indentation of your notes: each block of body text always
-belongs to the topic immediately before it. But don't call it a son
-of a topic: you'd better think of body text as being at the same
-level as the topic it belongs to (although its fold level may be set
-to a different value using `gy`, so that it may be folded
+or indentation of your notes, although I can help you aligning them
+with `:OutlawAlignNotes`: each block of body text always belongs to
+the topic immediately before it. But don't call it a son of a topic:
+you'd better think of body text as being at the same level as the
+topic it belongs to (although its fold level may be set to
+a different value using `gy`, so that it may be folded
 independently: see also `g:outlaw_body_text_level`).
 
 Notes are just plain text, but you may use `~~~` tags to embed any
-configured filetype (see `g:outlaw_nested_ft`). If you don't like
-`~~~`, the tag may be changed, too (see `g:outlaw_ft_tag`).
+configured filetype (see `g:outlaw_nested_filetypes`). If you don't
+like `~~~`, the tag may be changed, too (see
+`g:outlaw_embedded_syntax_tag`).
 
 I let you jump through topics quickly: to the next or previous topic
-(`<down>` and `<up>`), brother or cousin (`<c-j>` and `<c-k>`),
-father or uncle (`-` and `+`). Press `<enter>` in Normal mode to
-quickly add a new brother.
+(`<down>` and `<up>`), to the previous or next sibling/cousing
+(`<c-j>` and `<c-k>`), parent or uncle (`-` and `+`). Press
+`<enter>` in Normal mode to quickly add a new sibling below the
+current topic, or `<c-k>` to add a new sibling above the current
+topic.
+
+Besides, I let you move pieces of your outline using the arrow keys
+in Visual mode (they accept a count, of course). Fix the indentation
+with the usual mappings (`=`, `==`, …) if necessary (your notes will
+be unaffected).
 
 Folding and unfolding are performed using Vim's default mappings and
 controlled using Vim's options (see `:h fold-options`). In addition,
 I provide `gl` to set the fold level according to the level of the
-current line, and `g:outlaw_auto_close` as a better suited
+current topic, and `g:outlaw_auto_close` as a better suited
 alternative to setting `foldclose`.
 
 There's not much else you need to know about me. But if you want to
 know all the details, see **:h outlaw.txt**.
-
-
