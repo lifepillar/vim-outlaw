@@ -35,17 +35,30 @@ if !&smarttab && &l:softtabstop !=# shiftwidth()
   endif
 endif
 
-fun! OutlawFold(lnum)
-  return getline(a:lnum) =~# '\m^\s*'.b:outlaw_topic_mark ? '>'.(1+indent(a:lnum)/shiftwidth()) : b:outlaw_body_text_level
+fun! OutlawIsTopicLine(line) " Is the given line a topic line?
+  return getline(a:line) =~# '\m^\s*' . b:outlaw_topic_mark
 endf
 
 fun! OutlawTopicPattern() " Same as b:outlaw_topic_mark, but with \zs, \ze stripped away
   return substitute(b:outlaw_topic_mark, '\\ze\|\\zs', '', 'g')
 endf
 
+fun! OutlawFold()
+  return OutlawIsTopicLine(v:lnum)
+        \ ? '>' . (1 + indent(v:lnum) / shiftwidth())
+        \ : b:outlaw_body_text_level
+endf
+
+fun! OutlawFoldedText()
+  return foldlevel(v:foldstart) < 20
+        \ ? substitute(substitute(getline(v:foldstart), '\\t', repeat('\ ', shiftwidth()), 'g'),
+        \                         OutlawTopicPattern(), get(g:, 'outlaw_folded_prefix', '(+)\ '), 'g')
+        \ : b:outlaw_folded_text
+endf
+
 setlocal foldmethod=expr
-setlocal foldexpr=OutlawFold(v:lnum)
-setlocal foldtext=foldlevel(v:foldstart)<20?substitute(substitute(getline(v:foldstart),'\\t',repeat('\ ',shiftwidth()),'g'),OutlawTopicPattern(),get(g:,'outlaw_folded_prefix','(+)\ '),'g'):b:outlaw_folded_text
+setlocal foldexpr=OutlawFold()
+setlocal foldtext=OutlawFoldedText()
 setlocal autoindent
 setlocal comments=fb:*,fb:- " Lists
 setlocal formatoptions=tcroqnlj1
