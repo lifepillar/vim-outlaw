@@ -25,9 +25,9 @@ fun! OutlawIndent()
   if OutlawIsTopicLine(v:lnum)
     " Search for the first topic with a fold level (not indentation!) no less
     " than the fold level of the current topic (if any).
-    let l:prev = search('^\s*'.b:outlaw_topic_mark, 'bWz')
+    let l:prev = OutlawTopicJump('bWz')
     while l:prev > 1 && foldlevel(l:prev) >= foldlevel(v:lnum)
-      let l:prev = search('^\s*'.b:outlaw_topic_mark, 'bWz')
+      let l:prev = OutlawTopicJump('bWz')
     endwhile
     return foldlevel(l:prev) ==# 0
           \ ? 0

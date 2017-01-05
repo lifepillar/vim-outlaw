@@ -65,16 +65,16 @@ setlocal formatoptions=tcroqnlj1
 setlocal nopreserveindent
 setlocal shiftround
 
-fun! s:topic_search(flags) " Search for a topic line from the cursor's position
+fun! OutlawTopicJump(flags) " Search for a topic line from the cursor's position
   return search('^\s*'.b:outlaw_topic_mark, a:flags)
 endf
 
 fun! OutlawTopicStart() " Return the line number where the current topic starts
-  return s:topic_search('bcnW')
+  return OutlawTopicJump('bcnW')
 endf
 
 fun! OutlawNextTopic() " Return the line number where the next (sub)topic starts
-  return s:topic_search('nW')
+  return OutlawTopicJump('nW')
 endf
 
 fun! OutlawLevel() " Return the level of the current topic (top level is level 0)
@@ -123,7 +123,7 @@ endf
 fun! s:outlaw_move_down(count) range
   call cursor(line("'>") + 1, 1)
   for i in range(1, a:count)
-    let l:target = s:topic_search('W')
+    let l:target = OutlawTopicJump('W')
   endfor
   execute a:firstline.','.a:lastline.'move' (l:target > 0 ? l:target - 1 : line('$')).'<cr>'
 endf
@@ -131,7 +131,7 @@ endf
 fun! s:outlaw_move_up(count) range
   call cursor(line("'<"), 1)
   for i in range(1, a:count)
-    call s:topic_search('bW')
+    call OutlawTopicJump('bW')
   endfor
   execute a:firstline.','.a:lastline.'move' (line('.') - 1).'<cr>'
 endf
@@ -149,7 +149,7 @@ endf
 fun! s:align_all_notes()
   let l:view = winsaveview()
   call cursor(1,1)
-  while s:topic_search('ceWz') " Advance to next topic
+  while OutlawTopicJump('ceWz') " Advance to next topic
     call s:align_note()
   endwhile
   call winrestview(l:view)
