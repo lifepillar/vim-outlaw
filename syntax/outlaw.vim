@@ -15,7 +15,7 @@ let s:num = get(b:, 'outlaw_levels', get(g:, 'outlaw_levels',
 let s:mark = substitute(get(b:, 'outlaw_topic_mark', get(g:, 'outlaw_topic_mark', '\(=== \|\[x\] \|\[ \] \|\[-\] \)')), '\\ze|\\zs', '', 'g')
 let s:hg = get(b:, 'outlaw_highlight_groups', get(g:, 'outlaw_highlight_groups',
       \ ['Statement', 'Identifier', 'Constant', 'PreProc']))
-let s:tag = get(b:, 'outlaw_ft_tag', get(g:, 'outlaw_ft_tag', '\~\~\~'))
+let s:tag = get(b:, 'outlaw_embedded_syntax_tag', get(g:, 'outlaw_embedded_syntax_tag', '\~\~\~'))
 
 for i in range(0, len(s:num) - 1)
   execute 'syn match OutlawHead'.s:num[i] '/\m\%'.(1 + i * shiftwidth()).'v'.s:mark.'.*$/ contains=outlawKeyword'
@@ -23,7 +23,7 @@ for i in range(0, len(s:num) - 1)
 endfor
 
 " Embedded syntaxes
-for ft in get(b:, 'outlaw_nested_ft', get(g:, 'outlaw_nested_ft', []))
+for ft in get(b:, 'outlaw_nested_filetypes', get(g:, 'outlaw_nested_filetypes', []))
   execute 'syn include @Outlaw'.ft 'syntax/'.ft.'.vim'
   unlet b:current_syntax
   execute 'syn region Outlaw'.ft 'matchgroup=Conceal start="'.s:tag.ft.'" end="'.s:tag.'" concealends keepend contains=@Outlaw'.ft

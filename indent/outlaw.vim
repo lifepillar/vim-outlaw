@@ -6,10 +6,10 @@ if exists("b:did_indent")
 endif
 let b:did_indent = 1
 
+let b:undo_indent = "setl indentexpr< indentkeys<"
+
 setlocal indentexpr=OutlawIndent()
 setlocal indentkeys=
-
-let b:undo_indent = "setl indentexpr< indentkeys<"
 
 if exists("*OutlawIndent")
   finish
@@ -38,5 +38,3 @@ endf
 
 let &cpo = s:keepcpo
 unlet s:keepcpo
-
-" vim:sw=2:fdm=marker
