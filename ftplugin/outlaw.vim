@@ -7,7 +7,7 @@ endif
 let b:did_ftplugin = 1
 
 let s:undo_ftplugin = "setlocal autoindent< comments< foldexpr< foldmethod< foldtext< formatoptions< preserveindent< shiftround<"
-                  \ . "| unlet! b:outlaw_auto_close b:outlaw_body_text_level b:outlaw_folded_prefix b:outlaw_folded_text"
+                  \ . "| unlet! b:outlaw_auto_close b:outlaw_body_text_level b:outlaw_fold_prefix b:outlaw_folded_text"
                   \ . "| unlet! b:outlaw_embedded_syntax_tag b:outlaw_note_indent b:outlaw_topic_mark"
 
 let b:undo_ftplugin = (exists('b:undo_ftplugin') ? b:undo_ftplugin . '|' : '') . s:undo_ftplugin
@@ -23,7 +23,7 @@ setlocal shiftround
 
 let b:outlaw_auto_close      = get(b:, 'outlaw_auto_close',      get(g:, 'outlaw_auto_close',      1                                           ))
 let b:outlaw_body_text_level = get(b:, 'outlaw_body_text_level', get(g:, 'outlaw_body_text_level', '='                                         ))
-let b:outlaw_folded_prefix   = get(b:, 'outlaw_folded_prefix',   get(g:, 'outlaw_folded_prefix',   '(+)\ '                                     ))
+let b:outlaw_fold_prefix     = get(b:, 'outlaw_fold_prefix',     get(g:, 'outlaw_fold_prefix',     '(+)\ '                                     ))
 let b:outlaw_folded_text     = get(b:, 'outlaw_folded_text',     get(g:, 'outlaw_folded_text',     '[…]'                                       ))
 let b:outlaw_note_indent     = get(b:, 'outlaw_note_indent',     get(g:, 'outlaw_note_indent',     1                                           ))
 let b:outlaw_topic_mark      = get(b:, 'outlaw_topic_mark',      get(g:, 'outlaw_topic_mark',      '\%(=== \|\[x\ze\] \|\[ \ze\] \|\[-\ze\] \)'))
@@ -56,7 +56,7 @@ endf
 fun! OutlawFoldedText()
   return foldlevel(v:foldstart) < 20
         \ ? substitute(substitute(getline(v:foldstart), '\\t', repeat('\ ', shiftwidth()), 'g'),
-        \                         s:topic_mark, b:outlaw_folded_prefix, '')
+        \                         s:topic_mark, b:outlaw_fold_prefix, '')
         \ : b:outlaw_folded_text
 endf
 
