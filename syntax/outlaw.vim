@@ -12,7 +12,7 @@ hi def link OutlawKeyword Special
 
 let s:num = get(b:, 'outlaw_levels', get(g:, 'outlaw_levels',
       \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']))
-let s:mark = substitute(get(b:, 'outlaw_topic_mark', get(g:, 'outlaw_topic_mark', '\(=== \|\[x\] \|\[ \] \|\[-\] \)')), '\\ze', '', 'g')
+let s:mark = substitute(get(b:, 'outlaw_topic_mark', get(g:, 'outlaw_topic_mark', '\(=== \|\[x\] \|\[ \] \|\[-\] \)')), '\\ze|\\zs', '', 'g')
 let s:hg = get(b:, 'outlaw_highlight_groups', get(g:, 'outlaw_highlight_groups',
       \ ['Statement', 'Identifier', 'Constant', 'PreProc']))
 let s:tag = get(b:, 'outlaw_ft_tag', get(g:, 'outlaw_ft_tag', '\~\~\~'))
