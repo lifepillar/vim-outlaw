@@ -24,8 +24,8 @@ fun! OutlawIndent()
   " immediately when computing the new indentation, so foldlevel()
   " allows us to infer the original indentation of a previous line.
   if getline(v:lnum) =~# '\m^\s*'.b:outlaw_topic_mark
-    " Search for the first topic with a fold level no less than the
-    " fold level of the current topic (if any)
+    " Search for the first topic with a fold level (not indentation!) no less
+    " than the fold level of the current topic (if any).
     let l:prev = search('^\s*'.b:outlaw_topic_mark, 'bWz')
     while l:prev > 1 && foldlevel(l:prev) >= foldlevel(v:lnum)
       let l:prev = search('^\s*'.b:outlaw_topic_mark, 'bWz')
