@@ -174,7 +174,7 @@ if !get(g:, 'no_outlaw_maps', get(g:, 'no_plugin_maps', 0))
   call s:map('n', 'Parent',          '-',       ":<c-u>call OutlawAutoClose()<cr>:call OutlawUp('b')<cr>zv")
   call s:map('n', 'Uncle',           '+',       ":<c-u>call OutlawAutoClose()<cr>:call OutlawUp('')<cr>zv")
   call s:map('n', 'AddSiblingBelow', '<cr>',    ":<c-u>call OutlawAddSibling(1)<cr>")
-  call s:map('n', 'AddSibglingAbove','<c-k>',   ":<c-u>call OutlawAddSibling(0)<cr>")
+  call s:map('n', 'AddSiblingAbove', '<c-k>',   ":<c-u>call OutlawAddSibling(0)<cr>")
   call s:map('n', 'AddChild',        '<c-j>',   ":<c-u>call OutlawAddSibling(1)<cr><c-t><c-o>zv")
   call s:map('n', 'ToggleAutoClose', 'gA',      ":<c-u>call OutlawToggleAutoClose()<cr>")
 endif
