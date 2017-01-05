@@ -1,6 +1,5 @@
-" Author:       Lifepillar
-" Maintainer:   Lifepillar
-" License:      This file is placed in the public domain.
+" Author: Lifepillar <lifepillar@lifepillar.me>
+" License: This file is placed in the public domain
 
 if exists("b:did_indent")
   finish
