@@ -104,7 +104,7 @@ want to ask me questions.
 Section 2: How to do X?                              *outlaw-howto*
 
 Ok Outlaw, how much do you need? ~
-Just Vim 7.3.694 or later, compiled with |+comments| and |+folding|.
+Just Vim 7.4.984 or later, compiled with |+comments| and |+folding|.
 
 How do I open files as Outlaw buffers? ~
 Just set `ft=outlaw` in the document's modeline, or map the suffix
