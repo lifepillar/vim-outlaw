@@ -112,8 +112,7 @@ fun! OutlawLevel() " Return the level of the current topic (top level is level 0
 endf
 
 fun! OutlawTopicTreeEnd() " Return the line number of the last line of the current subtree
-  " FIXME: doesn't work when the cursor is before the topic's prefix
-  let l:line = search('\%<' . (OutlawTopicColumn() + 1) . 'v' . OutlawTopicPattern(), 'nW') - 1
+  let l:line = search('\%>' . line('.') . 'l\%<' . (OutlawTopicColumn() + 1) . 'v' . OutlawTopicPattern(), 'nW') - 1
   return l:line < 0 ? line('$') : l:line
 endf
 
