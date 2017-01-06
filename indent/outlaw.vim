@@ -31,7 +31,7 @@ fun! OutlawIndent()
     endwhile
     return foldlevel(l:prev) ==# 0
           \ ? 0
-          \ : (foldlevel(l:prev) <= foldlevel(v:lnum) ? indent(l:prev) + shiftwidth() : -1)
+          \ : (foldlevel(l:prev) < foldlevel(v:lnum) ? indent(l:prev) + shiftwidth() : -1)
   endif
   return -1
 endf
