@@ -81,6 +81,7 @@ fun! OutlawLevel() " Return the level of the current topic (top level is level 0
 endf
 
 fun! OutlawTopicTreeEnd() " Return the line number of the last line of the current subtree
+  " FIXME: doesn't work when the cursor is before the topic's prefix
   let l:line = search('\%<' . (OutlawTopicColumn() + 1) . 'v' . s:topic_mark, 'nW') - 1
   return l:line < 0 ? line('$') : l:line
 endf
@@ -133,8 +134,9 @@ endf
 
 fun! OutlawAlignNote() " Align the note at the cursor's position
   let l:start = OutlawTopicLine() + 1
-  if indent(l:start) == 0 | return | endif " Do not touch flush-left notes
+  if indent(l:start) <= 0 | return | endif " Do not touch flush-left notes
   let l:end = OutlawNextTopic() - 1
+  " FIXME: the note at the end of the document is not aligned
   if l:end < l:start | return | endif
   let l:shift = (indent(l:start - 1) + b:outlaw_note_indent * shiftwidth() - indent(l:start)) / shiftwidth()
   if l:shift == 0 | return | endif
