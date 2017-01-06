@@ -180,4 +180,3 @@ fun! OutlawAlignAllNotes()
   endwhile
   call winrestview(l:view)
 endf
-
