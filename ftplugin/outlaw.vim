@@ -37,8 +37,6 @@ if !&smarttab && &l:softtabstop !=# shiftwidth()
   endif
 endif
 
-let s:topic_mark = substitute(b:outlaw_topic_mark, '\\ze\|\\zs', '', 'g')
-
 command! -buffer -bar -nargs=0 OutlawAlignNotes :silent call OutlawAlignAllNotes()
 
 if !get(g:, 'no_outlaw_maps', get(g:, 'no_plugin_maps', 0))
@@ -72,8 +70,12 @@ if exists("*OutlawIsTopicLine")
   finish
 endif
 
+fun! OutlawTopicPattern()
+  return substitute(b:outlaw_topic_mark, '\\ze\|\\zs', '', 'g')
+endf
+
 fun! OutlawIsTopicLine(line) " Is the given line a topic line?
-  return getline(a:line) =~# '\m^\s*' . s:topic_mark
+  return getline(a:line) =~# '\m^\s*' . OutlawTopicPattern()
 endf
 
 fun! OutlawFold()
@@ -85,7 +87,7 @@ endf
 fun! OutlawFoldedText()
   return foldlevel(v:foldstart) < 20
         \ ? substitute(substitute(getline(v:foldstart), '\\t', repeat('\ ', shiftwidth()), 'g'),
-        \                         s:topic_mark, b:outlaw_fold_prefix, '')
+        \                         OutlawTopicPattern(), b:outlaw_fold_prefix, '')
         \ : b:outlaw_folded_text
 endf
 
@@ -111,7 +113,7 @@ endf
 
 fun! OutlawTopicTreeEnd() " Return the line number of the last line of the current subtree
   " FIXME: doesn't work when the cursor is before the topic's prefix
-  let l:line = search('\%<' . (OutlawTopicColumn() + 1) . 'v' . s:topic_mark, 'nW') - 1
+  let l:line = search('\%<' . (OutlawTopicColumn() + 1) . 'v' . OutlawTopicPattern(), 'nW') - 1
   return l:line < 0 ? line('$') : l:line
 endf
 
@@ -129,7 +131,7 @@ fun! OutlawAddSibling(dir)
     call cursor(foldclosed('.'), 1)
   endif
   let l:line = a:dir ? OutlawTopicTreeEnd() : max([OutlawTopicLine() - 1, 0])
-  call append(l:line, matchstr(getline(OutlawTopicLine()), '^\s*' . s:topic_mark . '\s*'))
+  call append(l:line, matchstr(getline(OutlawTopicLine()), '^\s*' . OutlawTopicPattern() . '\s*'))
   call cursor(l:line + 1, 1)
   call feedkeys('A', 'it')
 endf
