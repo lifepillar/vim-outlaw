@@ -44,7 +44,7 @@ if !get(g:, 'no_outlaw_maps', get(g:, 'no_plugin_maps', 0))
     execute a:mode.'noremap <buffer> <sid>('.a:name.')' a:rhs
     execute a:mode.'noremap <buffer> <script> <plug>(Outlaw'.a:name.') <sid>('.a:name.')'
     if !hasmapto('<plug>(Outlaw'.a:name.')', a:mode)
-      execute a:mode.'map <buffer>' a:lhs '<plug>(Outlaw'.a:name.')'
+      execute a:mode.'map <buffer> <silent>' a:lhs '<plug>(Outlaw'.a:name.')'
     endif
   endf
 
