@@ -39,6 +39,35 @@ endif
 
 let s:topic_mark = substitute(b:outlaw_topic_mark, '\\ze\|\\zs', '', 'g')
 
+command! -buffer -bar -nargs=0 OutlawAlignNotes :silent call OutlawAlignAllNotes()
+
+if !get(g:, 'no_outlaw_maps', get(g:, 'no_plugin_maps', 0))
+  fun! s:map(mode, name, lhs, rhs)
+    exe a:mode.'noremap <buffer> <sid>('.a:name.')' a:rhs
+    exe a:mode.'noremap <buffer> <script> <plug>(Outlaw'.a:name.') <sid>('.a:name.')'
+    if !hasmapto('<plug>(Outlaw'.a:name.')', a:mode)
+      exe a:mode.'map <buffer>' a:lhs '<plug>(Outlaw'.a:name.')'
+    endif
+  endf
+
+  call s:map('n', 'ThisFoldLevel',   'gl',      ":<c-u>let &l:fdl=OutlawLevel()<cr>")
+  call s:map('n', 'BodyTextMode',    'gy',      ":<c-u>let b:outlaw_body_text_level=b:outlaw_body_text_level==20?'=':20<cr>zx")
+  call s:map('n', 'PrevTopic',       '<up>',    ":<c-u>call OutlawAutoClose()<cr>:call OutlawTopicJump('besW')<cr>zv")
+  call s:map('n', 'NextTopic',       '<down>',  ":<c-u>call OutlawAutoClose()<cr>:call OutlawTopicJump('esW')<cr>zv")
+  call s:map('n', 'PrevSibling',     '<left>',  ":<c-u>call OutlawAutoClose()<cr>:call OutlawSibling('b')<cr>zv")
+  call s:map('n', 'NextSibling',     '<right>', ":<c-u>call OutlawAutoClose()<cr>:call OutlawSibling('')<cr>zv")
+  call s:map('v', 'MoveUp',          '<up>',    ":call OutlawMoveUp(v:count1)<cr>zvgv=:call OutlawAlignNote()<cr>gv")
+  call s:map('v', 'MoveDown',        '<down>',  ":call OutlawMoveDown(v:count1)<cr>zvgv")
+  call s:map('v', 'MoveLeft',        '<left>',  "<zvgv")
+  call s:map('v', 'MoveRight',       '<right>', ">zvgv")
+  call s:map('n', 'Parent',          '-',       ":<c-u>call OutlawAutoClose()<cr>:call OutlawUp('b')<cr>zv")
+  call s:map('n', 'Uncle',           '+',       ":<c-u>call OutlawAutoClose()<cr>:call OutlawUp('')<cr>zv")
+  call s:map('n', 'AddSiblingBelow', '<cr>',    ":<c-u>call OutlawAddSibling(1)<cr>")
+  call s:map('n', 'AddSiblingAbove', '<c-k>',   ":<c-u>call OutlawAddSibling(0)<cr>")
+  call s:map('n', 'AddChild',        '<c-j>',   ":<c-u>call OutlawAddSibling(1)<cr><c-t><c-o>zv")
+  call s:map('n', 'ToggleAutoClose', 'gA',      ":<c-u>call OutlawToggleAutoClose()<cr>")
+endif
+
 if exists("*OutlawIsTopicLine")
   finish
 endif
@@ -152,31 +181,3 @@ fun! OutlawAlignAllNotes()
   call winrestview(l:view)
 endf
 
-command! -buffer -bar -nargs=0 OutlawAlignNotes :silent call OutlawAlignAllNotes()
-
-if !get(g:, 'no_outlaw_maps', get(g:, 'no_plugin_maps', 0))
-  fun! s:map(mode, name, lhs, rhs)
-    exe a:mode.'noremap <buffer> <sid>('.a:name.')' a:rhs
-    exe a:mode.'noremap <buffer> <script> <plug>(Outlaw'.a:name.') <sid>('.a:name.')'
-    if !hasmapto('<plug>(Outlaw'.a:name.')', a:mode)
-      exe a:mode.'map <buffer>' a:lhs '<plug>(Outlaw'.a:name.')'
-    endif
-  endf
-
-  call s:map('n', 'ThisFoldLevel',   'gl',      ":<c-u>let &l:fdl=OutlawLevel()<cr>")
-  call s:map('n', 'BodyTextMode',    'gy',      ":<c-u>let b:outlaw_body_text_level=b:outlaw_body_text_level==20?'=':20<cr>zx")
-  call s:map('n', 'PrevTopic',       '<up>',    ":<c-u>call OutlawAutoClose()<cr>:call OutlawTopicJump('besW')<cr>zv")
-  call s:map('n', 'NextTopic',       '<down>',  ":<c-u>call OutlawAutoClose()<cr>:call OutlawTopicJump('esW')<cr>zv")
-  call s:map('n', 'PrevSibling',     '<left>',  ":<c-u>call OutlawAutoClose()<cr>:call OutlawSibling('b')<cr>zv")
-  call s:map('n', 'NextSibling',     '<right>', ":<c-u>call OutlawAutoClose()<cr>:call OutlawSibling('')<cr>zv")
-  call s:map('v', 'MoveUp',          '<up>',    ":call OutlawMoveUp(v:count1)<cr>zvgv=:call OutlawAlignNote()<cr>gv")
-  call s:map('v', 'MoveDown',        '<down>',  ":call OutlawMoveDown(v:count1)<cr>zvgv")
-  call s:map('v', 'MoveLeft',        '<left>',  "<zvgv")
-  call s:map('v', 'MoveRight',       '<right>', ">zvgv")
-  call s:map('n', 'Parent',          '-',       ":<c-u>call OutlawAutoClose()<cr>:call OutlawUp('b')<cr>zv")
-  call s:map('n', 'Uncle',           '+',       ":<c-u>call OutlawAutoClose()<cr>:call OutlawUp('')<cr>zv")
-  call s:map('n', 'AddSiblingBelow', '<cr>',    ":<c-u>call OutlawAddSibling(1)<cr>")
-  call s:map('n', 'AddSiblingAbove', '<c-k>',   ":<c-u>call OutlawAddSibling(0)<cr>")
-  call s:map('n', 'AddChild',        '<c-j>',   ":<c-u>call OutlawAddSibling(1)<cr><c-t><c-o>zv")
-  call s:map('n', 'ToggleAutoClose', 'gA',      ":<c-u>call OutlawToggleAutoClose()<cr>")
-endif
