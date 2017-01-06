@@ -41,10 +41,10 @@ command! -buffer -bar -nargs=0 OutlawAlignNotes :silent call OutlawAlignAllNotes
 
 if !get(g:, 'no_outlaw_maps', get(g:, 'no_plugin_maps', 0))
   fun! s:map(mode, name, lhs, rhs)
-    exe a:mode.'noremap <buffer> <sid>('.a:name.')' a:rhs
-    exe a:mode.'noremap <buffer> <script> <plug>(Outlaw'.a:name.') <sid>('.a:name.')'
+    execute a:mode.'noremap <buffer> <sid>('.a:name.')' a:rhs
+    execute a:mode.'noremap <buffer> <script> <plug>(Outlaw'.a:name.') <sid>('.a:name.')'
     if !hasmapto('<plug>(Outlaw'.a:name.')', a:mode)
-      exe a:mode.'map <buffer>' a:lhs '<plug>(Outlaw'.a:name.')'
+      execute a:mode.'map <buffer>' a:lhs '<plug>(Outlaw'.a:name.')'
     endif
   endf
 
@@ -147,7 +147,7 @@ fun! OutlawToggleAutoClose()
 endf
 
 fun! OutlawMoveDown(count) range
-  call cursor(line("'>") + 1, 1)
+  call cursor(line("'>") + 2, 1)
   for i in range(1, a:count)
     let l:target = OutlawTopicJump('W')
   endfor
@@ -170,7 +170,7 @@ fun! OutlawAlignNote() " Align the note at the cursor's position
   if l:end < l:start | return | endif
   let l:shift = (indent(l:start - 1) + b:outlaw_note_indent * shiftwidth() - indent(l:start)) / shiftwidth()
   if l:shift == 0 | return | endif
-  exe l:start.','.l:end.repeat(l:shift > 0 ? '>' : '<', abs(l:shift))
+  execute l:start.','.l:end.repeat(l:shift > 0 ? '>' : '<', abs(l:shift))
 endf
 
 fun! OutlawAlignAllNotes()
