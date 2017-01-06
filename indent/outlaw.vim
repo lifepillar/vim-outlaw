@@ -23,7 +23,7 @@ fun! OutlawIndent()
   " immediately when computing the new indentation, so foldlevel()
   " allows us to infer the original indentation of a previous line.
   if OutlawIsTopicLine(v:lnum)
-    " Search for the first topic with a fold level (not indentation!) no less
+    " Search for the first topic with a fold level (not indentation!) less
     " than the fold level of the current topic (if any).
     let l:prev = OutlawTopicJump('bWz')
     while l:prev > 1 && foldlevel(l:prev) >= foldlevel(v:lnum)
