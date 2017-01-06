@@ -145,7 +145,7 @@ fun! OutlawAlignAllNotes()
   let l:view = winsaveview()
   call cursor(1,1)
   while OutlawTopicJump('ceWz') " Advance to next topic
-    call s:align_note()
+    call OutlawAlignNote()
   endwhile
   call winrestview(l:view)
 endf
