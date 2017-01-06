@@ -1,8 +1,8 @@
 Outlaw {{{1
 New sibling below        «cr»          N
-New sibling above        «c-j»         N
-New child                «c-k»         N
-Fold up to current level gl            N
+New sibling above        «c-k»         N
+New child                «c-j»         N
+Fold to current level    gl            N
 Toggle body text mode    gy            N
 Toggle auto close        gA            N
 Jump to next topic       «down»        N
@@ -11,3 +11,7 @@ Jump to next sibling     «right»       N
 Jump to previous sibling «left»        N
 Jump to parent           -             N
 Jump to uncle            +             N
+Move down                «down»        V
+Move up                  «up»          V
+Move left                «left»        V
+Move right               «right»       V
