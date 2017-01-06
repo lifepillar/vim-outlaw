@@ -82,4 +82,5 @@ current topic, and `g:outlaw_auto_close` as a better suited
 alternative to setting `foldclose`.
 
 There's not much else you need to know about me. But if you want to
-know all the details, see **:h outlaw.txt**.
+know all the details, see **:h outlaw.txt**. Ah, I require Vim
+7.4.984 or later.
