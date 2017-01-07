@@ -160,7 +160,7 @@ fun! OutlawMoveDown(count) range
     if l:target < 0 | let l:target = line('$') | endif
   endif
   execute a:firstline.','.a:lastline.'move' l:target.'<cr>'
-  undo | redo " Nasty workaround to restore fold levels corrupted by :move (no, zx/zX do not help):
+  undo | redo " Nasty workaround to restore the fold levels corrupted by :move (no, zx/zX do not help):
 endf
 
 fun! OutlawMoveUp(count) range
