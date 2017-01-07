@@ -155,7 +155,7 @@ fun! OutlawMoveDown(count) range
     endif
   endfor
   let l:target = line('.')
-  if !OutlawIsTopicLine(line('.') + 1) " Skip note
+  if !OutlawIsTopicLine(l:target + 1) " Skip note
     let l:target = OutlawTopicJump('W') - 1
     if l:target < 0 | let l:target = line('$') | endif
   endif
