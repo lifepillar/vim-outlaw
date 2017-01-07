@@ -66,7 +66,7 @@ if !get(g:, 'no_outlaw_maps', get(g:, 'no_plugin_maps', 0))
   call s:map('n', 'ToggleAutoClose', 'gA',      ":<c-u>call OutlawToggleAutoClose()<cr>")
 endif
 
-if exists("*OutlawIsTopicLine")
+if exists("*OutlawTopicPattern")
   finish
 endif
 
