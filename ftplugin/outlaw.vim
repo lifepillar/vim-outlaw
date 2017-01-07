@@ -75,7 +75,7 @@ fun! OutlawTopicPattern()
 endf
 
 fun! OutlawIsTopicLine(line) " Is the given line a topic line?
-  return getline(a:line) =~# '\m^\s*' . OutlawTopicPattern()
+  return getline(a:line) =~# '\m^\s*' . b:outlaw_topic_mark
 endf
 
 fun! OutlawFold(lnum)
