@@ -147,17 +147,31 @@ fun! OutlawAddSibling(dir)
 endf
 
 fun! OutlawMoveDown(count) range
-  call cursor(line("'>") + 2, 1)
+  call cursor(line("'>"), 1)
   for i in range(1, a:count)
-    let l:target = OutlawTopicJump('W')
+    call OutlawTopicJump('W')
+    if foldclosedend('.') > - 1 " Ended up in a closed fold, skip it
+      call cursor(foldclosedend('.'), 1)
+    endif
   endfor
-  execute a:firstline.','.a:lastline.'move' (l:target > 0 ? l:target - 1 : line('$')).'<cr>'
+  if !OutlawIsTopicLine(line('.') + 1)
+    let l:target = OutlawTopicJump('W') - 1
+    if l:target < 0
+      let l:target = line('$')
+    endif
+  else
+    let l:target = line('.')
+  endif
+  execute a:firstline.','.a:lastline.'move' l:target.'<cr>'
 endf
 
 fun! OutlawMoveUp(count) range
   call cursor(line("'<"), 1)
   for i in range(1, a:count)
     call OutlawTopicJump('bW')
+    if foldclosed('.') > - 1 " Ended up in a closed fold, skip it
+      call cursor(foldclosed('.'), 1)
+    endif
   endfor
   execute a:firstline.','.a:lastline.'move' (line('.') - 1).'<cr>'
 endf
