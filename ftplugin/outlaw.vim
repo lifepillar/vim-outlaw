@@ -163,6 +163,7 @@ fun! OutlawMoveDown(count) range
     let l:target = line('.')
   endif
   execute a:firstline.','.a:lastline.'move' l:target.'<cr>'
+  undo | redo " Nasty workaround to restore fold levels corrupted by :move (no, zx/zX do not help):
 endf
 
 fun! OutlawMoveUp(count) range
@@ -174,6 +175,7 @@ fun! OutlawMoveUp(count) range
     endif
   endfor
   execute a:firstline.','.a:lastline.'move' (line('.') - 1).'<cr>'
+  undo | redo " See OutlawMoveDown()
 endf
 
 fun! OutlawAlignNote() " Align the note at the cursor's position
