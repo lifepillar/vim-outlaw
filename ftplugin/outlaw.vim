@@ -154,13 +154,10 @@ fun! OutlawMoveDown(count) range
       call cursor(foldclosedend('.'), 1)
     endif
   endfor
-  if !OutlawIsTopicLine(line('.') + 1)
+  let l:target = line('.')
+  if !OutlawIsTopicLine(line('.') + 1) " Skip note
     let l:target = OutlawTopicJump('W') - 1
-    if l:target < 0
-      let l:target = line('$')
-    endif
-  else
-    let l:target = line('.')
+    if l:target < 0 | let l:target = line('$') | endif
   endif
   execute a:firstline.','.a:lastline.'move' l:target.'<cr>'
   undo | redo " Nasty workaround to restore fold levels corrupted by :move (no, zx/zX do not help):
