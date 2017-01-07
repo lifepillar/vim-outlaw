@@ -14,7 +14,7 @@ let b:undo_ftplugin = (exists('b:undo_ftplugin') ? b:undo_ftplugin . '|' : '') .
 
 setlocal autoindent
 setlocal comments=fb:*,fb:- " Lists
-setlocal foldexpr=OutlawFold()
+setlocal foldexpr=OutlawFold(v:lnum)
 setlocal foldmethod=expr
 setlocal foldtext=OutlawFoldedText()
 setlocal formatoptions=tcroqnlj1
@@ -78,9 +78,9 @@ fun! OutlawIsTopicLine(line) " Is the given line a topic line?
   return getline(a:line) =~# '\m^\s*' . OutlawTopicPattern()
 endf
 
-fun! OutlawFold()
-  return OutlawIsTopicLine(v:lnum)
-        \ ? '>' . (1 + indent(v:lnum) / shiftwidth())
+fun! OutlawFold(lnum)
+  return OutlawIsTopicLine(a:lnum)
+        \ ? '>' . (1 + indent(a:lnum) / shiftwidth())
         \ : b:outlaw_body_text_level
 endf
 
