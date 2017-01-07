@@ -124,6 +124,17 @@ fun! OutlawSibling(dir) " Search for a topic at the same level, in the given dir
   return search('\%' . OutlawTopicColumn() . 'v' . b:outlaw_topic_mark, a:dir . 'esW')
 endf
 
+fun! OutlawAutoClose()
+  if b:outlaw_auto_close && foldclosed('.') == -1 && foldlevel('.') > 0
+    foldclose
+  endif
+endf
+
+fun! OutlawToggleAutoClose()
+  let b:outlaw_auto_close = 1 - b:outlaw_auto_close
+  echo '[Outlaw] Auto close' (b:outlaw_auto_close ? 'on' : 'off')
+endf
+
 fun! OutlawAddSibling(dir)
   call OutlawAutoClose()
   if foldclosed('.') > -1
@@ -133,17 +144,6 @@ fun! OutlawAddSibling(dir)
   call append(l:line, matchstr(getline(OutlawTopicLine()), '^\s*' . OutlawTopicPattern() . '\s*'))
   call cursor(l:line + 1, 1)
   call feedkeys('A', 'it')
-endf
-
-fun! OutlawAutoClose()
-  if b:outlaw_auto_close && foldclosed('.') == -1 && foldlevel('.') > 0
-    foldclose
-  endif
-endf
-
-fun! OutlawToggleAutoClose()
-  let b:outlaw_auto_close = 1 - b:outlaw_auto_close
-  echomsg '[Outlaw] Auto close' (b:outlaw_auto_close ? 'on' : 'off')
 endf
 
 fun! OutlawMoveDown(count) range
