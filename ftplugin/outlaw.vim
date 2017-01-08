@@ -54,8 +54,8 @@ if !get(g:, 'no_outlaw_maps', get(g:, 'no_plugin_maps', 0))
   call s:map('n', 'NextTopic',       '<down>',  ":<c-u>call OutlawAutoClose()<cr>:call OutlawTopicJump('esW')<cr>zv")
   call s:map('n', 'PrevSibling',     '<left>',  ":<c-u>call OutlawAutoClose()<cr>:call OutlawSibling('b')<cr>zv")
   call s:map('n', 'NextSibling',     '<right>', ":<c-u>call OutlawAutoClose()<cr>:call OutlawSibling('')<cr>zv")
-  call s:map('v', 'MoveUp',          '<up>',    ":call OutlawMoveUp(v:count1)<cr>zvgv=:call OutlawAlignNote()<cr>gv")
-  call s:map('v', 'MoveDown',        '<down>',  ":call OutlawMoveDown(v:count1)<cr>zvgv")
+  call s:map('v', 'MoveUp',          '<up>',    ":call OutlawMoveUp(v:count1)<cr>gv=:call OutlawAlignNote()<cr>gv")
+  call s:map('v', 'MoveDown',        '<down>',  ":call OutlawMoveDown(v:count1)<cr>gv=:call OutlawAlignNote()<cr>gv")
   call s:map('v', 'MoveLeft',        '<left>',  "<zvgv")
   call s:map('v', 'MoveRight',       '<right>', ">zvgv")
   call s:map('n', 'Parent',          '-',       ":<c-u>call OutlawAutoClose()<cr>:call OutlawUp('b')<cr>zv")
@@ -159,8 +159,10 @@ fun! OutlawMoveDown(count) range
     let l:target = OutlawTopicJump('W') - 1
     if l:target < 0 | let l:target = line('$') | endif
   endif
-  execute a:firstline.','.a:lastline.'move' l:target.'<cr>'
-  undo | redo " Nasty workaround to restore the fold levels corrupted by :move (no, zx/zX do not help):
+  execute a:firstline.','.a:lastline.'copy' l:target.'<cr>'
+  '<,'>delete _
+  execute (l:target - (a:lastline - a:firstline)).'mark <'
+  execute l:target.'mark >'
 endf
 
 fun! OutlawMoveUp(count) range
@@ -171,8 +173,11 @@ fun! OutlawMoveUp(count) range
       call cursor(foldclosed('.'), 1)
     endif
   endfor
-  execute a:firstline.','.a:lastline.'move' (line('.') - 1).'<cr>'
-  undo | redo " See OutlawMoveDown()
+  let l:target = line('.')
+  execute a:firstline.','.a:lastline.'copy' (l:target - 1).'<cr>'
+  '<,'>delete _
+  execute l:target.'mark <'
+  execute (l:target + a:lastline - a:firstline).'mark >'
 endf
 
 fun! OutlawAlignNote() " Align the note at the cursor's position
