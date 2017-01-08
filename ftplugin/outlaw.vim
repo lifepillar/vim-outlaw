@@ -8,7 +8,7 @@ let b:did_ftplugin = 1
 
 let s:undo_ftplugin = "setlocal autoindent< comments< foldexpr< foldmethod< foldtext< formatoptions< preserveindent< shiftround<"
                   \ . "| unlet! b:outlaw_auto_close b:outlaw_note_fold_level b:outlaw_fold_prefix b:outlaw_folded_text"
-                  \ . "| unlet! b:outlaw_embedded_syntax_tag b:outlaw_note_indent b:outlaw_topic_mark"
+                  \ . "| unlet! b:outlaw_fenced_tag b:outlaw_note_indent b:outlaw_topic_mark"
 
 let b:undo_ftplugin = (exists('b:undo_ftplugin') ? b:undo_ftplugin . '|' : '') . s:undo_ftplugin
 
