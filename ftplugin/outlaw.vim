@@ -186,9 +186,9 @@ fun! OutlawAlignNote() " Align the note at the cursor's position
   let l:end = OutlawNextTopic() - 1
   if l:end == -1 | let l:end = line('$') | endif
   if l:end < l:start | return | endif
-  let l:shift = (indent(l:start - 1) + b:outlaw_note_indent * shiftwidth() - indent(l:start)) / shiftwidth()
+  let l:shift = indent(l:start - 1) + b:outlaw_note_indent * shiftwidth() - indent(l:start)
   if l:shift == 0 | return | endif
-  execute l:start.','.l:end.repeat(l:shift > 0 ? '>' : '<', abs(l:shift))
+  execute l:start.','.l:end.repeat(l:shift > 0 ? '>' : '<', abs(l:shift) / shiftwidth() + (l:shift % shiftwidth() == 0 ? 0 : 1))
 endf
 
 fun! OutlawAlignAllNotes()
