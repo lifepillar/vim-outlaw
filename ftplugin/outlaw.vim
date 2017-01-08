@@ -49,7 +49,7 @@ if !get(g:, 'no_outlaw_maps', get(g:, 'no_plugin_maps', 0))
   endf
 
   call s:map('n', 'ThisFoldLevel',   'gl',      ":<c-u>let &l:fdl=foldlevel(OutlawTopicLine())<cr>")
-  call s:map('n', 'BodyTextMode',    'gy',      ":<c-u>let b:outlaw_note_fold_level=b:outlaw_note_fold_level==20?'=':20<cr>zx")
+  call s:map('n', 'BodyTextMode',    'gy',      ":<c-u>let b:outlaw_note_fold_level=b:outlaw_note_fold_level=='='?20:'='<cr>zx")
   call s:map('n', 'PrevTopic',       '<up>',    ":<c-u>call OutlawAutoClose()<cr>:call OutlawTopicJump('besW')<cr>zv")
   call s:map('n', 'NextTopic',       '<down>',  ":<c-u>call OutlawAutoClose()<cr>:call OutlawTopicJump('esW')<cr>zv")
   call s:map('n', 'PrevSibling',     '<left>',  ":<c-u>call OutlawAutoClose()<cr>:call OutlawSibling('b')<cr>zv")
