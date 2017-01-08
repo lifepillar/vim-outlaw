@@ -63,7 +63,7 @@ like `~~~`, the tag may be changed, too (see
 `g:outlaw_fenced_tag`).
 
 I let you jump through topics quickly: to the previous or next topic
-(`<up>` and `<down>`), to the previous or next sibling/cousing
+(`<up>` and `<down>`), to the previous or next sibling/cousin
 (`<left>` and `<right>`), parent or uncle (`-` and `+`). Press
 `<enter>` in Normal mode to quickly add a new sibling below the
 current topic, or `<c-k>` to add a new sibling above the current
