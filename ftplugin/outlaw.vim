@@ -7,7 +7,7 @@ endif
 let b:did_ftplugin = 1
 
 let s:undo_ftplugin = "setlocal autoindent< comments< foldexpr< foldmethod< foldtext< formatoptions< preserveindent< shiftround<"
-                  \ . "| unlet! b:outlaw_auto_close b:outlaw_body_text_level b:outlaw_fold_prefix b:outlaw_folded_text"
+                  \ . "| unlet! b:outlaw_auto_close b:outlaw_note_fold_level b:outlaw_fold_prefix b:outlaw_folded_text"
                   \ . "| unlet! b:outlaw_embedded_syntax_tag b:outlaw_note_indent b:outlaw_topic_mark"
 
 let b:undo_ftplugin = (exists('b:undo_ftplugin') ? b:undo_ftplugin . '|' : '') . s:undo_ftplugin
@@ -22,7 +22,7 @@ setlocal nopreserveindent
 setlocal shiftround
 
 let b:outlaw_auto_close      = get(b:, 'outlaw_auto_close',      get(g:, 'outlaw_auto_close',      1                                           ))
-let b:outlaw_body_text_level = get(b:, 'outlaw_body_text_level', get(g:, 'outlaw_body_text_level', '='                                         ))
+let b:outlaw_note_fold_level = get(b:, 'outlaw_note_fold_level', get(g:, 'outlaw_note_fold_level', '='                                         ))
 let b:outlaw_fold_prefix     = get(b:, 'outlaw_fold_prefix',     get(g:, 'outlaw_fold_prefix',     '(+)\ '                                     ))
 let b:outlaw_folded_text     = get(b:, 'outlaw_folded_text',     get(g:, 'outlaw_folded_text',     '[…]'                                       ))
 let b:outlaw_note_indent     = get(b:, 'outlaw_note_indent',     get(g:, 'outlaw_note_indent',     1                                           ))
@@ -49,7 +49,7 @@ if !get(g:, 'no_outlaw_maps', get(g:, 'no_plugin_maps', 0))
   endf
 
   call s:map('n', 'ThisFoldLevel',   'gl',      ":<c-u>let &l:fdl=OutlawLevel()<cr>")
-  call s:map('n', 'BodyTextMode',    'gy',      ":<c-u>let b:outlaw_body_text_level=b:outlaw_body_text_level==20?'=':20<cr>zx")
+  call s:map('n', 'BodyTextMode',    'gy',      ":<c-u>let b:outlaw_note_fold_level=b:outlaw_note_fold_level==20?'=':20<cr>zx")
   call s:map('n', 'PrevTopic',       '<up>',    ":<c-u>call OutlawAutoClose()<cr>:call OutlawTopicJump('besW')<cr>zv")
   call s:map('n', 'NextTopic',       '<down>',  ":<c-u>call OutlawAutoClose()<cr>:call OutlawTopicJump('esW')<cr>zv")
   call s:map('n', 'PrevSibling',     '<left>',  ":<c-u>call OutlawAutoClose()<cr>:call OutlawSibling('b')<cr>zv")
@@ -81,7 +81,7 @@ endf
 fun! OutlawFold(lnum)
   return OutlawIsTopicLine(a:lnum)
         \ ? '>' . (1 + indent(a:lnum) / shiftwidth())
-        \ : b:outlaw_body_text_level
+        \ : b:outlaw_note_fold_level
 endf
 
 fun! OutlawFoldedText()
