@@ -23,7 +23,7 @@ for i in range(0, len(s:num) - 1)
 endfor
 
 " Embedded syntaxes
-for ft in get(b:, 'outlaw_nested_filetypes', get(g:, 'outlaw_nested_filetypes', []))
+for ft in get(b:, 'outlaw_fenced_filetypes', get(g:, 'outlaw_fenced_filetypes', []))
   execute 'syn include @Outlaw'.ft 'syntax/'.ft.'.vim'
   unlet b:current_syntax
   execute 'syn region Outlaw'.ft 'matchgroup=Conceal start="'.s:tag.ft.'" end="'.s:tag.'" concealends keepend contains=@Outlaw'.ft
