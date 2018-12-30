@@ -7,7 +7,8 @@ endif
 
 syntax case ignore
 syntax sync minlines=10 maxlines=100
-syn keyword OutlawKeyword TODO FIXME XXX NOTE
+syn keyword OutlawKeyword FIXME XXX
+syn match OutlawKeyword /\%(TODO\|NOTE\|SEE\|SEE ALSO\):/
 hi def link OutlawKeyword Special
 
 let s:num = get(b:, 'outlaw_levels', get(g:, 'outlaw_levels',
