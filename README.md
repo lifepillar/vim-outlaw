@@ -56,10 +56,10 @@ you'd better think of body text as being at the same level as the
 topic it belongs to (it is possible to fold notes independently,
 though: see `g:outlaw_note_fold_level`).
 
-Notes are just plain text, but you may use `~~~` tags to embed any
-configured filetype (see `g:outlaw_fenced_filetypes`). If you don't
-like `~~~`, the tag may be changed, too (see
-`g:outlaw_fenced_tag`).
+Notes are just plain text, but lines starting with `>` or `|` are
+highlighted. You may also use `~~~` tags to embed any configured
+filetype (see `g:outlaw_fenced_filetypes`). If you don't like `~~~`, the
+tag may be changed, too (see `g:outlaw_fenced_tag`).
 
 I let you jump through topics quickly: to the previous or next topic
 (`<up>` and `<down>`), to the previous or next sibling/cousin

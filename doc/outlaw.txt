@@ -75,10 +75,14 @@ you'd better think of body text as being at the same level as the
 topic it belongs to (it is possible to fold notes independently,
 though: see |g:outlaw_note_fold_level|).
 
-The notes are just plain text, but you may use `~~~` tags to embed
-any configured filetype (see |g:outlaw_fenced_filetypes|). If you
-don't like `~~~`, the tag may be changed, too (see
-|g:outlaw_fenced_tag|).
+The notes are just plain text, but lines starting with `>` are
+highlighted using the `OutlawQuote` highlight group. Besides, lines
+starting with `|` are assigned the `OutlawCode` highlight group, which
+by default links to |hl-CursorLineNr|.
+
+You may also use `~~~` tags to embed any configured filetype (see
+|g:outlaw_fenced_filetypes|). If you don't like `~~~`, the tag may be
+changed, too (see |g:outlaw_fenced_tag|).
 
 I let you jump through topics quickly: to the previous or next topic
 (<up> and <down>), to the previous or next sibling/cousin (<left>
@@ -279,7 +283,7 @@ defining any mapping by setting |g:no_outlaw_maps| or
 ====================================================================
 Section 4: Commands                                *outlaw-commands*
 
-                                                 |:OutlawAlignNotes| 
+                                                 |:OutlawAlignNotes|
 Shift all the notes in the outline under their respective headers,
 with the exception of flush-left notes, which are left untouched.
 Flush-left notes are defined as notes whose first line has
