@@ -93,7 +93,8 @@ know all the details, see **:h outlaw.txt**. Ah, I require Vim
   a separate text file and keep the files in the same folder. Now, say
   you want to link `A.txt` from `B.txt`: just write `./A.txt` or even
   just `A.txt` somewhere inside `B.txt`: then, when put the cursor over
-  `A.txt` and type `gf` you will jump to `A.txt`.
+  `A.txt` and type `gf` you will jump to `A.txt`. Jump back and forth
+  with CTRL-O and CTRL-I.
 
 - Never underestimate how much you can accomplish using only Vim core
   features.
