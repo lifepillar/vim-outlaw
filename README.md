@@ -83,3 +83,18 @@ current topic (so that all subtopics are closed), and
 There's not much else you need to know about me. But if you want to
 know all the details, see **:h outlaw.txt**. Ah, I require Vim
 7.4.984 or later.
+
+## Tips from Nobody
+
+- Hyperlinks are underlined: put the cursor over a link and type `gx` to
+  open it, usually in your browser (requires Vim's Netrw).
+
+- You may easily use me to build a wiki. Put each “wiki” page in
+  a separate text file and keep the files in the same folder. Now, say
+  you want to link `A.txt` from `B.txt`: just write `./A.txt` or even
+  just `A.txt` somewhere inside `B.txt`: then, when put the cursor over
+  `A.txt` and type `gf` you will jump to `A.txt`.
+
+- Never underestimate how much you can accomplish using only Vim core
+  features.
+
