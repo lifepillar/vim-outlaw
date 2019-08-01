@@ -10,7 +10,7 @@ syntax sync minlines=10 maxlines=100
 syn keyword OutlawKeyword FIXME XXX TODO
 syn match OutlawKeyword /\%(NOTE\|SEE\|SEE ALSO\):/ contains=@NoSpell
 syn match OutlawLink /\S\+:\/\/\S\+/ contains=@NoSpell
-syn match OutlawPath /\s\+\zs\.\=\/\f\+/ contains=@NoSpell
+syn match OutlawPath /\%(\s\+\zs\.\=\/\f\+\)\|\%(\f\+\.txt\)/ contains=@NoSpell
 syn match OutlawCode /^\s*|\zs.*/ contains=@NoSpell
 syn match OutlawQuote /^\s*>.*/
 hi def link OutlawKeyword Todo
