@@ -15,11 +15,7 @@ syn match OutlawCode /^\s*|\zs.*/ contains=@NoSpell
 syn match OutlawQuote /^\s*>.*/
 hi def link OutlawKeyword Todo
 hi def link OutlawLink Underlined
-if hlexists('NormalMode')
-  hi def link OutlawCode NormalMode
-else
-  hi def link OutlawCode Normal
-endif
+hi def link OutlawCode CursorLineNr
 hi def link OutlawPath String
 hi def link OutlawQuote Comment
 
