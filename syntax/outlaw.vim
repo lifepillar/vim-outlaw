@@ -30,7 +30,7 @@ let s:hg = get(b:, 'outlaw_highlight_groups', get(g:, 'outlaw_highlight_groups',
 let s:tag = get(b:, 'outlaw_fenced_tag', get(g:, 'outlaw_fenced_tag', '\~\~\~'))
 
 for i in range(0, len(s:num) - 1)
-  execute 'syn match OutlawHead'.s:num[i] '/\m\%'.(1 + i * shiftwidth()).'v'.s:mark.'.*$/ contains=outlawKeyword,OutlawPath,OutlawLink'
+  execute 'syn match OutlawHead'.s:num[i] '/\m\%'.(1 + i * shiftwidth()).'v'.s:mark.'.*$/ contains=outlawKeyword,OutlawPath,OutlawLink,OutlawVerb'
   execute 'hi def link OutlawHead'.s:num[i] s:hg[i % len(s:hg)]
 endfor
 
