@@ -13,7 +13,7 @@ syn match OutlawLink /\S\+:\/\/\S\+/ contains=@NoSpell
 syn match OutlawPath /\%(\s\+\zs\.\=\/\f\+\)\|\%(\f\+\.txt\)/ contains=@NoSpell
 syn match OutlawCode /^\s*|\zs.*/ contains=@NoSpell
 syn region OutlawVerb matchgroup=OutlawVerbDelim start="`" end="`" keepend contains=@NoSpell concealends
-syn match OutlawQuote /^\s*>.*/ contains=OutlawVerb
+syn match OutlawQuote /^\s*>.*/ contains=OutlawLink,OutlawPath,OutlawVerb
 hi def link OutlawKeyword Todo
 hi def link OutlawLink Underlined
 hi def link OutlawCode CursorLineNr
