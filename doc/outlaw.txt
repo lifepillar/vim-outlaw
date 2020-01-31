@@ -35,7 +35,6 @@ is about 250 LoC.
 
 Here is a very simple outline which you may start playing with:
 >
-  vim: set tw=80 sw=4 ts=4 sts=0 et ft=outlaw:
   === My biography
       The secret of a long life is trying not to shorten it.
       === Travel to the East
@@ -52,7 +51,7 @@ Here is a very simple outline which you may start playing with:
           expect him to drink.
       [ ] Wear the sheriff's badge
 <
-(Hint: the modeline will be hidden if you set |'conceallevel'|.)
+Save it as `beauregard.outlaw` so that I can recognize it.
 
 I interpret lines starting with `===`, `[x]`, `[-]` or `[ ]`,
 followed by a space, as topics. Each topic must be on a single line.
@@ -62,9 +61,10 @@ choice.
 
 Topics may be indented to form a hierarchy or outline. I support up
 to nineteen levels (ten are highlighted by default, see
-|g:outlaw_levels|). I work with most (sensible) combinations of
-|'shiftwidth'|, |'tabstop'|, |'softtabstop'| and |'smarttab'| (I'll
-tell you if I don't like your settings).
+|g:outlaw_levels|). I don't care whether 'expandtab' is set or not.
+You only need to set your preferred indentation level with
+|g:outlaw_indent| (if you don't define that variable in your |vimrc|
+I will use the current value of 'shiftwidth').
 
 For me, everything that does not look like a topic (including blank
 lines) is body text (notes). I couldn't care less about the format
@@ -113,9 +113,8 @@ Ok Outlaw, how much do you need? ~
 Just Vim 7.4.984 or later, compiled with |+comments| and |+folding|.
 
 How do I open files as Outlaw buffers? ~
-Just set `ft=outlaw` in the document's modeline, or map the suffix
-you want yourself. I do not define any filetype mapping, because
-there is no conventional suffix or format for text outlines.
+Save those files with an `.outlaw` or `.outl` suffix. For new
+buffers, set the filetype to `outlaw`.
 
 How do I copy/move/delete topics? ~
 Fold them (|zc| or |za|), then yank/paste/delete as usual.
@@ -154,17 +153,20 @@ Use |zM| or set |'foldlevel'| to 0.
 
 How do I fully expand the outline, but with collapsed body text? ~
 With |zR||zm| or by setting |'foldlevel'| to 19.
+Hey, don't stop reading! If that doesn't seem to work, read the note
+below.
 
-Note: it is not possible to fold notes independently if
-|g:outlaw_note_fold_level| is set to `'='`. You may (temporarily)
-toggle the value of |g:outlaw_note_fold_level| using |gy|.
+Note: it is not possible to fold notes independently if you have set
+|g:outlaw_note_fold_level| to `'='`. You may toggle the value of
+|g:outlaw_note_fold_level| using |gy|.
 
 How do I zoom to the desired level? ~
 Use |gl| to close all folds deeper than the current one. To set an
 arbitrary fold level, just set |'foldlevel'|.
 
 How do I collapse a topic or the body text of a topic? ~
-I recommend using |zc| (close). Alternatively, use |za|.
+I recommend using |zc| (collapse). Alternatively, use |za| (toggle
+collapsing).
 
 How do I expand a topic or the body text of a topic? ~
 I recommend using |zv| (view), which works in all cases. All other
@@ -349,10 +351,21 @@ highlighting, set this variable to `['Normal']` (or even better, set
   let g:outlaw_highlight_groups =
     \ ['Statement', 'Identifier', 'Constant', 'PreProc']
 <
+                                                   *g:outlaw_indent*
+Set this in your |vimrc| to define the desired indentation in Outlaw
+buffers. If this is not set by the user, the current value of
+'shiftwidth' is used.
+
+Note: to avoid unexpected behaviour (e.g., inconsistent highlighting
+or wrong tab stops), |g:outlaw_indent| must be set in your |vimrc|
+unless 'shiftwidth' is also set in your |vimrc| and you want to use
+its value in Outlaw buffers.
+
                                                    *g:outlaw_levels*
 A List of Strings used to define the highlight groups for the
-different indentation levels. By default, ten levels are
-highlighted.
+different indentation levels. The listed names are prefixed by
+`Outlaw`, e.g., `OutlawI`, `OutlawII`, etc. By default, ten levels
+are highlighted.
 >
   let g:outlaw_levels =
     \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
@@ -362,7 +375,7 @@ A List of syntax filetypes that can be nested into an outline.
 >
   let g:outlaw_fenced_filetypes = []
 <
-For example, if you put this in your |.vimrc|:
+For example, if you put this in your |vimrc|:
 >
   let g:outlaw_fenced_filetypes = ['sql']
 <
@@ -418,3 +431,5 @@ A man who is a man needs something to believe in. My main source of
 inspiration has been the epic TimeOut Outliner for AppleWorks (yes,
 I am talking Apple II!). Simple, yet so effective. And no, I am not
 nearly as good as TimeOut!
+
+ vim:tw=68:ts=8:noet:ft=help:norl:

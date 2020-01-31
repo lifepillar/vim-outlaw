@@ -10,6 +10,7 @@ g:outlaw_fenced_tag	outlaw.txt	/*g:outlaw_fenced_tag*
 g:outlaw_fold_prefix	outlaw.txt	/*g:outlaw_fold_prefix*
 g:outlaw_folded_text	outlaw.txt	/*g:outlaw_folded_text*
 g:outlaw_highlight_groups	outlaw.txt	/*g:outlaw_highlight_groups*
+g:outlaw_indent	outlaw.txt	/*g:outlaw_indent*
 g:outlaw_levels	outlaw.txt	/*g:outlaw_levels*
 g:outlaw_note_fold_level	outlaw.txt	/*g:outlaw_note_fold_level*
 g:outlaw_note_indent	outlaw.txt	/*g:outlaw_note_indent*
