@@ -20,6 +20,11 @@ setlocal foldtext=OutlawFoldedText()
 setlocal formatoptions=tcroqnlj1
 setlocal nopreserveindent
 setlocal shiftround
+let s:indent = get(g:, 'outlaw_indent', shiftwidth())
+setlocal softtabstop=0
+let &l:tabstop=s:indent
+let &l:shiftwidth=s:indent
+unlet s:indent
 
 let b:outlaw_auto_close      = get(b:, 'outlaw_auto_close',      get(g:, 'outlaw_auto_close',      1                                           ))
 let b:outlaw_note_fold_level = get(b:, 'outlaw_note_fold_level', get(g:, 'outlaw_note_fold_level', '='                                         ))
@@ -27,15 +32,6 @@ let b:outlaw_fold_prefix     = get(b:, 'outlaw_fold_prefix',     get(g:, 'outlaw
 let b:outlaw_folded_text     = get(b:, 'outlaw_folded_text',     get(g:, 'outlaw_folded_text',     '[…]'                                       ))
 let b:outlaw_note_indent     = get(b:, 'outlaw_note_indent',     get(g:, 'outlaw_note_indent',     1                                           ))
 let b:outlaw_topic_mark      = get(b:, 'outlaw_topic_mark',      get(g:, 'outlaw_topic_mark',      '\%(=== \|\[x\ze\] \|\[ \ze\] \|\[-\ze\] \)'))
-
-" Preflight the user's whitespace preferences
-if !&smarttab && &l:softtabstop !=# shiftwidth()
-  if &l:softtabstop > 0
-    echomsg "[Outlaw] You should set 'softtabstop' to 0 or to the value of 'shiftwidth'."
-  elseif &l:softtabstop ==# 0 && &l:tabstop !=# shiftwidth()
-    echomsg "[Outlaw] You should set 'shiftwidth' to 0 or to the value of 'tabstop'."
-  endif
-endif
 
 command! -buffer -bar -nargs=0 OutlawAlignNotes :silent call OutlawAlignAllNotes()
 
