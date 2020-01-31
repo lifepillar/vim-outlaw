@@ -43,9 +43,10 @@ choice.
 
 Topics may be indented to form a hierarchy or outline. I support up
 to nineteen levels (ten are highlighted by default, see
-`g:outlaw_levels`). I work with most (sensible) combinations of
-`'shiftwidth'`, `'tabstop'`, `'softtabstop'` and `'smarttab'` (I'll
-tell you if I don't like your settings).
+`g:outlaw_levels`). I don't care whether `'expandtab'` is set or
+not. You only need to set your preferred indentation level with
+`g:outlaw_indent` (if you don't define that variable in your `vimrc`
+I will use the current value of `'shiftwidth'`).
 
 For me, everything that does not look like a topic (including blank
 lines) is body text (notes). I couldn't care less about the format
@@ -81,7 +82,7 @@ current topic (so that all subtopics are closed), and
 `foldclose`.
 
 There's not much else you need to know about me. But if you want to
-know all the details, see **:h outlaw.txt**. Ah, I require Vim
+know all the details, see **:help outlaw.txt**. Ah, I require Vim
 7.4.984 or later.
 
 ## Tips from Nobody
