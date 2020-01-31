@@ -1,1 +1,1 @@
-autocmd BufRead,BufNewFile *.outlaw setfiletype outlaw
+autocmd BufRead,BufNewFile *.outl,*.outlaw setfiletype outlaw
