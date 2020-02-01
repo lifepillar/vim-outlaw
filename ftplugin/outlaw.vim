@@ -14,6 +14,7 @@ let b:undo_ftplugin = (exists('b:undo_ftplugin') ? b:undo_ftplugin . '|' : '') .
 
 setlocal autoindent
 setlocal comments=fb:*,fb:- " Lists
+setlocal comments+=:>,:\|   " Quotes and verbatim
 setlocal foldexpr=OutlawFold(v:lnum)
 setlocal foldmethod=expr
 setlocal foldtext=OutlawFoldedText()
