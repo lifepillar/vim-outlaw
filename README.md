@@ -12,7 +12,9 @@ minimalist philosophy followed by plugins like
 [Sneak](https://github.com/justinmk/vim-sneak), I do not try to
 reinvent the wheel. The price on my head is about 250 LoC.
 
-Here is a very simple outline which you may start playing with:
+Here is a very simple outline which you may start playing with.
+Open Vim with `vim beauregard.outlaw` and start typing:
+
 
 ```
 === My biography
@@ -31,8 +33,6 @@ Here is a very simple outline which you may start playing with:
         expect him to drink.
     [ ] Wear the sheriff's badge
 ```
-
-Save it as `beauregard.outlaw` so that I can recognize it.
 
 ![Sample outline](https://raw.github.com/lifepillar/Resources/master/outlaw/example.gif)
 
