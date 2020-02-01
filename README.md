@@ -15,7 +15,6 @@ reinvent the wheel. The price on my head is about 250 LoC.
 Here is a very simple outline which you may start playing with:
 
 ```
-vim: set tw=80 sw=4 ts=4 sts=0 et ft=outlaw:
 === My biography
     The secret of a long life is trying not to shorten it.
     === Travel to the East
@@ -32,6 +31,8 @@ vim: set tw=80 sw=4 ts=4 sts=0 et ft=outlaw:
         expect him to drink.
     [ ] Wear the sheriff's badge
 ```
+
+Save it as `beauregard.outlaw` so that I can recognize it.
 
 ![Sample outline](https://raw.github.com/lifepillar/Resources/master/outlaw/example.gif)
 
