@@ -81,7 +81,7 @@ controlled using Vim's options (see `:h fold-options`). In addition,
 I provide `gl` to set the fold level according to the level of the
 current topic (so that all subtopics are closed), and
 `g:outlaw_auto_close` as a better suited alternative to setting
-`foldclose`.
+`'foldclose'`.
 
 There's not much else you need to know about me. But if you want to
 know all the details, see **:help outlaw.txt**. Ah, I require Vim
