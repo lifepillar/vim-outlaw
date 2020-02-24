@@ -96,9 +96,9 @@ know all the details, see **:help outlaw.txt**. Ah, I require Vim
   a separate text file (with a `.outl`, `.outlaw` or `.txt` suffix)
   and keep the files in the same folder. Now, say you want to link
   `A.outlaw` from `B.outlaw`: just write `./A.outlaw` or even just `A`
-  somewhere inside `B.outlaw`: then, when you put the cursor over `A`
-  and type `gf` you will jump to `A.outlaw`. Jump back and forth with
-  CTRL-O and CTRL-I.
+  or `@A` somewhere inside `B.outlaw`: then, when you put the cursor
+  over `A` and type `gf` you will jump to `A.outlaw`. Jump back and
+  forth with CTRL-O and CTRL-I.
 
 - Never underestimate how much you can accomplish using only Vim core
   features.
