@@ -56,13 +56,14 @@ with `:OutlawAlignNotes`): each block of body text always belongs to
 the topic immediately before it. But don't call it a son of a topic:
 you'd better think of body text as being at the same level as the
 topic it belongs to (it is possible to fold notes independently,
-though: see `g:outlaw_note_fold_level`).
+though: see `g:outlaw_note_fold_level` and `gy`).
 
-Notes are just plain text, but lines starting with `>` or `|` are
+Notes are just Normal text, but lines starting with `>` or `|` are
 highlighted (use `>` for quotations and `|` for verbatim text or
-code). You may also use `~~~` or `` ``` `` tags to embed any configured filetype
-(see `g:outlaw_fenced_filetypes`). The delimiters
-may be changed, too (see `g:outlaw_fenced_tag`).
+code). You may also use `~~~` or `` ``` `` tags to embed any
+configured filetype (see `g:outlaw_fenced_filetypes`). The delimiters
+may be changed, if you want (see `g:outlaw_fenced_tag`). Hyperlinks
+are highlighted, too.
 
 I let you jump through topics quickly: to the previous or next topic
 (`<up>` and `<down>`), to the previous or next sibling/cousin

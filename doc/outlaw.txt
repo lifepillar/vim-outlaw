@@ -339,7 +339,7 @@ be quickly toggled using |gy|.
 The tag to be used for nested filetypes. This is a regular
 expression.
 >
-  let g:outlaw_fenced_tag = '\~\~\~'
+  let g:outlaw_fenced_tag = '[`~]\{3}'
 <
                                          *g:outlaw_highlight_groups*
 A List of highlight groups for the different indentation levels.
