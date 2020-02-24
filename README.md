@@ -93,11 +93,12 @@ know all the details, see **:help outlaw.txt**. Ah, I require Vim
   open it, usually in your browser (requires Vim's Netrw).
 
 - You may easily use me to build a wiki. Put each “wiki” page in
-  a separate text file and keep the files in the same folder. Now,
-  say you want to link `A.txt` from `B.txt`: just write `./A.txt` or
-  even just `A.txt` somewhere inside `B.txt`: then, when you put the
-  cursor over `A.txt` and type `gf` you will jump to `A.txt`. Jump
-  back and forth with CTRL-O and CTRL-I.
+  a separate text file (with a `.outl`, `.outlaw` or `.txt` suffix)
+  and keep the files in the same folder. Now, say you want to link
+  `A.outlaw` from `B.outlaw`: just write `./A.outlaw` or even just `A`
+  somewhere inside `B.outlaw`: then, when you put the cursor over `A`
+  and type `gf` you will jump to `A.outlaw`. Jump back and forth with
+  CTRL-O and CTRL-I.
 
 - Never underestimate how much you can accomplish using only Vim core
   features.
