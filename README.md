@@ -60,7 +60,7 @@ though: see `g:outlaw_note_fold_level`).
 
 Notes are just plain text, but lines starting with `>` or `|` are
 highlighted (use `>` for quotations and `|` for verbatim text or
-code). You may also use `~~~` or `\`\`\`` tags to embed any configured filetype
+code). You may also use `~~~` or `` ``` `` tags to embed any configured filetype
 (see `g:outlaw_fenced_filetypes`). The delimiters
 may be changed, too (see `g:outlaw_fenced_tag`).
 
