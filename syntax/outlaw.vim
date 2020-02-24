@@ -32,7 +32,7 @@ let s:num = get(b:, 'outlaw_levels', get(g:, 'outlaw_levels',
 let s:mark = substitute(get(b:, 'outlaw_topic_mark', get(g:, 'outlaw_topic_mark', '\(=== \|\[x\] \|\[ \] \|\[-\] \)')), '\\ze\|\\zs', '', 'g')
 let s:hg = get(b:, 'outlaw_highlight_groups', get(g:, 'outlaw_highlight_groups',
       \ ['Statement', 'Identifier', 'Constant', 'PreProc']))
-let s:tag = get(b:, 'outlaw_fenced_tag', get(g:, 'outlaw_fenced_tag', '\~\~\~'))
+let s:tag = get(b:, 'outlaw_fenced_tag', get(g:, 'outlaw_fenced_tag', '[`~]\{3}'))
 
 let s:indent = get(g:, 'outlaw_indent', shiftwidth())
 for i in range(0, len(s:num) - 1)
