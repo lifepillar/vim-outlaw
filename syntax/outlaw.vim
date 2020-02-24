@@ -14,13 +14,18 @@ syn match OutlawPath /\%(\s\+\zs\.\=\/\f\+\)\|\%(\f\+\.\%(outl\%(aw\)\=\|txt\)\)
 syn match OutlawCode /^\s*|\zs.*/ contains=@NoSpell
 syn region OutlawVerb matchgroup=OutlawVerbDelim start="`" end="`" keepend contains=@NoSpell concealends
 syn match OutlawQuote /^\s*>.*/ contains=OutlawLink,OutlawPath,OutlawVerb
+syn match OutlawTag /@\%(\k\|\f\)\+\%((.\{-})\)\=/ contains=OutlawTagValue
+syn region OutlawTagValue matchgroup=OutlawDelim start="(" end=")" contained
 hi def link OutlawKeyword Todo
 hi def link OutlawLink Underlined
 hi def link OutlawCode CursorLineNr
+hi def link OutlawDelim Delimiter
 hi def link OutlawVerb Identifier
 hi def link OutlawVerbDelim Delimiter
 hi def link OutlawPath String
 hi def link OutlawQuote Comment
+hi def link OutlawTag Tag
+hi def link OutlawTagValue Constant
 
 let s:num = get(b:, 'outlaw_levels', get(g:, 'outlaw_levels',
       \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']))
@@ -31,7 +36,7 @@ let s:tag = get(b:, 'outlaw_fenced_tag', get(g:, 'outlaw_fenced_tag', '\~\~\~'))
 
 let s:indent = get(g:, 'outlaw_indent', shiftwidth())
 for i in range(0, len(s:num) - 1)
-  execute 'syn match OutlawHead'.s:num[i] '/\m\%'.(1 + i * s:indent).'v'.s:mark.'.*$/ contains=outlawKeyword,OutlawPath,OutlawLink,OutlawVerb'
+  execute 'syn match OutlawHead'.s:num[i] '/\m\%'.(1 + i * s:indent).'v'.s:mark.'.*$/ contains=outlawKeyword,OutlawPath,OutlawLink,OutlawTag,OutlawVerb'
   execute 'hi def link OutlawHead'.s:num[i] s:hg[i % len(s:hg)]
 endfor
 
