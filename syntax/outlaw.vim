@@ -14,7 +14,7 @@ syn match OutlawPath /\%(\s\+\zs\.\=\/\f\+\)\|\%(\f\+\.\%(outl\%(aw\)\=\|txt\)\)
 syn match OutlawCode /^\s*|\zs.*/ contains=@NoSpell
 syn region OutlawVerb matchgroup=OutlawVerbDelim start="`" end="`" keepend contains=@NoSpell concealends
 syn match OutlawQuote /^\s*>.*/ contains=OutlawLink,OutlawPath,OutlawVerb
-syn match OutlawTag /@\%(\k\|\f\)\+\%((.\{-})\)\=/ contains=OutlawTagValue
+syn match OutlawTag /\(^\|\s\)@\%(\k\|\f\)\+\%((.\{-})\)\=/ contains=OutlawTagValue
 syn region OutlawTagValue matchgroup=OutlawDelim start="(" end=")" contained
 hi def link OutlawKeyword Todo
 hi def link OutlawLink Underlined
