@@ -36,18 +36,25 @@ Open Vim with `vim beauregard.outlaw` and start typing:
 
 ![Sample outline](https://raw.github.com/lifepillar/Resources/master/outlaw/example.gif)
 
-I interpret lines starting with `===`, `[x]`, `[-]` or `[ ]`,
-followed by a space, as topics. Each topic must be on a single line.
-The pattern defining a topic may be fully customized by setting
-`g:outlaw_topic_mark`, shouldn't you like my admittedly biased
-choice.
+I interpret lines starting with `===`, `[x]`, `[-]` or `[ ]`, followed
+by a space, as topics. Each topic must be on a single line. The
+pattern defining a topic may be fully customized by setting
+`g:outlaw_topic_mark`, shouldn't you like my admittedly biased choice.
 
-Topics may be indented to form a hierarchy or outline. I support up
-to nineteen levels (ten are highlighted by default, see
-`g:outlaw_levels`). I don't care whether `'expandtab'` is set or
-not. You only need to set your preferred indentation level with
-`g:outlaw_indent` (if you don't define that variable in your `vimrc`
-I will use the current value of `'shiftwidth'`).
+If you are the task-oriented kind of guy, you may prefer the
+[TaskPaper](https://www.taskpaper.com/) format, rather than the above.
+I can't blame you. Just save your document with a `.taskpaper`
+suffix and I will format each topic as a project or task.
+
+![Nobody](https://raw.github.com/lifepillar/Resources/master/outlaw/outlaw-TaskPaper.png)
+
+Whatever patterns you adopt, topics may be indented to form
+a hierarchy or outline. I support up to nineteen levels (ten are
+highlighted by default, see `g:outlaw_levels`). I don't care whether
+`'expandtab'` is set or not. You only need to set your preferred
+indentation level with `g:outlaw_indent` (if you don't define that
+variable in your `vimrc` I will use the current value of
+`'shiftwidth'`).
 
 For me, everything that does not look like a topic (including blank
 lines) is body text (notes). I couldn't care less about the format
