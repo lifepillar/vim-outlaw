@@ -352,6 +352,7 @@ highlighting, set this variable to `['Normal']` (or even better, set
     \ ['Statement', 'Identifier', 'Constant', 'PreProc']
 <
                                                    *g:outlaw_indent*
+                                                   *b:outlaw_indent*
 Set this in your |vimrc| to define the desired indentation in Outlaw
 buffers. If this is not set by the user, the current value of
 'shiftwidth' is used.

@@ -1,6 +1,7 @@
 b:outlaw_auto_close	outlaw.txt	/*b:outlaw_auto_close*
 b:outlaw_fold_prefix	outlaw.txt	/*b:outlaw_fold_prefix*
 b:outlaw_folded_text	outlaw.txt	/*b:outlaw_folded_text*
+b:outlaw_indent	outlaw.txt	/*b:outlaw_indent*
 b:outlaw_note_fold_level	outlaw.txt	/*b:outlaw_note_fold_level*
 b:outlaw_note_indent	outlaw.txt	/*b:outlaw_note_indent*
 b:outlaw_topic_mark	outlaw.txt	/*b:outlaw_topic_mark*

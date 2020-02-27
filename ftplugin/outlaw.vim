@@ -22,7 +22,7 @@ setlocal foldtext=OutlawFoldedText()
 setlocal formatoptions=tcroqnlj1
 setlocal nopreserveindent
 setlocal shiftround
-let s:indent = get(g:, 'outlaw_indent', shiftwidth())
+let s:indent = get(b:, 'outlaw_indent', get(g:, 'outlaw_indent', shiftwidth()))
 setlocal softtabstop=0
 setlocal suffixesadd=.outl,.outlaw,.txt
 let &l:tabstop=s:indent
