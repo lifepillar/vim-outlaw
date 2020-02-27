@@ -67,10 +67,10 @@ though: see `g:outlaw_note_fold_level` and `gy`).
 
 Notes are just Normal text, but lines starting with `>` or `|` are
 highlighted (use `>` for quotations and `|` for verbatim text or
-code). You may also use `~~~` or `` ``` `` tags to embed any
-configured filetype (see `g:outlaw_fenced_filetypes`). The delimiters
-may be changed, if you want (see `g:outlaw_fenced_tag`). Hyperlinks
-are highlighted, too.
+code). Words preceded by `@` are highlighted as tags anywhere. You may
+also use `~~~` or `` ``` `` tags to embed any configured filetype (see
+`g:outlaw_fenced_filetypes`). The delimiters may be changed, if you
+want (see `g:outlaw_fenced_tag`). Hyperlinks are highlighted, too.
 
 I let you jump through topics quickly: to the previous or next topic
 (`<up>` and `<down>`), to the previous or next sibling/cousin
@@ -97,8 +97,9 @@ know all the details, see **:help outlaw.txt**. Ah, I require Vim
 
 ## Tips from Nobody
 
-- Hyperlinks are underlined: put the cursor over a link and type `gx` to
-  open it, usually in your browser (requires Vim's Netrw).
+- Hyperlinks should be underlined (if they are not, blame your color
+  scheme): put the cursor over a link and type `gx` to open it,
+  usually in your browser (requires Vim's Netrw).
 
 - You may easily use me to build a wiki. Put each “wiki” page in
   a separate text file (with a `.outl`, `.outlaw` or `.txt` suffix)
