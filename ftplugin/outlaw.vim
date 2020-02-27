@@ -112,16 +112,16 @@ fun! OutlawLevel() " Return the level of the current topic (top level is level 0
 endf
 
 fun! OutlawTopicTreeEnd() " Return the line number of the last line of the current subtree
-  let l:line = search('\%>' . line('.') . 'l\%<' . (OutlawTopicColumn() + 1) . 'v' . OutlawTopicPattern(), 'nW') - 1
+  let l:line = search('\%>' . line('.') . 'l\_^\s*\%<' . (OutlawTopicColumn() + 1) . 'v' . OutlawTopicPattern(), 'nW') - 1
   return l:line < 0 ? line('$') : l:line
 endf
 
 fun! OutlawUp(dir) " Search for a topic at least one level up, in the given direction
-  return search('\%(^\|\%<' . OutlawTopicColumn() . 'v\)' . b:outlaw_topic_mark, a:dir . 'esW')
+  return search('\%(^\|^\s*\%<' . OutlawTopicColumn() . 'v\)' . b:outlaw_topic_mark, a:dir . 'esW')
 endf
 
 fun! OutlawSibling(dir) " Search for a topic at the same level, in the given direction
-  return search('\%' . OutlawTopicColumn() . 'v' . b:outlaw_topic_mark, a:dir . 'esW')
+  return search('^\s*\%' . OutlawTopicColumn() . 'v' . b:outlaw_topic_mark, a:dir . 'esW')
 endf
 
 fun! OutlawAutoClose()
