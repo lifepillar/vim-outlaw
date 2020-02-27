@@ -29,7 +29,7 @@ let &l:tabstop=s:indent
 let &l:shiftwidth=s:indent
 unlet s:indent
 
-let b:outlaw_auto_close      = get(b:, 'outlaw_auto_close',      get(g:, 'outlaw_auto_close',      1                                           ))
+let b:outlaw_auto_close      = get(b:, 'outlaw_auto_close',      get(g:, 'outlaw_auto_close',      0                                           ))
 let b:outlaw_note_fold_level = get(b:, 'outlaw_note_fold_level', get(g:, 'outlaw_note_fold_level', '='                                         ))
 let b:outlaw_fold_prefix     = get(b:, 'outlaw_fold_prefix',     get(g:, 'outlaw_fold_prefix',     '(+)\ '                                     ))
 let b:outlaw_folded_text     = get(b:, 'outlaw_folded_text',     get(g:, 'outlaw_folded_text',     '[…]'                                       ))
