@@ -72,7 +72,7 @@ also use `~~~` or `` ``` `` tags to embed any configured filetype (see
 `g:outlaw_fenced_filetypes`). The delimiters may be changed, if you
 want (see `g:outlaw_fenced_tag`). Hyperlinks are highlighted, too.
 
-I let you jump through topics quickly: to the previous or next topic
+I let you jump over topics quickly: to the previous or next topic
 (`<up>` and `<down>`), to the previous or next sibling/cousin
 (`<left>` and `<right>`), parent or uncle (`-` and `+`). Press
 `<enter>` in Normal mode to quickly add a new sibling below the
@@ -88,8 +88,8 @@ Folding and unfolding are performed using Vim's default mappings and
 controlled using Vim's options (see `:h fold-options`). In addition,
 I provide `gl` to set the fold level according to the level of the
 current topic (so that all subtopics are closed), and
-`g:outlaw_auto_close` as a better suited alternative to setting
-`'foldclose'`.
+`g:outlaw_auto_close` (toggled with `gA`) as a better suited
+alternative to setting `'foldclose'`.
 
 There's not much else you need to know about me. But if you want to
 know all the details, see **:help outlaw.txt**. Ah, I require Vim
