@@ -46,7 +46,7 @@ If you are the task-oriented kind of guy, you may prefer the
 I can't blame you. Just save your document with a `.taskpaper`
 suffix and I will format each topic as a project or task.
 
-![Nobody](https://raw.github.com/lifepillar/Resources/master/outlaw/outlaw-TaskPaper.png)
+![Nobody](https://raw.githubusercontent.com/lifepillar/Resources/master/outlaw/outlaw-taskPaper.png)
 
 Whatever patterns you adopt, topics may be indented to form
 a hierarchy or outline. I support up to nineteen levels (ten are
