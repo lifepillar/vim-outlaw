@@ -1,151 +1,149 @@
-*outlaw.txt*  The wanted outliner!
+*outlaw.txt*	For Vim version 8.2	Last change: 2020 Feb 28
+
+	   _____	 _    _			  ~
+	  |  _	|	| |  | |		  ~
+	  | | | | _   _ | |_ | |  __ _ __      __ ~
+	  | | | || | | || __|| | / _` |\ \ /\ / / ~
+	  \ \_/ /| |_| || |_ | || (_| | \ V  V /  ~
+	   \___/  \__,_| \__||_| \__,_|  \_/\_/   ~
+
+The wanted outliner!
 
 Author:  Lifepillar <https://github.com/lifepillar>
 License: Public Domain
 
-           _____         _    _                   ~
-          |  _  |       | |  | |                  ~
-          | | | | _   _ | |_ | |  __ _ __      __ ~
-          | | | || | | || __|| | / _` |\ \ /\ / / ~
-          \ \_/ /| |_| || |_ | || (_| | \ V  V /  ~
-           \___/  \__,_| \__||_| \__,_|  \_/\_/   ~
-                                                  ~
+==============================================================================
+CONTENTS					*outlaw-contents*
 
-====================================================================
-CONTENTS                                           *outlaw-contents*
+	1. Introducing myself ......... |outlaw-introduction|
+	2. How to do X? ............... |outlaw-howto|
+	3. Mappings ................... |outlaw-mappings|
+	4. Commands ................... |outlaw-commands|
+	5. Customization .............. |outlaw-customization|
+	6. Contributing ............... |outlaw-contributing|
+	7. Credits .................... |outlaw-credits|
 
-    1. Introducing myself ... |outlaw-introduction|
-    2. How to do X? ......... |outlaw-howto|
-    3. Mappings ............. |outlaw-mappings|
-    4. Commands ............. |outlaw-commands|
-    5. Customization ........ |outlaw-customization|
-    6. Contributing ......... |outlaw-contributing|
-    7. Credits .............. |outlaw-credits|
-
-====================================================================
-Section 1: Introducing myself                  *outlaw-introduction*
+==============================================================================
+Introducing myself				*outlaw-introduction*
 
 Hi, I am Outlaw, and I am wanted.
 
-I am wanted because I am an outliner, and although many outliners
-are already available for Vim, I am different. Striving for the same
-minimalist philosophy followed by plugins like Commentary, Dirvish
-or Sneak, I do not try to reinvent the wheel. The price on my head
-is about 250 LoC.
+I am wanted because I am an outliner, and although many outliners are already
+available for Vim, I am different. Striving for the same minimalist philosophy
+followed by plugins like Commentary, Dirvish or Sneak, I do not try to
+reinvent the wheel. The price on my head is about 250 LoC.
 
-Here is a very simple outline which you may start playing with:
+Here is a very simple outline which you may start playing with (if you
+copy-paste it from here, remove the first tab character):
 >
-  === My biography
-      The secret of a long life is trying not to shorten it.
-      === Travel to the East
-          === The telegram
-              === Meeting with Nobody
-              === The bomb
-          === Searching for a brother
-              === The Wild Bunch
-
-  === Things to do
-      [x] Clean boots
-      [ ] Brush the horse
-          You may lead him to the water if you want, but don't
-          expect him to drink.
-      [ ] Wear the sheriff's badge
+	=== My biography
+	    The secret of a long life is trying not to shorten it.
+	    === Travel to the East
+	        === The telegram
+	            === Meeting with Nobody
+	            === The bomb
+	        === Searching for a brother
+	            === The Wild Bunch
+	
+	=== Things to do
+	    [x] Clean boots
+	    [ ] Brush the horse
+	        You may lead him to the water if you want, but don't
+	        expect him to drink.
+	    [ ] Wear the sheriff's badge
 <
 Save it as `beauregard.outlaw` so that I can recognize it.
 
-I interpret lines starting with `===`, `[x]`, `[-]` or `[ ]`,
-followed by a space, as topics. Each topic must be on a single line.
-The pattern defining a topic may be fully customized by setting
-|g:outlaw_topic_mark|, shouldn't you like my admittedly biased
-choice.
+I interpret lines starting with `===`, `[x]`, `[-]` or `[ ]`, followed by
+a space, as topics. Each topic must be on a single line. The pattern defining
+a topic may be fully customized by setting |g:outlaw_topic_mark|, shouldn't
+you like my admittedly biased choice.
 
-If you are the task-oriented kind of guy, you may prefer the TaskPaper
-format, rather than the above. I can't blame you. Just save your
-document with a `.taskpaper` suffix and I will format each topic as a
-project or task.
+If you are the task-oriented kind of guy, you may prefer the TaskPaper format,
+rather than the above. I can't blame you. Just save your document with
+a `.taskpaper` suffix and I will format each topic as a project or task.
 
-Whatever patterns you adopt, topics may be indented to form
-a hierarchy or outline. I support up to nineteen levels (ten are
-highlighted by default, see |g:outlaw_levels|). I don't care whether
-'expandtab' is set or not. You only need to set your preferred
-indentation level with |g:outlaw_indent| (if you don't define that
-variable in your |vimrc| I will use the current value of
+Whatever patterns you adopt, topics may be indented to form a hierarchy or
+outline. I support up to nineteen levels (ten are highlighted by default, see
+|g:outlaw_levels|). I don't care whether 'expandtab' is set or not. You only
+need to set your preferred indentation level with |g:outlaw_indent| (if you
+don't define that variable in your |vimrc| I will use the current value of
 'shiftwidth').
 
-For me, everything that does not look like a topic (including blank
-lines) is body text (notes). I couldn't care less about the format
-or indentation of your notes (although I can help you aligning them
-with |:OutlawAlignNotes|): each block of body text always belongs to
-the topic immediately before it. But don't call it a son of a topic:
-you'd better think of body text as being at the same level as the
-topic it belongs to (it is possible to fold notes independently,
-though: see |g:outlaw_note_fold_level|).
+For me, everything that does not look like a topic (including blank lines) is
+body text (notes). I couldn't care less about the format or indentation of
+your notes (although I can help you aligning them with |:OutlawAlignNotes|):
+each block of body text always belongs to the topic immediately before it. But
+don't call it a son of a topic: you'd better think of body text as being at
+the same level as the topic it belongs to (it is possible to fold notes
+independently, though: see |g:outlaw_note_fold_level|).
 
-The notes are just plain text, but lines starting with `>` are
-highlighted using the `OutlawQuote` highlight group. Besides, lines
-starting with `|` are assigned the `OutlawCode` highlight group, which
-by default links to |hl-CursorLineNr|.
+The notes are just plain text, but lines starting with `>` are highlighted
+using the `OutlawQuote` highlight group. Besides, lines starting with `|` are
+assigned the `OutlawCode` highlight group, which by default links to
+|hl-CursorLineNr|. And words precededed by `@` are highlighted as tags
+anywhere (with the `OutlawTag` highlight group). Such tags may be followed by
+text enclosed in parentheses (following TaskPaper's syntax), which is
+highlighted using the `OutlawTagValue` highlight group.
 
-You may also use `~~~` tags to embed any configured filetype (see
-|g:outlaw_fenced_filetypes|). If you don't like `~~~`, the tag may be
-changed, too (see |g:outlaw_fenced_tag|).
+You may also use `~~~` (or three backticks, à la Markdown) to embed any
+configured filetype (see |g:outlaw_fenced_filetypes|). Such delimiters may be
+configured (see |g:outlaw_fenced_tag|).
 
-I let you jump through topics quickly: to the previous or next topic
-(<up> and <down>), to the previous or next sibling/cousin (<left>
-and <right>), to parent or to uncle (- and +). Press <enter> in
-Normal mode to quickly add a new sibling below the current topic, or
-<c-k> to add a new sibling above the current topic. Use <c-j> to
-make a new child.
+I let you jump through topics quickly: to the previous or next topic (<up> and
+<down>), to the previous or next sibling/cousin (<left> and <right>), to
+parent or to uncle (|-| and |+|). Press <enter> in Normal mode to quickly add
+a new sibling below the current topic, or <c-k> to add a new sibling above the
+current topic. Use <c-j> to make a new child.
 
-Besides, I help you move pieces of your outline around using the
-arrow keys in Visual mode (they accept a count, of course). Fix the
-indentation with the usual mappings (|=|, |==|, …) if necessary
-(your notes will be unaffected).
+Besides, I help you move pieces of your outline around using the arrow keys in
+Visual mode (they accept a count, of course). Fix the indentation with the
+usual mappings (|=|, |==|, …) if necessary (your notes will be unaffected).
 
 Folding and unfolding are performed using Vim's default mappings and
-controlled using Vim's options (see |fold-options|). In addition,
-I provide |gl| to set the fold level according to the level of the
-current topic (so that all subtopics are closed), and
-|g:outlaw_auto_close| as a better suited alternative to setting
-|'foldclose'|.
+controlled using Vim's options (see |fold-options|). In addition, I provide
+|gl| to set the fold level according to the level of the current topic (so
+that all subtopics are closed), and |g:outlaw_auto_close| (toggled with |gA|)
+as a better suited alternative to setting |'foldclose'|.
 
-There's not much else you need to know about me. But read on if you
-want to ask me questions.
+There's not much else you need to know about me. But read on if you want to
+ask me questions.
 
-====================================================================
-Section 2: How to do X?                              *outlaw-howto*
+==============================================================================
+How to do X?					*outlaw-howto*
 
 Ok Outlaw, how much do you need? ~
 Just Vim 7.4.984 or later, compiled with |+comments| and |+folding|.
 
 How do I open files as Outlaw buffers? ~
-Save those files with an `.outlaw` or `.outl` suffix. For new
+Save those files with an `.outlaw` or `.outl` suffix. Besides, files with
+a `.taskpaper` suffix are formatted according to the TaskPaper format. For new
 buffers, set the filetype to `outlaw`.
 
 How do I copy/move/delete topics? ~
-Fold them (|zc| or |za|), then yank/paste/delete as usual.
-Or select some text and move it using the arrow keys.
+Fold them (|zc| or |za|), then yank/paste/delete as usual. Or select some text
+and move it using the arrow keys.
 
 How do I jump to the previous/next topic header? ~
-Use <up> and <down> in Normal mode (these and all other mappings may
-be customized, of course).
+Use <up> and <down> in Normal mode (these and all other mappings may be
+customized, of course).
 
 How do I jump to the parent of the current topic? ~
-Type - in Normal mode (even when you are inside the body text).
-Pressing - when the cursor is in a top-level topic will cause a jump
-to the previous top-level topic, so you may keep pressing - till you
-reach the beginning of the document.
+Type |-| in Normal mode (even when you are inside the body text). Pressing |-|
+when the cursor is in a top-level topic will cause a jump to the previous
+top-level topic, so you may keep pressing |-| till you reach the beginning of
+the document.
 
 May I jump to the (next) uncle of the current topic? ~
-Sure, type + in Normal mode (even from inside the body text).
-Actually, + will jump to the next great-uncle if the current topic
-has no next uncle, or to great-great-uncle if it has no great-uncle,
-and so on. Pressing + when the cursor is in a top-level topic will
-cause a jump to the next top-level topic, so you may continue
-pressing + until you reach the last top-level topic of the document.
+Sure, type |+| in Normal mode (even from inside the body text). Actually, |+|
+will jump to the next great-uncle if the current topic has no next uncle, or
+to great-great-uncle if it has no great-uncle, and so on. Pressing |+| when
+the cursor is in a top-level topic will cause a jump to the next top-level
+topic, so you may continue pressing |+| until you reach the last top-level
+topic of the document.
 
-How about moving to previous/next sibling or cousin (i.e., ~
-between topics at the same level)? ~
+How about moving to previous/next sibling or cousin (i.e., between topics at ~
+the same level)? ~
 Use <left> and <right>, respectively, in Normal mode.
 
 Are all those jumps remembered in the jump list? ~
@@ -159,54 +157,51 @@ Use |zM| or set |'foldlevel'| to 0.
 
 How do I fully expand the outline, but with collapsed body text? ~
 With |zR||zm| or by setting |'foldlevel'| to 19.
-Hey, don't stop reading! If that doesn't seem to work, read the note
-below.
+Hey, don't stop reading! If that doesn't seem to work, read the note below.
 
 Note: it is not possible to fold notes independently if you have set
 |g:outlaw_note_fold_level| to `'='`. You may toggle the value of
 |g:outlaw_note_fold_level| using |gy|.
 
 How do I zoom to the desired level? ~
-Use |gl| to close all folds deeper than the current one. To set an
-arbitrary fold level, just set |'foldlevel'|.
+Use |gl| to close all folds deeper than the current one. To set an arbitrary
+fold level, just set |'foldlevel'|.
 
 How do I collapse a topic or the body text of a topic? ~
 I recommend using |zc| (collapse). Alternatively, use |za| (toggle
 collapsing).
 
 How do I expand a topic or the body text of a topic? ~
-I recommend using |zv| (view), which works in all cases. All other
-Vim's folding commands work as usual, of course. But keep in mind
-that, depending on the value of |g:outlaw_note_fold_level|, you may
-need to unfold recursively (|zA| or |zv|) for your notes to become
-visible.
+I recommend using |zv| (view), which works in all cases. All other Vim's
+folding commands work as usual, of course. But keep in mind that, depending on
+the value of |g:outlaw_note_fold_level|, you may need to unfold recursively
+(|zA| or |zv|) for your notes to become visible.
 
 How do I shift a topic left or right? ~
-Fold it, then use << or >>. Or use <left> and <right> in Visual
-mode.
+Fold it, then use |<<| or |>>|. Or use <left> and <right> in Visual mode.
 
-But shifting to the left does not do what I want, because some ~
-siblings of the topic I am moving may become its children. How do ~
-I promote a topic to uncle? ~
-Visually select it, then move it wherever you want, or use something
-like |dd+P<<|. Say you have this outline:
+But shifting to the left does not do what I want, because some siblings of ~
+the topic I am moving may become its children. How do I promote a topic to ~
+uncle? ~
+Visually select it, then move it wherever you want, or use something like
+|dd+P<<|. Say you have this outline:
 >
-  === H1
-    === H1.1
-    === H1.2
-    === H1.3
-  === H2
+	=== H1
+	    === H1.1
+	    === H1.2
+	    === H1.3
+	=== H2
 <
-and the cursor is on H1.1. Then |dd| will delete the line (or the
-whole fold if the topic is folded), + will jump to H2, |P| will
-paste the deleted topic above H2 and << will move the topic
-one-level up. So, the topic will be promoted as you desire:
+and the cursor is on H1.1. Then |dd| will delete the line (or the whole fold
+if the topic is folded), |+| will jump to H2, |P| will paste the deleted topic
+above H2 and |<<| will move the topic one-level up. So, the topic will be
+promoted as you desire:
 >
-  === H1
-    === H1.2
-    === H1.3
-  === H1.1
-  === H2
+	=== H1
+	    === H1.2
+	    === H1.3
+	=== H1.1
+	=== H2
 <
 How do I quickly create a sibling/child/uncle of the current topic? ~
 To quickly add a new child to the current topic, use <c-j>. Press
@@ -216,227 +211,219 @@ if you are inside the body text of the topic). You may then indent
 or outdent as you see fit with |i_CTRL-T| and |i_CTRL-D|,
 respectively.
 
-All those mappings automatically copy the topic's prefix from the
-current topic, so you don't have to type it yourself (type
-|i_CTRL-U| if you want to change it).
+All those mappings automatically copy the topic's prefix from the current
+topic, so you don't have to type it yourself (type |i_CTRL-U| if you want to
+change it).
 
-How do I get an agenda view (e.g., a list of the TODO items in my ~
-outline)? ~
-A simple way is to use the quickfix list. For instance:
+How do I get an agenda view (e.g., a list of the TODO items in my outline)? ~
+A simple way is to use the quickfix list. For instance (assuming that you are
+tagging TODO items with `@todo`):
 >
- :vimgrep /^\s*<c-r>=b:outlaw_topic_mark<cr>\s*TODO/ % | copen
+ :vimgrep /@todo/ % | copen
 <
-   or even just:
->
- :vimgrep /TODO/ % | copen
-<
-You may get creative from there, but be aware that an outliner and
-a task manager are like Jack Beauregard and The Wild Bunch.
+You may get creative from there, but be aware that an outliner and a task
+manager are like Jack Beauregard and The Wild Bunch.
 
 How do I "zoom into a topic" (get a focused view on a topic)? ~
-Install the NrrRgn plugin. You may also like Limelight.
+If |:foldclose|, |gl| and |gA| are not enough for you, install the NrrRgn
+plugin. You may also like Limelight.
 
 How do I sort topics? ~
-If |:sort| (possibly combined with |:global)| doesn't cut it, use
-a plugin like AdvancedSorters or vissort. That's not the type of job
-I get hired for.
+If |:sort| (possibly combined with |:global)| doesn't cut it, use a plugin
+like AdvancedSorters or vissort. That's not the type of job I get hired for.
 
 How do I create a checkbox? ~
-Do I really have to tell you? Type `[x]`, `[-]` or `[ ]` in Insert
-mode.
+Do I really have to tell you? Type `[x]`, `[-]` or `[ ]` in Insert mode.
 
 Isn't there a quicker way? ~
 Sure, define a mapping.
 
 Ok, how do I toggle a checkbox's status? ~
-Position the cursor inside the checkbox, then type |rx|, |r-| or
-|r<spc>| as required.
+Position the cursor inside the checkbox, then type |rx|, |r-| or |r<spc>| as
+required.
 
 The checkbox is too far! How do I jump there? ~
-Pressing <up> from any point in the topic line or its body text
-will put you right inside the checkbox of the current topic.
+Pressing <up> from any point in the topic line or its body text will put you
+right inside the checkbox of the current topic.
 
-Other outliners have better horses and shine like the door of ~
-a whorehouse. ~
-I'm not the kind who needs an audience so I can show off. Btw,
-that's not a question.
+Other outliners have better horses and shine like the door of a whorehouse. ~
+I'm not the kind who needs an audience so I can show off. Btw, that's not
+a question.
 
-====================================================================
-Section 3: Mappings                                *outlaw-mappings*
+==============================================================================
+Mappings					*outlaw-mappings*
 
 These are the default mappings I provide:
 
-  nmap <buffer> gA      <plug>OutlawToggleAutoClose
-  nmap <buffer> gl      <plug>OutlawThisFoldLevel
-  nmap <buffer> gy      <plug>OutlawBodyTextMode
-  nmap <buffer> <up>    <plug>OutlawPrevTopic
-  nmap <buffer> <down>  <plug>OutlawNextTopic
-  nmap <buffer> <left>  <plug>OutlawPrevSibling
-  nmap <buffer> <right> <plug>OutlawNextSibling
-  vmap <buffer> <up>    <plug>OutlawMoveUp
-  vmap <buffer> <down>  <plug>OutlawMoveDown
-  vmap <buffer> <left>  <plug>OutlawMoveLeft
-  vmap <buffer> <right> <plug>OutlawMoveRight
-  nmap <buffer> -       <plug>OutlawParent
-  nmap <buffer> +       <plug>OutlawUncle
-  nmap <buffer> <cr>    <plug>OutlawAddSiblingBelow
-  nmap <buffer> <c-k>   <plug>OutlawAddSiblingAbove
-  nmap <buffer> <c-j>   <plug>OutlawAddChild
+	nmap <buffer> gA        <plug>OutlawToggleAutoClose
+	nmap <buffer> gl        <plug>OutlawThisFoldLevel
+	nmap <buffer> gy        <plug>OutlawBodyTextMode
+	nmap <buffer> <up>      <plug>OutlawPrevTopic
+	nmap <buffer> <down>    <plug>OutlawNextTopic
+	nmap <buffer> <left>    <plug>OutlawPrevSibling
+	nmap <buffer> <right>   <plug>OutlawNextSibling
+	vmap <buffer> <up>      <plug>OutlawMoveUp
+	vmap <buffer> <down>    <plug>OutlawMoveDown
+	vmap <buffer> <left>    <plug>OutlawMoveLeft
+	vmap <buffer> <right>   <plug>OutlawMoveRight
+	nmap <buffer> -         <plug>OutlawParent
+	nmap <buffer> +         <plug>OutlawUncle
+	nmap <buffer> <cr>      <plug>OutlawAddSiblingBelow
+	nmap <buffer> <c-k>     <plug>OutlawAddSiblingAbove
+	nmap <buffer> <c-j>     <plug>OutlawAddChild
 
-There's no way these mappings are good for everyone. Feel free to
-override them in your |.vimrc|. You may also prevent me from
-defining any mapping by setting |g:no_outlaw_maps| or
-|g:no_plugin_maps| to 1.
+There's no way these mappings are good for everyone. Feel free to override
+them in your |vimrc|. You may also prevent me from defining any mapping by
+setting |g:no_outlaw_maps| or |g:no_plugin_maps| to 1.
 
-====================================================================
-Section 4: Commands                                *outlaw-commands*
+==============================================================================
+Commands					*outlaw-commands*
 
-                                                 |:OutlawAlignNotes|
-Shift all the notes in the outline under their respective headers,
-with the exception of flush-left notes, which are left untouched.
-Flush-left notes are defined as notes whose first line has
-indentation equal to zero.
+						|:OutlawAlignNotes|
+Shift all the notes in the outline under their respective headers, with the
+exception of flush-left notes, which are left untouched. Flush-left notes are
+defined as notes whose first line has indentation equal to zero.
 
 You may control the relative indentation of the notes with
 |g:outlaw_note_indent|.
 
-====================================================================
-Section 5: Customization                      *outlaw-customization*
+==============================================================================
+Customization					*outlaw-customization*
 
-                                               *g:outlaw_auto_close*
-                                               *b:outlaw_auto_close*
-When set to 1, close the current fold (i.e., the fold at the cursor
-line) before using an Outlaw jump command. This is a less aggressive
-form of fold closing compared to setting |'foldclose'| to "all",
-because it allows you to have more than one open fold at a time.
-Set to 0 if you do not want folds to be closed, or if you prefer to
-set |'foldclose'|.
+						*g:outlaw_auto_close*
+						*b:outlaw_auto_close*
+When set to 1, close the current fold (i.e., the fold at the cursor line)
+before using an Outlaw jump command. This is a less aggressive form of fold
+closing compared to setting |'foldclose'| to "all", because it allows you to
+have more than one open fold at a time. Set to 0 if you do not want folds to
+be closed, or if you prefer to set |'foldclose'|.
 >
-  let g:outlaw_auto_close = 1
+	let g:outlaw_auto_close = 1
 <
 Fold auto-closing may also be toggled at any time using |gA|.
 
-                                              *g:outlaw_fold_prefix*
-                                              *b:outlaw_fold_prefix*
-The symbol used to indicate that a fold is closed.
->
-  let g:outlaw_fold_prefix = '(+)\ '
-<
-Note: spaces must be escaped.
-
-                                              *g:outlaw_folded_text*
-                                              *b:outlaw_folded_text*
-The text that is displayed for folded body text when
-|g:outlaw_note_fold_level| is not set to `'='`.
->
-  let g:outlaw_folded_text = '[…]'
-<
-                                          *g:outlaw_note_fold_level*
-                                          *b:outlaw_note_fold_level*
-The foldlevel of the body text. The value of this variable should be
-either '=' (same foldlevel as the topic header) or 20. If you use
-20, you may fully expand the outline while keeping the body text
-folded by setting |foldlevel| to 19. The value of this variable may
-be quickly toggled using |gy|.
->
-  let g:outlaw_note_fold_level = '='
-<
-                                               *g:outlaw_fenced_tag*
-The tag to be used for nested filetypes. This is a regular
-expression.
->
-  let g:outlaw_fenced_tag = '[`~]\{3}'
-<
-                                         *g:outlaw_highlight_groups*
-A List of highlight groups for the different indentation levels.
-The elements of the list are reused cyclically, so you may define
-less elements than the number of levels. If you don't want any
-highlighting, set this variable to `['Normal']` (or even better, set
-|g:outlaw_levels| to an empty list).
->
-  let g:outlaw_highlight_groups =
-    \ ['Statement', 'Identifier', 'Constant', 'PreProc']
-<
-                                                   *g:outlaw_indent*
-                                                   *b:outlaw_indent*
-Set this in your |vimrc| to define the desired indentation in Outlaw
-buffers. If this is not set by the user, the current value of
-'shiftwidth' is used.
-
-Note: to avoid unexpected behaviour (e.g., inconsistent highlighting
-or wrong tab stops), |g:outlaw_indent| must be set in your |vimrc|
-unless 'shiftwidth' is also set in your |vimrc| and you want to use
-its value in Outlaw buffers.
-
-                                                   *g:outlaw_levels*
-A List of Strings used to define the highlight groups for the
-different indentation levels. The listed names are prefixed by
-`Outlaw`, e.g., `OutlawI`, `OutlawII`, etc. By default, ten levels
-are highlighted.
->
-  let g:outlaw_levels =
-    \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
-<
-                                         *g:outlaw_fenced_filetypes*
+						*g:outlaw_fenced_filetypes*
 A List of syntax filetypes that can be nested into an outline.
 >
-  let g:outlaw_fenced_filetypes = []
+	let g:outlaw_fenced_filetypes = []
 <
 For example, if you put this in your |vimrc|:
 >
-  let g:outlaw_fenced_filetypes = ['sql']
+	let g:outlaw_fenced_filetypes = ['sql']
 <
 then when you write something like:
 >
-  === My plan
-    Here it is:
-    ~~~sql
-    select money from bank where sheriff is null;
-    ~~~
+	=== My plan
+	    Here it is:
+	    ~~~sql
+	    select money from bank where sheriff is null;
+	    ~~~
 <
-the part between `~~~` will be highlighted as SQL. The delimiters
-may be hidden by setting |'conceallevel'|.
+the part between `~~~` will be highlighted as SQL. The delimiters may be
+hidden by setting |'conceallevel'|.
 
-                                              *g:outlaw_note_indent*
-                                              *b:outlaw_note_indent*
-An integer specifying the desired indentation of the body text with
-respect to its header, in number of |shiftwidth()|s. This value is
-used when updating the indentation of the notes, either explicitly
-with |:OutlawAlignNotes| or implicitly when moving some text up and
-down in Visual mode.
+						*g:outlaw_fenced_tag*
+The tag to be used for nested filetypes. This is a regular expression.
 >
-  let g:outlaw_note_indent = 1
+  let g:outlaw_fenced_tag = '[`~]\{3}'
 <
-Note: flush-left notes, that is, notes whose first line has zero
-indentation, are never realigned. So, this value is ignored for
-flush-left notes.
-
-                                               *g:outlaw_topic_mark*
-                                               *b:outlaw_topic_mark*
-A regular expression that defines a topic's prefix.
+						*g:outlaw_fold_prefix*
+						*b:outlaw_fold_prefix*
+The symbol used to indicate that a fold is closed.
 >
-  let g:outlaw_topic_mark =
-    \  '\(=== \|\[x\ze\] \|\[ \ze\] \|\[-\ze\] \)'
+	let g:outlaw_fold_prefix = '(+)\ '
 <
-In this regular expression you may use |\ze| to denote the place
-where the cursor should be put when jumping to a topic line. The
-cursor is placed at the end of the match by default.
+Note: spaces must be escaped.
 
-====================================================================
-Section 6: Contributing                        *outlaw-contributing*
+						*g:outlaw_folded_text*
+						*b:outlaw_folded_text*
+The text that is displayed for folded body text when
+|g:outlaw_note_fold_level| is not set to `'='`.
+>
+	let g:outlaw_folded_text = '[…]'
+<
+						*g:outlaw_highlight_groups*
+A List of highlight groups for the different indentation levels. The elements
+of the list are reused cyclically, so you may define less elements than the
+number of levels. If you don't want any highlighting, set this variable to
+`['Normal']` (or even better, set |g:outlaw_levels| to an empty list).
+>
+	let g:outlaw_highlight_groups =
+	    \ ['Statement', 'Identifier', 'Constant', 'PreProc']
+<
+						*g:outlaw_indent*
+						*b:outlaw_indent*
+Set this in your |vimrc| to define the desired indentation in Outlaw buffers.
+If this is not set by the user, the current value of 'shiftwidth' is used.
+
+Note: to avoid unexpected behaviour (e.g., inconsistent highlighting or wrong
+tab stops), |g:outlaw_indent| must be set in your |vimrc| unless 'shiftwidth'
+is also set in your |vimrc| and you want to use its value in Outlaw buffers.
+
+						*g:outlaw_levels*
+A List of Strings used to define the highlight groups for the different
+indentation levels. The listed names are prefixed by `Outlaw`, e.g.,
+`OutlawI`, `OutlawII`, etc. By default, ten levels are highlighted.
+>
+	let g:outlaw_levels =
+	    \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+<
+						*g:outlaw_note_fold_level*
+						*b:outlaw_note_fold_level*
+The foldlevel of the body text. The value of this variable should be either
+'=' (same foldlevel as the topic header) or 20. If you use 20, you may fully
+expand the outline while keeping the body text folded by setting |foldlevel|
+to 19. The value of this variable may be quickly toggled using |gy|.
+>
+	let g:outlaw_note_fold_level = '='
+<
+						*g:outlaw_note_indent*
+						*b:outlaw_note_indent*
+An integer specifying the desired indentation of the body text with respect to
+its header, in number of |shiftwidth()|s. This value is used when updating the
+indentation of the notes, either explicitly with |:OutlawAlignNotes| or
+implicitly when moving some text up and down in Visual mode.
+>
+	let g:outlaw_note_indent = 1
+<
+Note: flush-left notes, that is, notes whose first line has zero indentation,
+are never realigned. So, this value is ignored for flush-left notes.
+
+						*g:outlaw_strikethrough*
+Set to 1 if you want topics marked with `@done` to be stricken out. This
+requires support from Vim, terminal (if you use a terminal) and font.
+>
+	let g:outlaw_strikethrough = 0
+<
+						*g:outlaw_topic_mark*
+						*b:outlaw_topic_mark*
+A regular expression to recognize topic lines.
+>
+	let g:outlaw_topic_mark = '\(=== \|\[x\ze\] \|\[ \ze\] \|\[-\ze\] \)'
+<
+In this regular expression you may use |\ze| to denote the place where the
+cursor should be put when jumping to a topic line. The cursor is placed at the
+end of the match by default.
+
+Note: do not use |^| or |$| anchors in this regular expression. The regexp
+matches at the first non-whitespace character of a line. If you want to match
+the end of line, use |\_$|.
+
+==============================================================================
+Contributing					*outlaw-contributing*
 
 For bug reports and feature requests please use:
 
-    https://github.com/lifepillar/vim-outlaw/issues
+	https://github.com/lifepillar/vim-outlaw/issues
 
 Pull requests are welcome, too!
 
-====================================================================
-Section 7: Credits                                  *outlaw-credits*
+==============================================================================
+Credits						*outlaw-credits*
 
 A man who is a man needs something to believe in. My main source of
-inspiration has been the epic TimeOut Outliner for AppleWorks (yes,
-I am talking Apple II!). Simple, yet so effective. And no, I am not
-nearly as good as TimeOut!
+inspiration has been the epic TimeOut Outliner for AppleWorks (yes, I am
+talking Apple II!). Simple, yet so effective. And no, I am not nearly as good
+as TimeOut!
 
- vim:tw=68:ts=8:noet:ft=help:norl:
+ vim:tw=78:ts=8:noet:ft=help:norl:

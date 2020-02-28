@@ -15,6 +15,7 @@ g:outlaw_indent	outlaw.txt	/*g:outlaw_indent*
 g:outlaw_levels	outlaw.txt	/*g:outlaw_levels*
 g:outlaw_note_fold_level	outlaw.txt	/*g:outlaw_note_fold_level*
 g:outlaw_note_indent	outlaw.txt	/*g:outlaw_note_indent*
+g:outlaw_strikethrough	outlaw.txt	/*g:outlaw_strikethrough*
 g:outlaw_topic_mark	outlaw.txt	/*g:outlaw_topic_mark*
 outlaw-commands	outlaw.txt	/*outlaw-commands*
 outlaw-contents	outlaw.txt	/*outlaw-contents*
