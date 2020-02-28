@@ -29,8 +29,11 @@ hi def link OutlawQuote Comment
 hi def link OutlawTag Tag
 hi def link OutlawTagValue Constant
 hi def link OutlawDone Comment
-hi def OutlawStrike gui=italic,strikethrough cterm=italic,strikethrough
-" hi def link OutlawStrike Comment
+if get(g:, 'outlaw_strikethrough', 0)
+  hi def OutlawStrike gui=italic,strikethrough cterm=italic,strikethrough
+else
+  hi def link OutlawStrike Comment
+endif
 
 let s:num = get(b:, 'outlaw_levels', get(g:, 'outlaw_levels',
       \ ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']))
