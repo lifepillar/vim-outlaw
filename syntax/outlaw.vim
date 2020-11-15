@@ -1,5 +1,5 @@
 " Author: Lifepillar <lifepillar@lifepillar.me>
-" License: This file is placed in the public domain
+" License: MIT
 
 if exists("b:current_syntax")
   finish

@@ -1,4 +1,4 @@
-*outlaw.txt*	For Vim version 8.2	Last change: 2020 Feb 28
+*outlaw.txt*	For Vim version 8.2	Last change: 2020 Nov 15
 
 	   _____	 _    _			  ~
 	  |  _	|	| |  | |		  ~
@@ -10,7 +10,7 @@
 The wanted outliner!
 
 Author:  Lifepillar <https://github.com/lifepillar>
-License: Public Domain
+License: MIT
 
 ==============================================================================
 CONTENTS					*outlaw-contents*
