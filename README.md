@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> **As of March 11, 2026, this repository is on [Codeberg](https://codeberg.org/lifepillar/vim-outlaw).**
+
 ![Nobody](https://raw.github.com/lifepillar/Resources/master/outlaw/nobody.jpg)
 
 # Vim Outlaw: The Wanted Outliner!
